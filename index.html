@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Stack — Interactive Field Atlas · July 2026</title>
+<meta name="description" content="Seven layers from sand to software. An interactive map of the AI sector — where value concentrates, who's buying whom, and how a dollar moves through the stack. Updated July 2026.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The AI Stack — Interactive Field Atlas">
+<meta property="og:description" content="Seven layers from sand to software. An interactive map of the AI sector — where value concentrates, who's buying whom, and how a dollar moves through the stack. Updated July 2026.">
+<meta property="og:url" content="https://aistacked.netlify.app/">
+<meta property="og:site_name" content="The AI Stack">
+<meta property="og:image" content="https://aistacked.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The AI Stack — Interactive Field Atlas · July 2026">
+<meta name="twitter:description" content="Seven layers from sand to software. An interactive map of the AI sector — where value concentrates, who's buying whom, and how a dollar moves through the stack. Updated July 2026.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">Field Atlas · The AI Sector · v3 Interactive</p>
+    <h1 class="serif">The Stack,<br>bottom&nbsp;to&nbsp;<em>top</em>.</h1>
+    <p class="lede">Seven layers from sand to software. Intelligence is manufactured at the bottom and refined upward; capital flows the other way. Where a name sits in this stack determines what it can charge, what it can defend, and who can eat it. <b style="color:var(--gold-bright)">New in v3:</b> the Operator's Bench below the map — a token-math cockpit, an adapt-or-build chooser, and a concepts deck that explains the machinery in thirty seconds a card.</p>
+    <div class="meta" id="metaLine"></div>
+  </header>
+
+  <div class="onboard" id="onboardHint">
+    <span>New here? <b>Skim top → bottom</b> for the full map, jump straight to the <a href="#bench">Operator's Bench</a> to run the numbers yourself, or hit <b>Quiz me</b> to test what stuck. Click any tile or concept card to go deeper — nothing here assumes prior AI knowledge.</span>
+    <button id="onboardClose" type="button">Got it ✕</button>
+  </div>
+
+  <div class="ctrl">
+    <span class="clab">Search</span>
+    <div class="cgroup">
+      <input type="text" id="companySearch" class="searchbox" placeholder="Find a company…" autocomplete="off">
+      <span id="searchCount" class="searchcount"></span>
+    </div>
+    <div class="cdiv"></div>
+    <span class="clab">Lens</span>
+    <div class="cgroup">
+      <button class="btn lensbtn on" data-lens="none">Plain map</button>
+      <button class="btn lensbtn" data-lens="cap">Value capture</button>
+      <button class="btn lensbtn" data-lens="pub">Public vs private</button>
+      <button class="btn lensbtn" data-lens="pe">PE / VC angle</button>
+    </div>
+    <div class="cdiv"></div>
+    <span class="clab">Trace a dollar</span>
+    <div class="cgroup">
+      <button class="btn trbtn" data-trace="cursor">One Cursor request</button>
+      <button class="btn trbtn" data-trace="training">A frontier training run</button>
+      <button class="btn trbtn" data-trace="enterprise">An enterprise dollar</button>
+    </div>
+    <div class="cdiv"></div>
+    <button class="btn quiz" id="quizBtn">Quiz me</button>
+    <div class="cdiv"></div>
+    <a class="btn anchor" href="#bench">Operator's bench ↓</a>
+  </div>
+  <div id="lensNote"></div>
+  <div id="tracePanel"></div>
+
+  <div class="flowkey">
+    <span><span class="arrowup">▲</span> Intelligence &amp; margin compound upward</span>
+    <span><span class="arrowdn">▼</span> Capital &amp; compute pour downward</span>
+    <span class="epi">Epistemics: <b style="color:var(--paper)">plain text</b> = public fact · <span class="rep">reported</span> = unconfirmed / in talks · <b style="color:var(--flag-bright)">○</b> = thesis, an argument not a measurement</span>
+  </div>
+
+  <div id="layersRoot"><!-- rendered from data.json by app.js --></div>
+
+  <!-- v3: OPERATOR'S BENCH -->
+  <section class="bench" id="bench">
+    <p class="beyebrow">Part II · The Operator's Bench</p>
+    <h2 class="serif">Now run the <em>numbers</em> yourself.</h2>
+    <p class="blede">The map shows where the money sits; the bench shows why. Three instruments — drag, choose, flip. Same epistemics as the map: prices are directional as of July 2026, theses are marked ○, and every number is an argument you're invited to have.</p>
+
+    <div class="binstr">
+      <div class="bhead">
+        <div class="bnum">II · 01</div>
+        <div class="bname">The Token Meter — unit economics of an AI product</div>
+        <div class="bdesc">Every AI product is a spread trade: price per user minus the token bill underneath. Drag the sliders and watch the spread — then see what a year of falling token prices does to it, and when self-hosting actually beats renting the API.</div>
+      </div>
+      <div class="bbody">
+        <div>
+          <div class="qlab" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px">Model class (sets blended $/M tokens ○)</div>
+          <div class="bseg" id="tmClass"></div>
+          <div id="tmSliders"></div>
+        </div>
+        <div>
+          <div class="bstats">
+            <div class="bstat"><div class="v" id="tmCost">—</div><div class="l">token cost / task</div></div>
+            <div class="bstat"><div class="v" id="tmMargin">—</div><div class="l">gross margin / user</div></div>
+            <div class="bstat"><div class="v" id="tmBill">—</div><div class="l">org token bill / mo</div></div>
+          </div>
+          <div style="margin-top:14px" id="tmBars"></div>
+          <div id="tmNotes"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="binstr">
+      <div class="bhead">
+        <div class="bnum">II · 02</div>
+        <div class="bname">Adapt or Build — which lever do you pull?</div>
+        <div class="bdesc">Prompting, RAG, fine-tuning, agents — the four ways to make a rented model yours. Answer four questions about the problem; the bench recommends the stack and names the failure mode you just signed up for.</div>
+      </div>
+      <div class="bbody">
+        <div id="acQs"></div>
+        <div id="acOut"></div>
+      </div>
+    </div>
+
+    <div class="binstr">
+      <div class="bhead">
+        <div class="bnum">II · 03</div>
+        <div class="bname">The Concepts Deck — the machinery, thirty seconds a card</div>
+        <div class="bdesc">Thirteen cards, one term each: the plain-English version, the one thing to remember, and the sharp question it arms you to ask in a room. Say your version out loud <i>before</i> you flip — that's the rep.</div>
+      </div>
+      <div style="padding:4px 20px 20px">
+        <div class="fcards" id="fcards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIDE: M&A + READING -->
+  <div class="cols">
+    <div class="card">
+      <h3>Capital &amp; M&amp;A — recent flow</h3>
+      <ul class="mna" id="mnaFlowList"></ul>
+    </div>
+    <div class="card">
+      <h3>Reading the map <span class="epi">· ○ these are theses — arguments, not measurements</span></h3>
+      <ul class="mna" id="readingRulesList"></ul>
+    </div>
+  </div>
+
+  <div class="yousit">
+    <h3>▸ Corners this map doesn't fully capture (yet)</h3>
+    <p id="cornersText"></p>
+  </div>
+
+  <p class="foot" id="footerText"></p>
+
+</div>
+
+<!-- Drawer -->
+<div id="scrim"></div>
+<aside id="drawer" aria-label="Company profile">
+  <button class="dx" id="drawerClose" title="Close (Esc)">×</button>
+  <div id="drawerBody"></div>
+</aside>
+
+<!-- Quiz -->
+<div id="quizModal">
+  <div class="qcard">
+    <button class="dx" id="quizClose" title="Close (Esc)">×</button>
+    <div class="qn" id="qNum"></div>
+    <div class="qq" id="qQ"></div>
+    <div class="qa" id="qA"></div>
+    <div class="qbtns">
+      <button class="btn" id="qReveal">Reveal answer</button>
+      <button class="btn" id="qNext">Next →</button>
+      <button class="btn" id="qShuffle">Shuffle</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
