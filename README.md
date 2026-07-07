@@ -13,7 +13,7 @@ An interactive map of the AI industry stack — from silicon to application laye
 - **3 money-flow traces** — follow a literal dollar through the stack for a Cursor request, a frontier training run, and an enterprise contract
 - **3 analytical lenses** — value capture, public vs. private, and a PE/VC angle on where non-venture capital plays
 - **Company search** — filter every tile on the map by name
-- **The Operator's Bench** — a unit-economics calculator (token costs, margin, build-vs-buy breakeven), an "adapt or build" decision tool (prompting vs. RAG vs. fine-tuning vs. agents), and a 13-card concepts deck covering the underlying ML mechanics
+- **The Operator's Bench** — *Your AI Bill*, a personal cost calculator (what your own usage costs per query and per month, whether a subscription beats pay-as-you-go, and what running open models locally would cost); an "adapt or build" decision tool (prompting vs. RAG vs. fine-tuning vs. agents); and a 16-card concepts deck covering the underlying ML mechanics and how to work with agents. Points out to live tools (Price Per Token, OpenRouter, Hugging Face, LM Studio) for current numbers
 - **Quiz mode** — 20 questions testing the concepts above, not just recall
 - Every claim is tagged **fact**, _reported_, or **○ thesis** — the map is explicit about what's measured vs. argued
 
