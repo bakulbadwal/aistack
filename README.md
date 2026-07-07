@@ -4,6 +4,8 @@ An interactive map of the AI industry stack — from silicon to application laye
 
 **Live:** https://aistacked.netlify.app/
 
+![Field atlas screenshot](docs/screenshot.png)
+
 ## What it does
 
 - **Seven-layer stack** (silicon → compute → training/RL → labs → inference → orchestration/agents → applications), each with an economics breakdown (margins, moats, chokepoints, who's eating whom)
