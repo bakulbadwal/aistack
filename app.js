@@ -443,10 +443,10 @@
       { id: "freq", l: "How often per month", min: 1, max: 1000, v: 20, st: 1, u: function (v) { return v + "×/mo"; } },
       { id: "sub", l: "Your subscription / mo ($) — $20 Plus/Pro · $100–200 Max", min: 0, max: 200, v: 20, st: 5, u: function (v) { return v === 0 ? "none" : "$" + v; } },
     ];
-    var tmLocal = 0; // 0 = already own a capable Mac, 1 = would need to buy
+    var tmLocal = 0; // 0 = already own capable hardware, 1 = would need to buy/rent
     var TM_LOCAL = [
-      ["I already own a capable Mac", 0],
-      ["I'd need to buy one (~$1,200)", 1200 / 36],
+      ["I own capable hardware", 0],
+      ["I'd need to buy or rent", 2000 / 36],
     ];
     function tmV(id) {
       var s = TM_SLIDERS.find(function (x) {
@@ -561,9 +561,9 @@
       notes.push('<div class="bnote"><b>The deflation tailwind is yours too:</b> token prices have fallen ~40%/yr ○ — the same query that costs ' + fmt$(costQuery) + " today should run about " + fmt$(costQuery * 0.6) + ' in a year on the same tier. \"Just wait\" is a real strategy for anything that isn\'t urgent — and it\'s why picking the right model tier beats optimizing prompt length.</div>');
       notes.push('<div class="bnote"><b>Model tier is the biggest lever you control.</b> Running this exact task on Mid-tier or Small/open instead of Frontier cuts the API cost <b>5–20×</b> — often for a real but small quality loss on easy work. That\'s the "routing" idea from Layer 06, applied to your own bill.</div>');
       if (tmLocal === 0)
-        notes.push('<div class="bnote"><b>On your own Mac, marginal cost is ≈ $0</b> (electricity is trivial) — but local caps you to Small/open-weight-tier models at ~15–40 tok/s ○, noticeably slower and less capable than frontier API access. People still run local for a real reason beyond cost: keeping proprietary or sensitive data off someone else\'s servers entirely — the "sovereign AI" argument, at personal scale. <i>Renting a GPU by the hour is a third option, but at personal volumes it rarely beats the API — same utilization reason self-hosting is hard at any scale.</i></div>');
+        notes.push('<div class="bnote"><b>On hardware you already own, marginal cost is ≈ $0</b> (just electricity) — a Mac with unified memory or a PC with a strong GPU. The catch: you\'re capped to Small/open-weight-tier models at ~15–40 tok/s ○, slower and less capable than frontier API access. The real reason to run local usually isn\'t cost — it\'s keeping proprietary or sensitive data off someone else\'s servers entirely (the "sovereign AI" argument, at personal scale).</div>');
       else
-        notes.push('<div class="bnote"><b>Buying in costs ~' + fmt$(localMonth) + '/mo amortized</b> (a ~$1,200 Mac over 3 years) — and it still caps you to Small/open-weight-tier quality at ~15–40 tok/s ○, below frontier API access. Worth it mainly if you\'d run local anyway for privacy (keeping data off third-party servers) or heavy sustained use, not to save a few dollars on light usage.</div>');
+        notes.push('<div class="bnote"><b>A capable machine is a real upfront cost</b> — a Mac with enough unified memory or a PC with a strong GPU runs ~$1,500–3,000+, about ' + fmt$(localMonth) + '/mo over three years — and still caps you to open-weight-tier quality ○. The other path is renting GPUs from a neocloud (Lambda, Crusoe, RunPod, CoreWeave), but that\'s mostly an enterprise move: at personal volumes you pay for idle GPU time and rarely beat the API. <i>Note: buying tokens through a hyperscaler like AWS Bedrock or Google Vertex is still per-token pricing — that\'s the "API" line above, not renting compute. Where compute rental actually lives is Layer 02 of the map.</i></div>');
       notes.push('<div class="bnote">○ Prices are directional (July 2026) and the 40%/yr deflation figure is a thesis, not a measurement. For live per-model pricing across every provider, see <a href="https://openrouter.ai/models" target="_blank" rel="noopener" style="color:var(--hl-bright)">OpenRouter\'s model list ↗</a>. The durable part: per-token cost keeps falling, subscriptions are a bet on your volume, and tier choice matters more than token-counting.</div>');
       $("tmNotes").innerHTML = notes.join("");
     }
