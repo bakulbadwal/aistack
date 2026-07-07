@@ -50,7 +50,7 @@ Deployed on Netlify directly from this repo (auto-deploys on push to `main`). An
 
 ## Provenance
 
-Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. Built and maintained by [Bakul Badwal](https://github.com/) with Claude Code.
+Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. Reviewed monthly. Built and maintained by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) — MBA Candidate, UVA Darden, Class of 2027 — with Claude Code.
 
 ## License
 

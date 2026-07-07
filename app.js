@@ -41,6 +41,7 @@
     if (!el || !meta) return;
     el.innerHTML =
       "<span>As of <b>" + esc(meta.asOf) + "</b></span>" +
+      (meta.cadence ? "<span><b style=\"color:var(--gold-bright)\">" + esc(meta.cadence) + "</b></span>" : "") +
       "<span>Inference now <b>" + esc(meta.inferenceShare) + "</b></span>" +
       "<span>Private AI funding TTM <b>" + esc(meta.fundingTTM) + "</b></span>" +
       "<span class=\"rep\" style=\"color:var(--paper-dim)\">" + esc(meta.note) + "</span>";
@@ -422,20 +423,30 @@
       return (n * 100).toFixed(1) + "¢";
     };
 
-    /* Token Meter */
+    /* Token Meter — "Your AI Bill" (personal usage) */
     var TM_CLASSES = [
       ["Frontier", 8],
       ["Mid-tier", 1.5],
       ["Small / open", 0.4],
     ];
     var tmClass = 0;
+    // [label, default tokTask in K, hint]
+    var TM_TASKS = [
+      ["Quick question", 1.5, "~1–2K tokens · a Slack-message-sized ask"],
+      ["Study / homework help", 6, "~5–8K tokens · a few back-and-forth turns"],
+      ["Long coding session", 35, "~20–50K tokens · a real debugging or build session"],
+      ["Read a big PDF / CIM", 100, "~50–150K tokens · drop in a document and ask questions"],
+      ["Full research thread", 180, "~150–200K tokens · a long multi-turn deep dive"],
+    ];
     var TM_SLIDERS = [
-      { id: "tokTask", l: "Tokens per task (K)", min: 1, max: 50, v: 8, u: function (v) { return v + "K"; } },
-      { id: "tasks", l: "Tasks per user / month", min: 20, max: 1000, v: 200, st: 10, u: function (v) { return v; } },
-      { id: "price", l: "Price per user / month ($)", min: 5, max: 100, v: 20, u: function (v) { return "$" + v; } },
-      { id: "users", l: "Users (K)", min: 1, max: 500, v: 50, u: function (v) { return v + "K"; } },
-      { id: "tps", l: "Self-host: tokens/sec per GPU ○", min: 20, max: 200, v: 80, st: 5, u: function (v) { return v + " tok/s"; } },
-      { id: "util", l: "Self-host: GPU utilization %", min: 10, max: 90, v: 40, st: 5, u: function (v) { return v + "%"; } },
+      { id: "tokTask", l: "Tokens for this task (K)", min: 0.5, max: 500, v: 6, st: 0.5, u: function (v) { return v >= 1 ? v + "K" : Math.round(v * 1000) + " tok"; } },
+      { id: "freq", l: "How often per month", min: 1, max: 1000, v: 20, st: 1, u: function (v) { return v + "×/mo"; } },
+      { id: "sub", l: "Your subscription / mo ($) — $20 Plus/Pro · $100–200 Max", min: 0, max: 200, v: 20, st: 5, u: function (v) { return v === 0 ? "none" : "$" + v; } },
+    ];
+    var tmLocal = 0; // 0 = already own a capable Mac, 1 = would need to buy
+    var TM_LOCAL = [
+      ["I already own a capable Mac", 0],
+      ["I'd need to buy one (~$1,200)", 1200 / 36],
     ];
     function tmV(id) {
       var s = TM_SLIDERS.find(function (x) {
@@ -444,12 +455,33 @@
       return s.cur !== undefined ? s.cur : s.v;
     }
     function tmRenderControls() {
+      $("tmTasks").innerHTML = TM_TASKS.map(function (t, i) {
+        return '<button class="btn" data-tt="' + i + '" title="' + t[2] + '">' + t[0] + "</button>";
+      }).join("");
+      $("tmTasks").querySelectorAll("button").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var s = TM_SLIDERS.find(function (x) { return x.id === "tokTask"; });
+          s.cur = TM_TASKS[+b.getAttribute("data-tt")][1];
+          tmRenderControls();
+          tmUpd();
+        });
+      });
       $("tmClass").innerHTML = TM_CLASSES.map(function (c, i) {
         return '<button class="btn' + (i === tmClass ? " on" : "") + '" data-tc="' + i + '">' + c[0] + " · $" + c[1] + "/M</button>";
       }).join("");
       $("tmClass").querySelectorAll("button").forEach(function (b) {
         b.addEventListener("click", function () {
           tmClass = +b.getAttribute("data-tc");
+          tmRenderControls();
+          tmUpd();
+        });
+      });
+      $("tmLocal").innerHTML = TM_LOCAL.map(function (t, i) {
+        return '<button class="btn' + (i === tmLocal ? " on" : "") + '" data-tl="' + i + '">' + t[0] + "</button>";
+      }).join("");
+      $("tmLocal").querySelectorAll("button").forEach(function (b) {
+        b.addEventListener("click", function () {
+          tmLocal = +b.getAttribute("data-tl");
           tmRenderControls();
           tmUpd();
         });
@@ -477,50 +509,62 @@
     function tmUpd() {
       var apiPM = TM_CLASSES[tmClass][1];
       var tokTask = tmV("tokTask"),
-        tasks = tmV("tasks"),
-        price = tmV("price"),
-        users = tmV("users") * 1000,
-        tps = tmV("tps"),
-        util = tmV("util") / 100;
+        freq = tmV("freq"),
+        sub = tmV("sub");
       TM_SLIDERS.forEach(function (s) {
         var el = $("tmv_" + s.id);
         if (el) el.textContent = s.u(s.cur !== undefined ? s.cur : s.v);
       });
-      var costTask = (tokTask * apiPM) / 1000;
-      var cogsUser = tasks * costTask;
-      var margin = ((price - cogsUser) / price) * 100;
-      var volM = (users * tasks * tokTask) / 1000;
-      var bill = volM * apiPM;
-      var apiPM2 = apiPM * 0.6;
-      var margin2 = ((price - (tasks * tokTask * apiPM2) / 1000) / price) * 100;
-      var selfPerM = 2.0 / ((tps * 3600 * util) / 1e6);
-      var selfTotal = volM * selfPerM + 15000;
-      $("tmCost").textContent = fmt$(costTask);
-      $("tmMargin").textContent = Math.round(margin) + "%";
-      $("tmMargin").style.color = margin >= 60 ? "var(--gold-bright)" : margin >= 30 ? "var(--paper)" : "var(--flag-bright)";
-      $("tmBill").textContent = fmt$(bill);
+      var costQuery = (tokTask * apiPM) / 1000;      // $ per single use
+      var costMonth = costQuery * freq;               // $ API cost per month
+      var apiPM2 = apiPM * 0.6;                        // 1yr-out deflation (~-40%/yr)
+      var costMonthNext = ((tokTask * apiPM2) / 1000) * freq;
+      var localMonth = TM_LOCAL[tmLocal][1];          // ~$0 if owned, amortized if bought
+
+      $("tmCost").textContent = fmt$(costQuery);
+      $("tmMonth").textContent = fmt$(costMonth);
+
+      var verdict, vColor;
+      if (sub === 0) {
+        verdict = "Pay-as-you-go";
+        vColor = "var(--paper)";
+      } else if (costMonth < sub * 0.5) {
+        verdict = "Overpaying by " + fmt$(sub - costMonth) + "/mo";
+        vColor = "var(--flag-bright)";
+      } else if (costMonth > sub * 1.3) {
+        verdict = "Subscription wins by " + fmt$(costMonth - sub) + "/mo";
+        vColor = "var(--gold-bright)";
+      } else {
+        verdict = "About a wash";
+        vColor = "var(--paper)";
+      }
+      $("tmVerdict").textContent = verdict;
+      $("tmVerdict").style.color = vColor;
+
       var bar = function (l, pct, val, col) {
         return '<div class="bbarrow"><span class="lbl">' + l + '</span><div class="trk"><i style="width:' + Math.max(0, Math.min(100, pct)) + "%;background:" + (col || "var(--gold)") + '"></i></div><span class="val">' + val + "</span></div>";
       };
-      var mx = Math.max(bill, selfTotal) || 1;
+      var mx = Math.max(costMonth, sub, localMonth, costMonthNext) || 1;
+      var localVal = localMonth < 0.5 ? "~$0" : fmt$(localMonth);
       $("tmBars").innerHTML =
-        bar("Margin / user — today", margin, Math.round(margin) + "%", margin < 30 ? "var(--flag-bright)" : "var(--gold)") +
-        bar("Margin — after 1yr deflation ○", margin2, Math.round(margin2) + "%", "var(--hl-bright)") +
+        bar("API pay-as-you-go / mo", (costMonth / mx) * 100, fmt$(costMonth)) +
+        (sub > 0 ? bar("Your subscription / mo", (sub / mx) * 100, "$" + sub, "var(--hl-bright)") : "") +
+        bar("Run it locally / mo ○", (localMonth / mx) * 100, localVal, "var(--gold-dim)") +
         '<div style="height:8px"></div>' +
-        bar("API bill / month", (bill / mx) * 100, fmt$(bill)) +
-        bar("Self-host / month ○", (selfTotal / mx) * 100, fmt$(selfTotal), "var(--flag-bright)");
+        bar("API / mo — in 1 year ○", (costMonthNext / mx) * 100, fmt$(costMonthNext), "var(--flag-bright)");
+
       var notes = [];
-      if (margin < 30)
-        notes.push('<div class="bnote warn"><b>Wrapper zone.</b> Under 30% gross margin, your COGS is someone else\'s roadmap — this is Layer 06\'s squeeze as arithmetic. Fixes: smaller model for easy tasks (routing), caching, or reprice against the value, not the seat.</div>');
-      if (margin2 > margin + 3)
-        notes.push('<div class="bnote good"><b>The deflation tailwind:</b> hold your price while token costs fall ~40%/yr ○ and margin walks from ' + Math.round(margin) + "% to " + Math.round(margin2) + '% without you doing anything. This is the quiet reason app-layer economics improve while labs bleed — whoever holds the customer keeps the deflation.</div>');
-      if (selfPerM > apiPM) {
-        notes.push('<div class="bnote"><b>Build-vs-buy verdict: rent.</b> At ' + Math.round(util * 100) + '% utilization your own GPUs cost <b>$' + selfPerM.toFixed(2) + "/M tokens</b> vs the API's $" + apiPM + "/M — the API provider batches thousands of customers to run near-full, you can't. Build-vs-buy is a <b>utilization</b> question, not a hardware question.</div>");
-      } else {
-        var be = 15000 / (apiPM - selfPerM);
-        notes.push('<div class="bnote good"><b>Build-vs-buy verdict: ' + (volM > be ? "self-host wins" : "rent — for now") + ".</b> Your GPUs run $" + selfPerM.toFixed(2) + "/M vs API $" + apiPM + "/M; with the $15K/mo platform overhead ○, breakeven is <b>" + Math.round(be) + "M tokens/mo</b> and you're at " + Math.round(volM) + "M. " + (volM > be ? "Past the threshold — now price in the eng team you just hired." : "Below it — the overhead eats the per-token saving.") + "</div>");
-      }
-      notes.push('<div class="bnote">○ Prices and throughput are directional (July 2026). The durable part is the <b>structure</b>: the spread trade, the deflation tailwind, and the utilization threshold. Argue with the numbers — that\'s what they\'re for.</div>');
+      if (sub > 0 && costMonth < sub * 0.5)
+        notes.push('<div class="bnote warn"><b>You\'re paying for convenience, not tokens.</b> At this volume the raw API would run you ' + fmt$(costMonth) + "/mo — under half your " + fmt$(sub) + " subscription. The flat rate is buying you no bill-shock and no metering anxiety, which is a fine trade if you value not thinking about it — just know that's what you\'re buying, not a cheaper token.</div>");
+      if (sub > 0 && costMonth > sub * 1.3)
+        notes.push('<div class="bnote good"><b>Your subscription is doing real work.</b> At this volume the API would cost ' + fmt$(costMonth) + "/mo — more than you pay. Whoever eats that spread (the lab) is betting your usage stays this heavy or grows: the same subsidize-to-lock-in logic as the whole subscription layer of this map, now working in your favor.</div>");
+      notes.push('<div class="bnote"><b>The deflation tailwind is yours too:</b> token prices have fallen ~40%/yr ○ — the same query that costs ' + fmt$(costQuery) + " today should run about " + fmt$(costQuery * 0.6) + ' in a year on the same tier. \"Just wait\" is a real strategy for anything that isn\'t urgent — and it\'s why picking the right model tier beats optimizing prompt length.</div>');
+      notes.push('<div class="bnote"><b>Model tier is the biggest lever you control.</b> Running this exact task on Mid-tier or Small/open instead of Frontier cuts the API cost <b>5–20×</b> — often for a real but small quality loss on easy work. That\'s the "routing" idea from Layer 06, applied to your own bill.</div>');
+      if (tmLocal === 0)
+        notes.push('<div class="bnote"><b>On your own Mac, marginal cost is ≈ $0</b> (electricity is trivial) — but local caps you to Small/open-weight-tier models at ~15–40 tok/s ○, noticeably slower and less capable than frontier API access. People still run local for a real reason beyond cost: keeping proprietary or sensitive data off someone else\'s servers entirely — the "sovereign AI" argument, at personal scale. <i>Renting a GPU by the hour is a third option, but at personal volumes it rarely beats the API — same utilization reason self-hosting is hard at any scale.</i></div>');
+      else
+        notes.push('<div class="bnote"><b>Buying in costs ~' + fmt$(localMonth) + '/mo amortized</b> (a ~$1,200 Mac over 3 years) — and it still caps you to Small/open-weight-tier quality at ~15–40 tok/s ○, below frontier API access. Worth it mainly if you\'d run local anyway for privacy (keeping data off third-party servers) or heavy sustained use, not to save a few dollars on light usage.</div>');
+      notes.push('<div class="bnote">○ Prices are directional (July 2026) and the 40%/yr deflation figure is a thesis, not a measurement. For live per-model pricing across every provider, see <a href="https://openrouter.ai/models" target="_blank" rel="noopener" style="color:var(--hl-bright)">OpenRouter\'s model list ↗</a>. The durable part: per-token cost keeps falling, subscriptions are a bet on your volume, and tier choice matters more than token-counting.</div>');
       $("tmNotes").innerHTML = notes.join("");
     }
 

@@ -16,6 +16,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The AI Stack — Interactive Field Atlas · July 2026">
 <meta name="twitter:description" content="Seven layers from sand to software. An interactive map of the AI sector — where value concentrates, who's buying whom, and how a dollar moves through the stack. Updated July 2026.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,7 +27,8 @@
   <header class="mast">
     <p class="eyebrow">Field Atlas · The AI Sector · v3 Interactive</p>
     <h1 class="serif">The Stack,<br>bottom&nbsp;to&nbsp;<em>top</em>.</h1>
-    <p class="lede">Seven layers from sand to software. Intelligence is manufactured at the bottom and refined upward; capital flows the other way. Where a name sits in this stack determines what it can charge, what it can defend, and who can eat it. <b style="color:var(--gold-bright)">New in v3:</b> the Operator's Bench below the map — a token-math cockpit, an adapt-or-build chooser, and a concepts deck that explains the machinery in thirty seconds a card.</p>
+    <p class="lede">Seven layers from sand to software. Intelligence is manufactured at the bottom and refined upward; capital flows the other way — where a name sits determines what it can charge, what it can defend, and who can eat it.</p>
+    <p class="lede" style="margin-top:12px">Below the map, the <a href="#bench">Operator's Bench</a> lets you run the numbers yourself: what your own AI usage costs, how to adapt a model, and a concepts deck for the machinery underneath.</p>
     <div class="meta" id="metaLine"></div>
   </header>
 
@@ -74,25 +78,29 @@
   <section class="bench" id="bench">
     <p class="beyebrow">Part II · The Operator's Bench</p>
     <h2 class="serif">Now run the <em>numbers</em> yourself.</h2>
-    <p class="blede">The map shows where the money sits; the bench shows why. Three instruments — drag, choose, flip. Same epistemics as the map: prices are directional as of July 2026, theses are marked ○, and every number is an argument you're invited to have.</p>
+    <p class="blede">The map shows where the money sits; the bench shows why. Three instruments — drag, choose, flip.</p>
 
     <div class="binstr">
       <div class="bhead">
         <div class="bnum">II · 01</div>
-        <div class="bname">The Token Meter — unit economics of an AI product</div>
-        <div class="bdesc">Every AI product is a spread trade: price per user minus the token bill underneath. Drag the sliders and watch the spread — then see what a year of falling token prices does to it, and when self-hosting actually beats renting the API.</div>
+        <div class="bname">Your AI Bill — what your own usage actually costs</div>
+        <div class="bdesc">Pick a model tier and a task you actually do. See what it costs per query on the raw API — then check whether your monthly subscription is a good deal at your real volume, or whether you're paying for headroom you never touch.</div>
       </div>
       <div class="bbody">
         <div>
-          <div class="qlab" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px">Model class (sets blended $/M tokens ○)</div>
+          <div class="qlab" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px">Pick a task you actually do</div>
+          <div class="bseg" id="tmTasks"></div>
+          <div class="qlab" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin:12px 0 6px">Model tier (sets $/M tokens ○)</div>
           <div class="bseg" id="tmClass"></div>
           <div id="tmSliders"></div>
+          <div class="qlab" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin:12px 0 6px">Running it on your own machine?</div>
+          <div class="bseg" id="tmLocal"></div>
         </div>
         <div>
           <div class="bstats">
-            <div class="bstat"><div class="v" id="tmCost">—</div><div class="l">token cost / task</div></div>
-            <div class="bstat"><div class="v" id="tmMargin">—</div><div class="l">gross margin / user</div></div>
-            <div class="bstat"><div class="v" id="tmBill">—</div><div class="l">org token bill / mo</div></div>
+            <div class="bstat"><div class="v" id="tmCost">—</div><div class="l">cost / query (API)</div></div>
+            <div class="bstat"><div class="v" id="tmMonth">—</div><div class="l">est. cost / mo (API)</div></div>
+            <div class="bstat"><div class="v" id="tmVerdict">—</div><div class="l">vs your subscription</div></div>
           </div>
           <div style="margin-top:14px" id="tmBars"></div>
           <div id="tmNotes"></div>
@@ -104,7 +112,7 @@
       <div class="bhead">
         <div class="bnum">II · 02</div>
         <div class="bname">Adapt or Build — which lever do you pull?</div>
-        <div class="bdesc">Prompting, RAG, fine-tuning, agents — the four ways to make a rented model yours. Answer four questions about the problem; the bench recommends the stack and names the failure mode you just signed up for.</div>
+        <div class="bdesc">Four ways to make a rented model yours. Answer four questions; the bench recommends a stack and names the failure mode you just signed up for.</div>
       </div>
       <div class="bbody">
         <div id="acQs"></div>
@@ -116,7 +124,7 @@
       <div class="bhead">
         <div class="bnum">II · 03</div>
         <div class="bname">The Concepts Deck — the machinery, thirty seconds a card</div>
-        <div class="bdesc">Thirteen cards, one term each: the plain-English version, the one thing to remember, and the sharp question it arms you to ask in a room. Say your version out loud <i>before</i> you flip — that's the rep.</div>
+        <div class="bdesc">One term per card: the plain-English version, the one thing to remember, and a sharp question to ask. Say your version out loud <i>before</i> you flip.</div>
       </div>
       <div style="padding:4px 20px 20px">
         <div class="fcards" id="fcards"></div>
@@ -136,12 +144,22 @@
     </div>
   </div>
 
+  <div class="card" style="margin-top:14px">
+    <h3>Where the live numbers live <span class="epi">· this page is a dated snapshot — these update in real time</span></h3>
+    <ul class="mna">
+      <li><span class="d mono">Timelines</span><span class="t"><b><a href="https://ai-2027.com/" target="_blank" rel="noopener" style="color:var(--gold-bright)">AI 2027</a></b> — the reference near-term AGI scenario (Kokotajlo / AI Futures Project)</span></li>
+      <li><span class="d mono">Rankings</span><span class="t"><b><a href="https://lmarena.ai/" target="_blank" rel="noopener" style="color:var(--gold-bright)">LM Arena</a></b> — human-preference gold standard · <b><a href="https://artificialanalysis.ai/" target="_blank" rel="noopener" style="color:var(--gold-bright)">Artificial Analysis</a></b> — benchmark + price + speed index</span></li>
+      <li><span class="d mono">Pricing</span><span class="t"><b><a href="https://openrouter.ai/models" target="_blank" rel="noopener" style="color:var(--gold-bright)">OpenRouter</a></b> — live per-model token pricing across every provider</span></li>
+    </ul>
+  </div>
+
   <div class="yousit">
     <h3>▸ Corners this map doesn't fully capture (yet)</h3>
     <p id="cornersText"></p>
   </div>
 
   <p class="foot" id="footerText"></p>
+  <p style="margin-top:14px;font-size:13px;color:var(--paper-dim);line-height:1.6">© 2026 <b style="color:var(--paper);font-size:14.5px">Bakul Badwal</b> · MBA Candidate, UVA Darden, Class of 2027 · built with Claude Code · <a href="https://www.linkedin.com/in/bakulbadwal/" target="_blank" rel="noopener" style="color:var(--hl-bright)">LinkedIn ↗</a></p>
 
 </div>
 
