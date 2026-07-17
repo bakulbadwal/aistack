@@ -19,60 +19,91 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/fraunces-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fraunces-600-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="wrap">
 
   <header class="mast">
-    <p class="eyebrow">Field Atlas · The AI Sector · v4 Interactive</p>
-    <h1 class="serif">The Stack,<br>bottom&nbsp;to&nbsp;<em>top</em>.</h1>
-    <p class="lede">Seven layers from sand to software. Intelligence is manufactured at the bottom and refined upward; capital flows the other way — where a name sits determines what it can charge, what it can defend, and who can eat it.</p>
-    <p class="lede" style="margin-top:12px">Below the map, the <a href="#bench" style="color:var(--gold-bright)">Operator's Bench</a> lets you run the numbers yourself: what your own AI usage costs, how to adapt a model, and a concepts deck for the machinery underneath.</p>
-    <div class="meta" id="metaLine"></div>
+    <nav class="hero-stage" id="stackHero" aria-label="The seven layers of the AI stack — click a layer to jump to it"></nav>
+    <div class="mast-topline">
+      <a class="wordmark" href="#top" aria-label="The AI Stack home">AI STACK <span>/ FIELD ATLAS</span></a>
+      <nav class="mast-nav" aria-label="Atlas sections">
+        <a href="#atlas">Atlas</a>
+        <a href="#bench">Operator's bench</a>
+        <a href="#notes">Notes</a>
+      </nav>
+    </div>
+    <div class="mast-copy" id="top">
+      <p class="eyebrow">Field Atlas · The AI Sector · Interactive edition</p>
+      <h1 class="serif">The Stack,<br>bottom&nbsp;to&nbsp;<em>top</em>.</h1>
+      <p class="lede">Seven layers from sand to software. Intelligence is manufactured at the bottom and refined upward; capital flows the other way. Where a name sits determines what it can charge, what it can defend, and who can eat it.</p>
+      <div class="hero-actions">
+        <a class="hero-action primary" href="#atlas">Explore the atlas <span aria-hidden="true">↓</span></a>
+        <a class="hero-action" href="#bench">Open the operator's bench</a>
+      </div>
+      <p class="hero-note">Below the map, the <a href="#bench">Operator's Bench</a> lets you run the numbers yourself: what your own AI usage costs, how to adapt a model, and a concepts deck for the machinery underneath.</p>
+      <div class="meta" id="metaLine"></div>
+    </div>
   </header>
 
-  <div class="onboard" id="onboardHint">
-    <span>New here? <b>Skim top → bottom</b> for the full map, jump straight to the <a href="#bench">Operator's Bench</a> to run the numbers yourself, or hit <b>Quiz me</b> to test what stuck. Click any tile or concept card to go deeper — nothing here assumes prior AI knowledge.</span>
-    <button id="onboardClose" type="button">Got it ✕</button>
+  <div class="onboard" id="onboardHint" role="status">
+    <span><b>Pick a path:</b> scan the layers, filter the market through a lens, trace one real dollar, or test what stuck. Every company tile opens a plain-English profile.</span>
+    <button id="onboardClose" type="button" aria-label="Dismiss getting-started guidance">Got it <span aria-hidden="true">×</span></button>
   </div>
 
-  <div class="ctrl">
-    <span class="clab">Search</span>
-    <div class="cgroup">
-      <input type="text" id="companySearch" class="searchbox" placeholder="Find a company…" autocomplete="off">
-      <span id="searchCount" class="searchcount"></span>
+  <div class="ctrl" aria-label="Atlas controls">
+    <div class="control-block search-control">
+      <span class="clab">Find a company</span>
+      <div class="cgroup">
+        <input type="text" id="companySearch" class="searchbox" placeholder="Search the map" autocomplete="off" aria-label="Find a company">
+        <span id="searchCount" class="searchcount" aria-live="polite"></span>
+      </div>
     </div>
-    <div class="cdiv"></div>
-    <span class="clab">Lens</span>
-    <div class="cgroup">
-      <button class="btn lensbtn on" data-lens="none">Plain map</button>
-      <button class="btn lensbtn" data-lens="cap">Value capture</button>
-      <button class="btn lensbtn" data-lens="pub">Public vs private</button>
-      <button class="btn lensbtn" data-lens="pe">PE / VC angle</button>
+    <div class="control-block">
+      <span class="clab">View through</span>
+      <div class="cgroup">
+        <button class="btn lensbtn on" data-lens="none">Plain map</button>
+        <button class="btn lensbtn" data-lens="cap">Value capture</button>
+        <button class="btn lensbtn" data-lens="pub">Public / private</button>
+        <button class="btn lensbtn" data-lens="pe">PE / VC</button>
+      </div>
     </div>
-    <div class="cdiv"></div>
-    <span class="clab">Trace a dollar</span>
-    <div class="cgroup">
-      <button class="btn trbtn" data-trace="cursor">One Cursor request</button>
-      <button class="btn trbtn" data-trace="training">A frontier training run</button>
-      <button class="btn trbtn" data-trace="enterprise">An enterprise dollar</button>
+    <div class="control-block trace-control">
+      <span class="clab">Trace one dollar</span>
+      <div class="cgroup">
+        <button class="btn trbtn" data-trace="cursor">Cursor request</button>
+        <button class="btn trbtn" data-trace="training">Training run</button>
+        <button class="btn trbtn" data-trace="enterprise">Enterprise dollar</button>
+      </div>
     </div>
-    <div class="cdiv"></div>
-    <button class="btn quiz" id="quizBtn">Quiz me</button>
-    <div class="cdiv"></div>
-    <a class="btn anchor" href="#bench">Operator's bench ↓</a>
+    <div class="control-end">
+      <button class="btn quiz" id="quizBtn">Quiz me</button>
+      <a class="text-link" href="#bench">Bench <span aria-hidden="true">↓</span></a>
+    </div>
   </div>
   <div id="lensNote"></div>
   <div id="tracePanel"></div>
 
-  <div class="flowkey">
-    <span><span class="arrowup">▲</span> Intelligence &amp; margin compound upward</span>
-    <span><span class="arrowdn">▼</span> Capital &amp; compute pour downward</span>
-    <span class="epi">Epistemics: <b style="color:var(--paper)">plain text</b> = public fact · <span class="rep">reported</span> = unconfirmed / in talks · <b style="color:var(--flag-bright)">○</b> = thesis, an argument not a measurement</span>
-  </div>
+  <main id="atlas">
+    <div class="atlas-heading">
+      <div>
+        <p class="section-kicker">01 / Atlas</p>
+        <h2 class="serif">Read the market as a system.</h2>
+      </div>
+      <p>Move from applications down to silicon. Every layer has its own economics, choke point, and way of getting squeezed.</p>
+    </div>
+    <div class="layer-nav" id="layerNavigator" aria-label="Jump to an AI stack layer"></div>
+    <div class="flowkey">
+      <span><span class="arrowup">↑</span> Intelligence &amp; margin compound upward</span>
+      <span><span class="arrowdn">↓</span> Capital &amp; compute pour downward</span>
+      <span class="epi">Plain text = public fact · <span class="rep">reported</span> = unconfirmed / in talks · <b style="color:var(--flag-bright)">○</b> = thesis, an argument not a measurement</span>
+    </div>
 
-  <div id="layersRoot"><!-- rendered from data.json by app.js --></div>
+    <div id="layersRoot"><!-- rendered from data.json by app.js --></div>
+  </main>
 
   <!-- v4: OPERATOR'S BENCH -->
   <section class="bench" id="bench">
@@ -133,7 +164,7 @@
   </section>
 
   <!-- SIDE: M&A + READING -->
-  <div class="cols">
+  <div class="cols" id="notes">
     <div class="card">
       <h3>Capital &amp; M&amp;A — recent flow</h3>
       <ul class="mna" id="mnaFlowList"></ul>

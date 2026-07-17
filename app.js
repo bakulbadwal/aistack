@@ -19,10 +19,13 @@
     .then(function (data) {
       renderMeta(data.meta);
       renderLayers(data.layers);
+      renderLayerNavigator(data.layers);
+      renderStackHero(data.layers);
       renderSide(data);
       renderBenchConcepts(data.concepts);
       wireInteractive(data);
       wireBench();
+      initReveals();
     })
     .catch(function (err) {
       var w = document.querySelector(".wrap");
@@ -43,7 +46,7 @@
       "<span>As of <b>" + esc(meta.asOf) + "</b></span>" +
       (meta.cadence ? "<span><b style=\"color:var(--gold-bright)\">" + esc(meta.cadence) + "</b></span>" : "") +
       "<span>Inference now <b>" + esc(meta.inferenceShare) + "</b></span>" +
-      "<span>Private AI funding TTM <b>" + esc(meta.fundingTTM) + "</b></span>" +
+      "<span>AI funding <b>" + esc(meta.fundingTTM) + "</b></span>" +
       "<span class=\"rep\" style=\"color:var(--paper-dim)\">" + esc(meta.note) + "</span>";
   }
 
@@ -52,9 +55,9 @@
     var root = document.getElementById("layersRoot");
     if (!root) return;
     root.innerHTML = layers
-      .map(function (layer) {
+      .map(function (layer, index) {
         return (
-          '<section class="layer" data-lnum="' + esc(layer.lnum) + '" data-lname="' + esc(layer.lname) + '">' +
+          '<section class="layer" id="atlas-layer-' + index + '" data-lnum="' + esc(layer.lnum) + '" data-lname="' + esc(layer.lname) + '">' +
           '<div class="lhead">' +
           '<div class="lnum">' + esc(layer.lnum) + "</div>" +
           '<div class="lname">' + layer.lname + "</div>" +
@@ -68,6 +71,88 @@
         );
       })
       .join("");
+  }
+
+  function plainText(markup) {
+    var el = document.createElement("div");
+    el.innerHTML = markup;
+    return el.textContent || el.innerText || "";
+  }
+
+  function renderLayerNavigator(layers) {
+    var nav = document.getElementById("layerNavigator");
+    if (!nav) return;
+    nav.innerHTML = layers
+      .map(function (layer, index) {
+        return (
+          '<a class="layer-jump" href="#atlas-layer-' + index + '">' +
+          '<span class="layer-jump-num">' + esc(layer.lnum) + "</span>" +
+          '<span class="layer-jump-name">' + esc(plainText(layer.lname)) + "</span>" +
+          '<span class="layer-jump-arrow" aria-hidden="true">↓</span>' +
+          "</a>"
+        );
+      })
+      .join("");
+  }
+
+  /* Isometric CSS stack hero — the seven layers as clickable slabs.
+     Accent colors come from --accL1..--accL7 via :nth-child, same as the cards. */
+  function renderStackHero(layers) {
+    var stage = document.getElementById("stackHero");
+    if (!stage) return;
+    var n = layers.length;
+    stage.innerHTML =
+      '<div class="stack3d">' +
+      layers
+        .map(function (layer, i) {
+          var num = esc(layer.lnum.split("·")[0].trim());
+          var name = esc(plainText(layer.lname));
+          return (
+            '<a class="slab" href="#atlas-layer-' + i + '" style="--i:' + i + ";--n:" + n + '" aria-label="' + num + " — " + name + '">' +
+            '<span class="slab-face" aria-hidden="true"></span>' +
+            '<span class="slab-tag"><b>' + num + "</b> " + name + "</span>" +
+            "</a>"
+          );
+        })
+        .join("") +
+      "</div>";
+    var scene = stage.querySelector(".stack3d");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        scene.classList.add("built");
+      });
+    });
+  }
+
+  /* Scroll-in reveals; skipped entirely under prefers-reduced-motion */
+  function initReveals() {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var els = document.querySelectorAll(".layer, .binstr, .cols .card, .wrap > .card, .yousit, .atlas-heading, .layer-nav");
+    els.forEach(function (el) {
+      el.classList.add("reveal");
+    });
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            io.unobserve(en.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+    );
+    els.forEach(function (el) {
+      io.observe(el);
+    });
+    /* Safety net: if reveals can't fire (hidden tab, IO quirk), show everything */
+    setTimeout(function () {
+      document.querySelectorAll(".reveal:not(.in)").forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("in");
+      });
+    }, 1500);
   }
 
   function renderEcon(rows) {
@@ -181,6 +266,7 @@
       var count = document.getElementById("searchCount");
       if (!input) return;
       var allTiles = document.querySelectorAll(".tile");
+      input.placeholder = "Search " + allTiles.length + " entities";
       function apply() {
         var q = input.value.trim().toLowerCase();
         if (!q) {

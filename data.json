@@ -3,7 +3,7 @@
     "asOf": "July 2026",
     "cadence": "Reviewed monthly",
     "inferenceShare": "≈⅔ of AI compute spend",
-    "fundingTTM": ">$150B",
+    "fundingTTM": "~$188B in Q1 '26 alone",
     "note": "Valuations move weekly — treat as directional"
   },
   "layers": [
@@ -12,34 +12,129 @@
       "lname": "Application Layer",
       "ldesc": "Where revenue meets a human. Margin defended by data, workflow lock-in, or distribution — not the model.",
       "econ": [
-        {"k": "Margins", "v": "60–80% gross for software; AI-native services run lower gross (30–50%) but capture the client's <b>wage line</b>, not the software budget — a far bigger pool."},
-        {"k": "Moat", "v": "Workflow lock-in, proprietary data, distribution, and regulatory barriers (legal, healthcare). The model is never the moat up here — everyone rents the same models."},
-        {"k": "Chokepoint", "v": "Distribution — who owns the end-customer relationship. Token costs are just COGS."},
-        {"k": "Who eats whom", "v": "Labs launch competing apps from below (ChatGPT vs. every assistant). Apps fight back by fine-tuning open weights to cut their token bill."},
-        {"k": "○ Investor question", "v": "The PE play in the whole stack is here: buy services firms, install AI, expand margin. Software tiles are venture-priced; outcome-priced services are the arbitrage.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "60–80% gross for software; AI-native services run lower gross (30–50%) but capture the client's <b>wage line</b>, not the software budget — a far bigger pool."
+        },
+        {
+          "k": "Moat",
+          "v": "Workflow lock-in, proprietary data, distribution, and regulatory barriers (legal, healthcare). The model is never the moat up here — everyone rents the same models."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "Distribution — who owns the end-customer relationship. Token costs are just COGS."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Labs launch competing apps from below (ChatGPT vs. every assistant). Apps fight back by fine-tuning open weights to cut their token bill."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "The PE play in the whole stack is here: buy services firms, install AI, expand margin. Software tiles are venture-priced; outcome-priced services are the arbitrage.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "Horizontal assistants &amp; search", "cap": "contested", "tiles": [
-          {"nm": "ChatGPT", "tg": "1B+ MAU"},
-          {"nm": "Claude", "tg": "fastest-growing"},
-          {"nm": "Gemini", "tg": "2B Apple devices", "pub": true},
-          {"nm": "Perplexity", "tg": "~$20B · search"},
-          {"nm": "Glean", "tg": "enterprise search"}
-        ]},
-        {"title": "Vertical AI — workflow owners", "cap": "strong", "pe": "Growth-equity zone: workflow lock-in inside regulated domains — durable pricing power once embedded.", "tiles": [
-          {"nm": "Harvey", "tg": "legal"},
-          {"nm": "Abridge / OpenEvidence", "tg": "healthcare"},
-          {"nm": "Sierra", "tg": "customer service"},
-          {"nm": "Ramp", "tg": "finance ops · RL case"},
-          {"nm": "Zapier", "tg": "automation"},
-          {"nm": "Clay", "tg": "GTM / sales"}
-        ]},
-        {"title": "AI-native services <span class=\"rep\">— sell the outcome, not the software</span>", "cap": "strong", "pe": "Prime roll-up zone: buy the wage line, not the software line. Services firms with AI margin expansion — the classic LMM PE shape.", "tiles": [
-          {"nm": "EvenUp", "tg": "legal / injury"},
-          {"nm": "Crosby", "tg": "AI-native law"},
-          {"nm": "Harper", "tg": "insurance brokerage"},
-          {"nm": "deploy.co", "tg": "OpenAI FDE arm"}
-        ]}
+        {
+          "title": "Horizontal assistants &amp; search",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "ChatGPT",
+              "tg": "1B+ MAU"
+            },
+            {
+              "nm": "Claude",
+              "tg": "fastest-growing"
+            },
+            {
+              "nm": "Gemini",
+              "tg": "2B Apple devices",
+              "pub": true
+            },
+            {
+              "nm": "Perplexity",
+              "tg": "~$20B · search"
+            },
+            {
+              "nm": "Glean",
+              "tg": "enterprise search"
+            }
+          ]
+        },
+        {
+          "title": "Vertical AI — workflow owners",
+          "cap": "strong",
+          "pe": "Growth-equity zone: workflow lock-in inside regulated domains — durable pricing power once embedded.",
+          "tiles": [
+            {
+              "nm": "Harvey",
+              "tg": "legal"
+            },
+            {
+              "nm": "Abridge / OpenEvidence",
+              "tg": "healthcare"
+            },
+            {
+              "nm": "Sierra",
+              "tg": "customer service"
+            },
+            {
+              "nm": "Ramp",
+              "tg": "finance ops · RL case"
+            },
+            {
+              "nm": "Zapier",
+              "tg": "automation"
+            },
+            {
+              "nm": "Clay",
+              "tg": "GTM / sales"
+            }
+          ]
+        },
+        {
+          "title": "AI-native services <span class=\"rep\">— sell the outcome, not the software</span>",
+          "cap": "strong",
+          "pe": "Prime roll-up zone: buy the wage line, not the software line. Services firms with AI margin expansion — the classic LMM PE shape.",
+          "tiles": [
+            {
+              "nm": "EvenUp",
+              "tg": "legal / injury"
+            },
+            {
+              "nm": "Crosby",
+              "tg": "AI-native law"
+            },
+            {
+              "nm": "Harper",
+              "tg": "insurance brokerage"
+            },
+            {
+              "nm": "deploy.co",
+              "tg": "OpenAI FDE arm"
+            }
+          ]
+        },
+        {
+          "title": "Creative &amp; media tools",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Midjourney",
+              "tg": "bootstrapped · image"
+            },
+            {
+              "nm": "Suno",
+              "tg": "$5.4B · music"
+            },
+            {
+              "nm": "Black Forest Labs",
+              "tg": "FLUX · image models",
+              "muted": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -47,31 +142,123 @@
       "lname": "Agents, Orchestration &amp; Dev Tooling",
       "ldesc": "Turns a model into a worker. The fastest-growing software category ever measured.",
       "econ": [
-        {"k": "Margins", "v": "Look like software (70%+) but inference passthrough can crush them — a coding agent pays labs per token before it earns a dollar of its subscription."},
-        {"k": "Moat", "v": "The weakest layer for moats. Workflow habit and iteration speed; open protocols (MCP, A2A) commoditize integration <i>on purpose</i>."},
-        {"k": "Chokepoint", "v": "Its own supplier: the model vendor it depends on is also its biggest competitor (Claude Code vs. Cursor; Codex vs. everyone)."},
-        {"k": "Who eats whom", "v": "Labs, from below. That structural squeeze is arguably why Cursor sold <span class=\"rep\">(reported — SpaceX deal is an option structure, not a closed acquisition)</span>."},
-        {"k": "○ Investor question", "v": "Is this a company or a feature of Layer 04? Ask what survives the next model release before believing any ARR multiple.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "Look like software (70%+) but inference passthrough can crush them — a coding agent pays labs per token before it earns a dollar of its subscription."
+        },
+        {
+          "k": "Moat",
+          "v": "The weakest layer for moats. Workflow habit and iteration speed; open protocols (MCP, A2A) commoditize integration <i>on purpose</i>."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "Its own supplier: the model vendor it depends on is also its biggest competitor (Claude Code vs. Cursor; Codex vs. everyone)."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Labs, from below. That structural squeeze is arguably why Cursor sold <span class=\"rep\">(reported — SpaceX deal is an option structure, not a closed acquisition)</span>."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "Is this a company or a feature of Layer 04? Ask what survives the next model release before believing any ARR multiple.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "Coding agents &amp; IDEs", "cap": "contested", "tiles": [
-          {"nm": "Cursor / Anysphere", "tg": "SpaceX acq. <span class=\"rep\">reported</span> ~$60B"},
-          {"nm": "Claude Code", "tg": "Anthropic"},
-          {"nm": "Cognition (Devin)", "tg": "$26B · autonomous SWE"},
-          {"nm": "Poolside", "tg": "$12B · ex-GitHub CTO"},
-          {"nm": "Magic", "tg": "$515M · 100M-tok ctx"},
-          {"nm": "Windsurf", "tg": "IDE agent"},
-          {"nm": "Replit", "tg": "build-from-prompt"},
-          {"nm": "GitHub Copilot", "tg": "Microsoft", "pub": true},
-          {"nm": "Sourcegraph", "tg": "code intel"}
-        ]},
-        {"title": "Frameworks &amp; protocols", "cap": "squeezed", "tiles": [
-          {"nm": "LangChain / LangGraph", "tg": "$1.25B · orchestration"},
-          {"nm": "LlamaIndex", "tg": "RAG / data", "muted": true},
-          {"nm": "CrewAI", "tg": "multi-agent", "muted": true},
-          {"nm": "MCP", "tg": "tool protocol", "muted": true},
-          {"nm": "A2A", "tg": "agent-to-agent", "muted": true}
-        ]}
+        {
+          "title": "Coding agents &amp; IDEs",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Cursor / Anysphere",
+              "tg": "SpaceX acq. <span class=\"rep\">reported</span> ~$60B"
+            },
+            {
+              "nm": "Claude Code",
+              "tg": "Anthropic"
+            },
+            {
+              "nm": "Cognition (Devin)",
+              "tg": "$26B · autonomous SWE"
+            },
+            {
+              "nm": "Poolside",
+              "tg": "$12B · ex-GitHub CTO"
+            },
+            {
+              "nm": "Magic",
+              "tg": "$515M · 100M-tok ctx"
+            },
+            {
+              "nm": "Windsurf",
+              "tg": "IDE agent"
+            },
+            {
+              "nm": "Replit",
+              "tg": "build-from-prompt"
+            },
+            {
+              "nm": "GitHub Copilot",
+              "tg": "Microsoft",
+              "pub": true
+            },
+            {
+              "nm": "Sourcegraph",
+              "tg": "code intel"
+            },
+            {
+              "nm": "Codex",
+              "tg": "OpenAI"
+            },
+            {
+              "nm": "Antigravity",
+              "tg": "Google · agent IDE"
+            },
+            {
+              "nm": "Lovable",
+              "tg": "~$13B talks <span class=\"rep\">reported</span> · $500M ARR"
+            },
+            {
+              "nm": "Factory",
+              "tg": "agent-native SWE",
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Frameworks &amp; protocols",
+          "cap": "squeezed",
+          "tiles": [
+            {
+              "nm": "LangChain / LangGraph",
+              "tg": "$1.25B · orchestration"
+            },
+            {
+              "nm": "n8n",
+              "tg": "$5.2B · SAP-backed"
+            },
+            {
+              "nm": "LlamaIndex",
+              "tg": "RAG / data",
+              "muted": true
+            },
+            {
+              "nm": "CrewAI",
+              "tg": "multi-agent",
+              "muted": true
+            },
+            {
+              "nm": "MCP",
+              "tg": "tool protocol",
+              "muted": true
+            },
+            {
+              "nm": "A2A",
+              "tg": "agent-to-agent",
+              "muted": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -79,28 +266,92 @@
       "lname": "Inference &amp; Serving",
       "ldesc": "Runs the model per token. ~$117B market in 2026; the layer where consolidation is most violent.",
       "econ": [
-        {"k": "Margins", "v": "Squeezed from both sides: rents GPUs from Layer 02, sells tokens into a relentlessly falling price curve. 20–40% gross; serving engineering is the entire edge."},
-        {"k": "Moat", "v": "Kernel and serving engineering, plus <b>neutrality</b> across models — the Switzerland position."},
-        {"k": "Chokepoint", "v": "GPU allocation, and the price-performance jump of each new chip generation (which can strand your fleet)."},
-        {"k": "Who eats whom", "v": "Silicon (01) and labs (04) are buying this layer: Replicate→Cloudflare closed; SambaNova→Intel <span class=\"rep\">reported</span>. Neutral routers survive on Switzerland status."},
-        {"k": "○ Investor question", "v": "Exits here are acquisitions, not IPOs. Neutrality is the scarce asset — price it, and check who the top three customers are.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "Squeezed from both sides: rents GPUs from Layer 02, sells tokens into a relentlessly falling price curve. 20–40% gross; serving engineering is the entire edge."
+        },
+        {
+          "k": "Moat",
+          "v": "Kernel and serving engineering, plus <b>neutrality</b> across models — the Switzerland position."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "GPU allocation, and the price-performance jump of each new chip generation (which can strand your fleet)."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Silicon (01) and labs (04) are buying this layer: Replicate→Cloudflare closed. But the exits aren't inevitable — Fireworks turned its $15B acquisition talks into a $1.5B raise at $17.5B, and SambaNova's reported Intel deal died into an $11B round. Neutral independence is being funded again."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "Exits here are acquisitions, not IPOs. Neutrality is the scarce asset — price it, and check who the top three customers are.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "Serverless / managed inference", "cap": "squeezed", "tiles": [
-          {"nm": "Fireworks", "tg": "~$800M ARR · $15B talks"},
-          {"nm": "Together AI", "tg": "$7.5B · Tri Dao"},
-          {"nm": "Baseten", "tg": "$13B · powers Cursor/Notion"},
-          {"nm": "Modal", "tg": "code-first GPU"},
-          {"nm": "DeepInfra", "tg": "cost leader"},
-          {"nm": "Replicate", "tg": "Cloudflare-owned", "pub": true},
-          {"nm": "Fal", "tg": "generative media"},
-          {"nm": "Anyscale", "tg": "$1B · Ray · Ion Stoica"}
-        ]},
-        {"title": "Gateways &amp; routers", "cap": "contested", "tiles": [
-          {"nm": "OpenRouter", "tg": "~25T tok/wk · $1.3B"},
-          {"nm": "Vercel AI Gateway", "tg": "200K+ teams"},
-          {"nm": "Clarifai", "tg": "orchestration", "muted": true}
-        ]}
+        {
+          "title": "Serverless / managed inference",
+          "cap": "squeezed",
+          "tiles": [
+            {
+              "nm": "Fireworks",
+              "tg": "$17.5B · Nvidia-backed"
+            },
+            {
+              "nm": "Together AI",
+              "tg": "$7.5B · Tri Dao"
+            },
+            {
+              "nm": "Baseten",
+              "tg": "$13B · powers Cursor/Notion"
+            },
+            {
+              "nm": "Modal",
+              "tg": "code-first GPU"
+            },
+            {
+              "nm": "DeepInfra",
+              "tg": "cost leader"
+            },
+            {
+              "nm": "Replicate",
+              "tg": "Cloudflare-owned",
+              "pub": true
+            },
+            {
+              "nm": "Fal",
+              "tg": "generative media"
+            },
+            {
+              "nm": "Anyscale",
+              "tg": "$1B · Ray · Ion Stoica"
+            },
+            {
+              "nm": "Cerebras Inference",
+              "tg": "wafer-scale speed",
+              "pub": true
+            }
+          ]
+        },
+        {
+          "title": "Gateways &amp; routers",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "OpenRouter",
+              "tg": "~25T tok/wk · $1.3B"
+            },
+            {
+              "nm": "Vercel AI Gateway",
+              "tg": "200K+ teams"
+            },
+            {
+              "nm": "Clarifai",
+              "tg": "orchestration",
+              "muted": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -108,33 +359,132 @@
       "lname": "Foundation Model Labs",
       "ldesc": "Capture the most value because they control the core technology. Trade at 15–60× revenue.",
       "econ": [
-        {"k": "Margins", "v": "Gross margin on inference 40–60% and rising; operating margin deeply negative. Training capex is both the moat and the sinkhole — spend now, capability later."},
-        {"k": "Moat", "v": "Talent density, compute access years ahead, distribution deals, and the usage flywheel feeding the next model."},
-        {"k": "Chokepoint", "v": "Compute and power commitments — you book clusters and megawatts before you know if the model works."},
-        {"k": "Who eats whom", "v": "Open weights (DeepSeek, Qwen, GLM) commoditize everything below the frontier. The frontier is the only defensible altitude — and it moves every quarter."},
-        {"k": "○ Investor question", "v": "15–60× revenue isn't software economics — it's a call option on transformative AI plus consumer distribution. Underwrite it as an option, not a SaaS multiple.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "Gross margin on inference 40–60% and rising; operating margin deeply negative. Training capex is both the moat and the sinkhole — spend now, capability later."
+        },
+        {
+          "k": "Moat",
+          "v": "Talent density, compute access years ahead, distribution deals, and the usage flywheel feeding the next model."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "Compute and power commitments — you book clusters and megawatts before you know if the model works."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Open weights (DeepSeek, Qwen, GLM) commoditize everything below the frontier. The frontier is the only defensible altitude — and it moves every quarter."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "15–60× revenue isn't software economics — it's a call option on transformative AI plus consumer distribution. Underwrite it as an option, not a SaaS multiple.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "Frontier — US", "cap": "strong", "tiles": [
-          {"nm": "OpenAI", "tg": "~$852B · GPT-5.5/5.6", "pub": "filed", "lab": true},
-          {"nm": "Anthropic", "tg": "~$965B · Claude Opus 4.8", "pub": "filed", "lab": true},
-          {"nm": "Google DeepMind", "tg": "Gemini 3.x", "pub": true, "lab": true},
-          {"nm": "xAI / SpaceX", "tg": "~$1.25T merged · Grok 4", "lab": true},
-          {"nm": "Meta AI", "tg": "Llama 4", "pub": true, "lab": true}
-        ]},
-        {"title": "Frontier — intl. &amp; open-weight <span class=\"rep\">— the fine-tuning bases</span>", "cap": "squeezed", "tiles": [
-          {"nm": "Mistral", "tg": "~$15B · EU leader", "lab": true},
-          {"nm": "DeepSeek", "tg": "V4 · open weights", "lab": true},
-          {"nm": "Z.ai", "tg": "GLM-5.2 · open lead", "lab": true},
-          {"nm": "Alibaba / Qwen", "tg": "Qwen3.x", "pub": true, "lab": true},
-          {"nm": "Moonshot", "tg": "Kimi K2.5", "lab": true},
-          {"nm": "MiniMax", "tg": "M2.x", "lab": true}
-        ]},
-        {"title": "New labs / stealth", "cap": "contested", "tiles": [
-          {"nm": "Thinking Machines", "tg": "~$50B · Murati", "lab": true},
-          {"nm": "Safe Superintelligence", "tg": "Sutskever · stealth", "lab": true},
-          {"nm": "Reflection AI", "tg": "agentic coding", "lab": true}
-        ]}
+        {
+          "title": "Frontier — US",
+          "cap": "strong",
+          "tiles": [
+            {
+              "nm": "OpenAI",
+              "tg": "~$852B · GPT-5.5/5.6",
+              "pub": "filed",
+              "lab": true
+            },
+            {
+              "nm": "Anthropic",
+              "tg": "~$965B · Claude Fable 5",
+              "pub": "filed",
+              "lab": true
+            },
+            {
+              "nm": "Google DeepMind",
+              "tg": "Gemini 3.x",
+              "pub": true,
+              "lab": true
+            },
+            {
+              "nm": "xAI / SpaceX",
+              "tg": "~$1.25T merged · Grok 4",
+              "lab": true
+            },
+            {
+              "nm": "Meta AI",
+              "tg": "Llama 4",
+              "pub": true,
+              "lab": true
+            }
+          ]
+        },
+        {
+          "title": "Frontier — intl. &amp; open-weight <span class=\"rep\">— the fine-tuning bases</span>",
+          "cap": "squeezed",
+          "tiles": [
+            {
+              "nm": "Mistral",
+              "tg": "~$15B · EU leader",
+              "lab": true
+            },
+            {
+              "nm": "DeepSeek",
+              "tg": "V4 · open weights",
+              "lab": true
+            },
+            {
+              "nm": "Z.ai",
+              "tg": "GLM-5.2 · open lead",
+              "lab": true
+            },
+            {
+              "nm": "Alibaba / Qwen",
+              "tg": "Qwen3.x",
+              "pub": true,
+              "lab": true
+            },
+            {
+              "nm": "Moonshot",
+              "tg": "Kimi K2.5",
+              "lab": true
+            },
+            {
+              "nm": "MiniMax",
+              "tg": "M2.x",
+              "lab": true
+            },
+            {
+              "nm": "Cohere",
+              "tg": "enterprise · sovereign",
+              "muted": true
+            },
+            {
+              "nm": "Ai2",
+              "tg": "OLMo · nonprofit open",
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "New labs / stealth",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Thinking Machines",
+              "tg": "~$50B · Murati",
+              "lab": true
+            },
+            {
+              "nm": "Safe Superintelligence",
+              "tg": "Sutskever · stealth",
+              "lab": true
+            },
+            {
+              "nm": "Reflection AI",
+              "tg": "agentic coding",
+              "lab": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -142,51 +492,192 @@
       "lname": "Training, Data, RL &amp; Eval Infra",
       "ldesc": "The plumbing between raw compute and a working model — teach it, feed it, retrieve for it, grade it. The hottest new layer; labs may spend &gt;$1B/yr on RL environments alone.",
       "econ": [
-        {"k": "Margins", "v": "Split personality: data labeling is labor-heavy (25–45% gross); evals and observability are software (70–80%). Same layer, opposite economics."},
-        {"k": "Moat", "v": "Expert networks, proprietary environment libraries, and being wired directly into a lab's training loop."},
-        {"k": "Chokepoint", "v": "Customer concentration — three frontier labs are most of the revenue for the whole layer."},
-        {"k": "Who eats whom", "v": "Labs internalize whatever matters most (see Scale after the Meta deal). One customer's strategy shift can halve a company's market overnight."},
-        {"k": "○ Investor question", "v": "Check revenue concentration before anything else. RL environments are the hot new line item, but the concentration risk is identical to labeling's.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "Split personality: data labeling is labor-heavy (25–45% gross); evals and observability are software (70–80%). Same layer, opposite economics."
+        },
+        {
+          "k": "Moat",
+          "v": "Expert networks, proprietary environment libraries, and being wired directly into a lab's training loop."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "Customer concentration — three frontier labs are most of the revenue for the whole layer."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Labs internalize whatever matters most (see Scale after the Meta deal). One customer's strategy shift can halve a company's market overnight."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "Check revenue concentration before anything else. RL environments are the hot new line item, but the concentration risk is identical to labeling's.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "RL environments &amp; post-training", "cap": "contested", "tiles": [
-          {"nm": "Prime Intellect", "tg": "▸ the tool you found"},
-          {"nm": "Mechanize", "tg": "~$750M · coding envs"},
-          {"nm": "OpenPipe", "tg": "fine-tuning", "muted": true},
-          {"nm": "Predibase", "tg": "post-training", "muted": true}
-        ]},
-        {"title": "Data, labeling &amp; verifiers", "cap": "contested", "tiles": [
-          {"nm": "Scale AI", "tg": "$29B · Alexandr Wang"},
-          {"nm": "Surge AI", "tg": "RLHF data", "muted": true},
-          {"nm": "Mercor", "tg": "expert data", "muted": true},
-          {"nm": "Snorkel", "tg": "$1.3B · programmatic"},
-          {"nm": "Labelbox", "tg": "$189M raised"},
-          {"nm": "Unstructured", "tg": "$65M · doc parsing"},
-          {"nm": "Turing", "tg": "code data", "muted": true}
-        ]},
-        {"title": "Evals &amp; observability", "cap": "contested", "tiles": [
-          {"nm": "Braintrust", "tg": "evals · Notion/Stripe", "muted": true},
-          {"nm": "Patronus AI", "tg": "$20M · Lynx (hallucination)"},
-          {"nm": "LangSmith", "tg": "tracing", "muted": true},
-          {"nm": "Langfuse", "tg": "open-source obs.", "muted": true},
-          {"nm": "Arize", "tg": "ML monitoring", "muted": true},
-          {"nm": "Weights &amp; Biases", "tg": "experiment tracking", "muted": true}
-        ]},
-        {"title": "Data stack &amp; pipelines", "cap": "strong", "tiles": [
-          {"nm": "Databricks", "tg": "$134B · lakehouse"},
-          {"nm": "Snowflake", "tg": "data cloud", "pub": true, "muted": true},
-          {"nm": "MongoDB", "tg": "operational DB", "pub": true, "muted": true},
-          {"nm": "Hex", "tg": "$70M C · notebooks"},
-          {"nm": "Dagster", "tg": "$47M · orchestration"}
-        ]},
-        {"title": "Retrieval, voice &amp; video <span class=\"rep\">— modality infra</span>", "cap": "contested", "tiles": [
-          {"nm": "Zilliz / Milvus", "tg": "$113M · vector DB"},
-          {"nm": "Pinecone", "tg": "vector DB", "muted": true},
-          {"nm": "Weaviate", "tg": "vector DB", "muted": true},
-          {"nm": "Deepgram", "tg": "$1.3B · speech-to-text"},
-          {"nm": "ElevenLabs", "tg": "voice gen", "muted": true},
-          {"nm": "TwelveLabs", "tg": "$110M · video · Nvidia"}
-        ]}
+        {
+          "title": "RL environments &amp; post-training",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Prime Intellect",
+              "tg": "▸ the tool you found"
+            },
+            {
+              "nm": "Mechanize",
+              "tg": "~$750M · coding envs"
+            },
+            {
+              "nm": "OpenPipe",
+              "tg": "fine-tuning",
+              "muted": true
+            },
+            {
+              "nm": "Predibase",
+              "tg": "post-training",
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Data, labeling &amp; verifiers",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Scale AI",
+              "tg": "$29B · Alexandr Wang"
+            },
+            {
+              "nm": "Surge AI",
+              "tg": "RLHF data",
+              "muted": true
+            },
+            {
+              "nm": "Mercor",
+              "tg": "expert data",
+              "muted": true
+            },
+            {
+              "nm": "Snorkel",
+              "tg": "$1.3B · programmatic"
+            },
+            {
+              "nm": "Labelbox",
+              "tg": "$189M raised"
+            },
+            {
+              "nm": "Unstructured",
+              "tg": "$65M · doc parsing"
+            },
+            {
+              "nm": "Turing",
+              "tg": "code data",
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Evals &amp; observability",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "LM Arena",
+              "tg": "$1.7B · the leaderboard"
+            },
+            {
+              "nm": "Braintrust",
+              "tg": "evals · Notion/Stripe",
+              "muted": true
+            },
+            {
+              "nm": "Patronus AI",
+              "tg": "$20M · Lynx (hallucination)"
+            },
+            {
+              "nm": "LangSmith",
+              "tg": "tracing",
+              "muted": true
+            },
+            {
+              "nm": "Langfuse",
+              "tg": "open-source obs.",
+              "muted": true
+            },
+            {
+              "nm": "Arize",
+              "tg": "ML monitoring",
+              "muted": true
+            },
+            {
+              "nm": "Weights &amp; Biases",
+              "tg": "experiment tracking",
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Data stack &amp; pipelines",
+          "cap": "strong",
+          "tiles": [
+            {
+              "nm": "Databricks",
+              "tg": "$134B · lakehouse"
+            },
+            {
+              "nm": "Snowflake",
+              "tg": "data cloud",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "MongoDB",
+              "tg": "operational DB",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Hex",
+              "tg": "$70M C · notebooks"
+            },
+            {
+              "nm": "Dagster",
+              "tg": "$47M · orchestration"
+            }
+          ]
+        },
+        {
+          "title": "Retrieval, voice &amp; video <span class=\"rep\">— modality infra</span>",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Zilliz / Milvus",
+              "tg": "$113M · vector DB"
+            },
+            {
+              "nm": "Pinecone",
+              "tg": "vector DB",
+              "muted": true
+            },
+            {
+              "nm": "Weaviate",
+              "tg": "vector DB",
+              "muted": true
+            },
+            {
+              "nm": "Deepgram",
+              "tg": "$1.3B · speech-to-text"
+            },
+            {
+              "nm": "ElevenLabs",
+              "tg": "voice gen",
+              "muted": true
+            },
+            {
+              "nm": "TwelveLabs",
+              "tg": "$110M · video · Nvidia"
+            }
+          ]
+        }
       ]
     },
     {
@@ -194,36 +685,149 @@
       "lname": "Compute, Clouds &amp; Power",
       "ldesc": "Rents the iron. \"Neoclouds\" undercut hyperscalers on price; the grid itself is now the bottleneck.",
       "econ": [
-        {"k": "Margins", "v": "Neoclouds: 20–35% gross, brutally capital-intensive — GPUs depreciate faster than the debt that bought them amortizes. Power producers hold the real pricing power."},
-        {"k": "Moat", "v": "Power contracts, Nvidia allocation, and sheer speed of standing up capacity."},
-        {"k": "Chokepoint", "v": "The grid. Interconnect queues and PPAs — not chips — now gate datacenter growth."},
-        {"k": "Who eats whom", "v": "Hyperscalers can squeeze neoclouds whenever GPU supply loosens; the power layer quietly squeezes everyone above it."},
-        {"k": "○ Investor question", "v": "A neocloud is a leveraged commodity trade. Match contract duration against GPU depreciation before believing any margin slide.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "Neoclouds: 20–35% gross, brutally capital-intensive — GPUs depreciate faster than the debt that bought them amortizes. Power producers hold the real pricing power."
+        },
+        {
+          "k": "Moat",
+          "v": "Power contracts, Nvidia allocation, and sheer speed of standing up capacity."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "The grid. Interconnect queues and PPAs — not chips — now gate datacenter growth."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Hyperscalers can squeeze neoclouds whenever GPU supply loosens; the power layer quietly squeezes everyone above it."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "A neocloud is a leveraged commodity trade. Match contract duration against GPU depreciation before believing any margin slide.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "Neoclouds &amp; GPU marketplaces", "cap": "squeezed", "tiles": [
-          {"nm": "CoreWeave", "tg": "~$19B · 1.7GW target", "pub": true},
-          {"nm": "Lambda", "tg": "dedicated GPU", "muted": true},
-          {"nm": "Nebius", "tg": "EU residency", "pub": true, "muted": true},
-          {"nm": "Nscale", "tg": "$2B Series C"},
-          {"nm": "Crusoe", "tg": "energy-first", "muted": true},
-          {"nm": "RunPod", "tg": "spot GPU", "muted": true},
-          {"nm": "Prime Intellect", "tg": "1–256 GPU · cross-cloud"}
-        ]},
-        {"title": "Hyperscalers", "cap": "strong", "tiles": [
-          {"nm": "Microsoft Azure", "tg": "$190B capex '26", "pub": true},
-          {"nm": "Google Cloud", "tg": "$175–185B capex", "pub": true},
-          {"nm": "AWS", "tg": "Bedrock · Trainium", "pub": true, "muted": true},
-          {"nm": "Oracle Cloud", "tg": "OCI", "pub": true, "muted": true}
-        ]},
-        {"title": "Power &amp; energy <span class=\"rep\">— the real bottleneck</span>", "cap": "strong", "pe": "Infra-capital zone: long-duration contracts, real assets, public comps — where patient capital plays the AI boom without model risk.", "tiles": [
-          {"nm": "Constellation", "tg": "nuclear PPAs · CEG", "pub": true},
-          {"nm": "Vistra", "tg": "nuclear · VST", "pub": true, "muted": true},
-          {"nm": "Oklo", "tg": "SMR · Altman-backed", "pub": true},
-          {"nm": "GE Vernova", "tg": "gas turbines", "pub": true, "muted": true},
-          {"nm": "Vertiv", "tg": "cooling / thermal", "pub": true, "muted": true},
-          {"nm": "Bloom Energy", "tg": "on-site fuel cells", "pub": true, "muted": true}
-        ]}
+        {
+          "title": "Neoclouds &amp; GPU marketplaces",
+          "cap": "squeezed",
+          "tiles": [
+            {
+              "nm": "CoreWeave",
+              "tg": "~$19B · 1.7GW target",
+              "pub": true
+            },
+            {
+              "nm": "Lambda",
+              "tg": "dedicated GPU",
+              "muted": true
+            },
+            {
+              "nm": "Nebius",
+              "tg": "EU residency",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Nscale",
+              "tg": "$2B Series C"
+            },
+            {
+              "nm": "Crusoe",
+              "tg": "energy-first",
+              "muted": true
+            },
+            {
+              "nm": "RunPod",
+              "tg": "spot GPU",
+              "muted": true
+            },
+            {
+              "nm": "Prime Intellect",
+              "tg": "1–256 GPU · cross-cloud"
+            },
+            {
+              "nm": "Fluidstack",
+              "tg": "TPU megadeals",
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Hyperscalers",
+          "cap": "strong",
+          "tiles": [
+            {
+              "nm": "Microsoft Azure",
+              "tg": "$190B capex '26",
+              "pub": true
+            },
+            {
+              "nm": "Google Cloud",
+              "tg": "$175–185B capex",
+              "pub": true
+            },
+            {
+              "nm": "AWS",
+              "tg": "Bedrock · Trainium",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Oracle Cloud",
+              "tg": "OCI",
+              "pub": true,
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Power &amp; energy <span class=\"rep\">— the real bottleneck</span>",
+          "cap": "strong",
+          "pe": "Infra-capital zone: long-duration contracts, real assets, public comps — where patient capital plays the AI boom without model risk.",
+          "tiles": [
+            {
+              "nm": "Constellation",
+              "tg": "nuclear PPAs · CEG",
+              "pub": true
+            },
+            {
+              "nm": "Vistra",
+              "tg": "nuclear · VST",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Oklo",
+              "tg": "SMR · Altman-backed",
+              "pub": true
+            },
+            {
+              "nm": "GE Vernova",
+              "tg": "gas turbines",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Vertiv",
+              "tg": "cooling / thermal",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Bloom Energy",
+              "tg": "on-site fuel cells",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "NextEra",
+              "tg": "renewables + gas",
+              "pub": true,
+              "muted": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -231,78 +835,444 @@
       "lname": "Silicon &amp; Accelerators",
       "ldesc": "The sand. Whoever owns the wafer sets the ceiling for everyone above. Nvidia still the gravity well.",
       "econ": [
-        {"k": "Margins", "v": "Nvidia runs ~70%+ gross — the fattest margin in the stack, sitting at the \"commodity\" bottom of it. That inversion is the single most instructive fact on this map."},
-        {"k": "Moat", "v": "CUDA's software gravity plus locked-up TSMC, packaging, and HBM allocation. The moat is the ecosystem and supply-chain position, not the chip."},
-        {"k": "Chokepoint", "v": "Advanced packaging (CoWoS) and HBM supply. Honest gap in this map: TSMC, ASML, and SK Hynix sit <i>below</i> this layer and aren't drawn."},
-        {"k": "Who eats whom", "v": "Hyperscalers designing in-house (TPU, Trainium) claw back share; challengers bet on inference-specific economics where CUDA matters less."},
-        {"k": "○ Investor question", "v": "Not \"is Nvidia great\" but \"does anyone else earn economic profit here?\" Challengers are call options on the inference cost curve.", "thesis": true}
+        {
+          "k": "Margins",
+          "v": "Nvidia runs ~70%+ gross — the fattest margin in the stack, sitting at the \"commodity\" bottom of it. That inversion is the single most instructive fact on this map."
+        },
+        {
+          "k": "Moat",
+          "v": "CUDA's software gravity plus locked-up TSMC, packaging, and HBM allocation. The moat is the ecosystem and supply-chain position, not the chip."
+        },
+        {
+          "k": "Chokepoint",
+          "v": "Advanced packaging (CoWoS) and HBM supply. Honest gap in this map: TSMC, ASML, and SK Hynix sit <i>below</i> this layer and aren't drawn."
+        },
+        {
+          "k": "Who eats whom",
+          "v": "Hyperscalers designing in-house (TPU, Trainium) claw back share; challengers bet on inference-specific economics where CUDA matters less."
+        },
+        {
+          "k": "○ Investor question",
+          "v": "Not \"is Nvidia great\" but \"does anyone else earn economic profit here?\" Challengers are call options on the inference cost curve.",
+          "thesis": true
+        }
       ],
       "groups": [
-        {"title": "GPUs &amp; incumbents", "cap": "strong", "tiles": [
-          {"nm": "Nvidia", "tg": "B300 / B200 · Vera Rubin", "pub": true},
-          {"nm": "AMD", "tg": "MI accelerators", "pub": true, "muted": true},
-          {"nm": "Google TPU", "tg": "in-house", "pub": true, "muted": true},
-          {"nm": "AWS Trainium", "tg": "in-house", "pub": true, "muted": true}
-        ]},
-        {"title": "Inference-silicon challengers", "cap": "contested", "tiles": [
-          {"nm": "Groq", "tg": "LPU · Nvidia license"},
-          {"nm": "Cerebras", "tg": "public · CBRS", "pub": true},
-          {"nm": "SambaNova", "tg": "Intel acq. <span class=\"rep\">reported</span>"},
-          {"nm": "D-Matrix", "tg": "~$2B"},
-          {"nm": "Tenstorrent", "tg": "Qualcomm talks <span class=\"rep\">reported</span>"},
-          {"nm": "Etched", "tg": "$800M · transformer ASIC"},
-          {"nm": "Unconventional AI", "tg": "Rao · $475M seed"}
-        ]}
+        {
+          "title": "GPUs &amp; incumbents",
+          "cap": "strong",
+          "tiles": [
+            {
+              "nm": "Nvidia",
+              "tg": "B300 / B200 · Vera Rubin",
+              "pub": true
+            },
+            {
+              "nm": "AMD",
+              "tg": "MI accelerators",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Google TPU",
+              "tg": "in-house",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "AWS Trainium",
+              "tg": "in-house",
+              "pub": true,
+              "muted": true
+            },
+            {
+              "nm": "Broadcom",
+              "tg": "custom XPUs · $10.8B/qtr AI rev",
+              "pub": true
+            },
+            {
+              "nm": "Marvell",
+              "tg": "custom silicon",
+              "pub": true,
+              "muted": true
+            }
+          ]
+        },
+        {
+          "title": "Inference-silicon challengers",
+          "cap": "contested",
+          "tiles": [
+            {
+              "nm": "Groq",
+              "tg": "LPU · Nvidia license"
+            },
+            {
+              "nm": "Cerebras",
+              "tg": "public · CBRS",
+              "pub": true
+            },
+            {
+              "nm": "SambaNova",
+              "tg": "$11B raise · Intel talks over"
+            },
+            {
+              "nm": "D-Matrix",
+              "tg": "~$2B"
+            },
+            {
+              "nm": "Tenstorrent",
+              "tg": "Qualcomm talks $8–10B <span class=\"rep\">reported</span>"
+            },
+            {
+              "nm": "Etched",
+              "tg": "$800M · transformer ASIC"
+            },
+            {
+              "nm": "Unconventional AI",
+              "tg": "Rao · $475M seed"
+            }
+          ]
+        }
       ]
     }
   ],
   "profiles": {
-    "Nvidia": {"tag": "Layer 01 · GPUs &amp; incumbents", "sells": "GPUs, full systems (NVL racks), networking, and the CUDA software stack.", "buyers": "Hyperscalers, neoclouds, and labs — everyone above it in this map.", "model": "Hardware sales at software margins (~70%+ gross). Gets paid up front, before anyone above earns a dollar.", "down": "TSMC wafers, HBM memory (SK Hynix / Micron), advanced packaging — the un-drawn layer below this map.", "moat": "CUDA's two-decade software gravity plus locked-up supply-chain allocation. The moat is the ecosystem, not the chip.", "kill": "Hyperscaler in-house silicon (TPU, Trainium) taking share, or an inference-dominated world where CUDA matters less per token."},
-    "Groq": {"tag": "Layer 01 · inference-silicon challenger", "sells": "Ultra-low-latency inference on its own LPU ASICs, via GroqCloud.", "buyers": "Developers and enterprises who care about tokens-per-second above all.", "model": "Tokens-as-a-service on owned silicon — vertically integrated from chip to API.", "down": "Fab capacity; capital for datacenters.", "moat": "Deterministic architecture built for inference, not adapted from graphics. Plus the Nvidia license deal (~$20B) — validation and capital in one.", "kill": "Nvidia's inference roadmap closing the latency gap generation over generation."},
-    "CoreWeave": {"tag": "Layer 02 · neocloud", "sells": "Dedicated GPU cluster capacity on long-term contracts.", "buyers": "Labs and inference companies who can't get (or don't want) hyperscaler allocation.", "model": "Debt-financed GPU fleets rented against multi-year committed contracts. A leveraged bet on sustained GPU scarcity.", "down": "Nvidia (allocation is the moat), power PPAs, datacenter shells.", "moat": "Speed and allocation — it stands up capacity faster than hyperscalers move.", "kill": "GPU depreciation outrunning contract revenue the moment hyperscaler supply loosens. Watch contract duration vs. fleet age."},
-    "Constellation": {"tag": "Layer 02 · power — the real bottleneck", "sells": "Firm, carbon-free nuclear power via long-term PPAs to datacenter operators.", "buyers": "Hyperscalers and neoclouds desperate for interconnected megawatts.", "model": "Sell electrons on 10–20 year contracts to the most price-insensitive buyers in history.", "down": "Uranium, regulatory licenses.", "moat": "An existing fleet of licensed reactors — a decade and billions to replicate. The scarcest asset in the whole stack right now.", "kill": "Demand undershooting the capex forecasts everyone upstream is making, or regulatory shifts on PPA structures."},
-    "Microsoft Azure": {"tag": "Layer 02 · hyperscaler", "sells": "Cloud compute, and privileged hosting of OpenAI's entire workload.", "buyers": "Enterprises (distribution moat) and labs (compute contracts).", "model": "$190B of '26 capex converted into committed multi-year cloud contracts — capex arbitrage at civilization scale.", "down": "Nvidia + its own Maia silicon; power contracts.", "moat": "Enterprise distribution nobody can match, plus the OpenAI tie.", "kill": "The perennial bear case: model efficiency gains growing faster than demand, stranding capex."},
-    "Scale AI": {"tag": "Layer 03 · data &amp; labeling", "sells": "Training data, expert labeling, RLHF pipelines, and eval services to frontier labs.", "buyers": "A handful of frontier labs — and that's the problem.", "model": "Labor marketplace with a software margin layered on top.", "down": "Global expert-labor networks.", "moat": "Expert network scale and being wired into labs' training loops.", "kill": "Customer concentration. The Meta deal showed what happens: one customer's strategy shift and the others flee. Labs internalize what matters most."},
-    "Prime Intellect": {"tag": "Layers 03 + 02 · RL environments &amp; cross-cloud compute", "sells": "RL environments (teach models to act) and aggregated cross-cloud GPU training infra.", "buyers": "Labs and researchers post-training models.", "model": "Note it appears twice on this map — companies span layers; tiles are placed by primary business. That's a feature of reality, not an error in the map.", "down": "GPU supply across many clouds.", "moat": "The 'self-improving loop' thesis (Rule 4): whoever owns the environments owns the next scaling axis.", "kill": "Labs building environments in-house — the same internalization risk as all of Layer 03."},
-    "Databricks": {"tag": "Layer 03 · data stack", "sells": "The lakehouse: enterprise data platform plus ML/AI tooling on top.", "buyers": "Enterprises — the widest customer base in this layer.", "model": "Consumption-based platform revenue at $134B valuation; the anti-concentration story in Layer 03.", "down": "Hyperscaler infrastructure.", "moat": "Data gravity — once your data lives there, every AI workload lands there too.", "kill": "Hyperscalers bundling 'good enough' equivalents into contracts enterprises already sign."},
-    "OpenAI": {"tag": "Layer 04 · frontier lab (IPO filed)", "sells": "API tokens, ChatGPT subscriptions, and enterprise deals.", "buyers": "1B+ consumers and most of the Fortune 500.", "model": "Consumer subscription at unprecedented scale + API. ~$852B at filing — priced as an option on transformative AI, not as SaaS.", "down": "Microsoft Azure compute; Nvidia.", "moat": "Brand and consumer distribution — the strongest consumer franchise in AI.", "kill": "Open weights commoditizing below-frontier capability while consumer switching costs stay near zero."},
-    "Anthropic": {"tag": "Layer 04 · frontier lab (IPO filed)", "sells": "Claude API, enterprise deals, and its own Layer-06 products (Claude Code).", "buyers": "Enterprise/API-skewed, with agentic coding as the standout franchise.", "model": "~$965B at filing. Same option-pricing logic as OpenAI, different revenue mix.", "down": "AWS and Google compute — note it rents from companies it competes with.", "moat": "Frontier models, safety brand, and the coding-agent lead.", "kill": "Same commoditization pressure as every lab; plus structural dependence on rivals' clouds."},
-    "DeepSeek": {"tag": "Layer 04 · open-weight frontier", "sells": "Nothing, mostly — it gives weights away and sells cheap hosted inference.", "buyers": "Everyone who fine-tunes; every app cutting its token bill.", "model": "Open weights as strategy: commoditize your complement. If below-frontier intelligence is free, value moves to whoever owns customers and compute.", "down": "Export-controlled chip supply — its binding constraint.", "moat": "Training-efficiency engineering born of constraint.", "kill": "Chip access. Its moat and its risk are the same fact."},
-    "Fireworks": {"tag": "Layer 05 · serverless inference", "sells": "Fast serving of open and custom models, per token.", "buyers": "AI apps that don't want to run their own GPUs.", "model": "~$800M ARR buying GPUs from Layer 02 and selling tokens into a falling price curve. The squeezed middle, executed brilliantly.", "down": "Neoclouds and hyperscalers for GPU supply.", "moat": "Kernel and serving engineering — latency and cost per token.", "kill": "Rule 3: this layer gets acquired. The $15B talks are the thesis playing out in real time."},
-    "Baseten": {"tag": "Layer 05 · dedicated inference", "sells": "Dedicated model-serving infrastructure for AI apps (powers Cursor and Notion).", "buyers": "Layer 06/07 companies whose product is someone else's model, served fast.", "model": "Infra-as-COGS: its revenue is literally its customers' cost of goods. Revenue ~20× YoY.", "down": "GPU rent from Layer 02.", "moat": "Being load-bearing inside the fastest-growing apps' latency budgets.", "kill": "Labs bundling first-party serving with their models, cutting out the middle."},
-    "OpenRouter": {"tag": "Layer 05 · gateway / router", "sells": "One API that routes to every model — ~25T tokens a week.", "buyers": "Developers who want model optionality without integration cost.", "model": "Take-rate on token flow. Tiny margin, enormous volume, perfect neutrality.", "down": "Every lab and inference provider simultaneously.", "moat": "Switzerland status — the only player with no incentive to favor a model.", "kill": "Apps going direct to labs once they scale past needing optionality."},
-    "Cursor / Anysphere": {"tag": "Layer 06 · coding agent", "sells": "AI coding seats — the fastest-growing software product ever measured.", "buyers": "Developers, then whole engineering orgs.", "model": "Subscription with token passthrough as COGS: it pays its own competitors (Anthropic, OpenAI) per keystroke.", "down": "Frontier labs for models; Baseten for serving its own smaller ones.", "moat": "Workflow habit and iteration speed — the weakest moat class on the map, which is the point.", "kill": "Its own suppliers (Claude Code, Codex). The SpaceX deal (reported — an option structure per the prospectus, not a closed acquisition) reads as the escape from that squeeze."},
-    "LangChain / LangGraph": {"tag": "Layer 06 · frameworks", "sells": "Open-source orchestration, monetized via LangSmith observability.", "buyers": "Developers building agents; enterprises paying for the tracing.", "model": "OSS funnel to SaaS — the classic infra playbook.", "down": "Model APIs it wraps.", "moat": "Mindshare and docs, which is to say: not much. Frameworks churn fast.", "kill": "Protocols (MCP, A2A) standardizing away the glue code it exists to provide."},
-    "MCP": {"tag": "Layer 06 · protocol — not a company", "sells": "Nothing. MCP is an open protocol (Anthropic-originated) for connecting models to tools.", "buyers": "Adopted, not bought.", "model": "It sits on this map like a company tile but it's a different kind of entity — worth noticing, because protocols shape economics without capturing them.", "down": "—", "moat": "—", "kill": "Economically, MCP commoditizes integration on purpose: it moves the moat from 'who has the connectors' to 'who owns the workflow.' Protocols are how a layer gets squeezed deliberately."},
-    "Harvey": {"tag": "Layer 07 · vertical AI (legal)", "sells": "AI associates for big law — research, drafting, diligence.", "buyers": "Am Law firms, per seat plus usage.", "model": "Vertical SaaS where the token bill is COGS and the law firm relationship is everything.", "down": "Frontier lab APIs.", "moat": "Firm-workflow integration, trust in a regulated domain, domain-tuned models.", "kill": "General assistants getting good enough at law, or firms building in-house on open weights."},
-    "Sierra": {"tag": "Layer 07 · vertical AI (customer service)", "sells": "AI agents that resolve customer-service issues end to end.", "buyers": "Consumer brands replacing contact-center spend.", "model": "The outcome-pricing pioneer: paid per resolution, not per seat. Prices against the wage line, not the software budget.", "down": "Frontier lab APIs.", "moat": "Resolution-rate data flywheel — every ticket makes the next one cheaper.", "kill": "CRM incumbents (Salesforce et al.) bundling agents into contracts brands already hold."},
-    "EvenUp": {"tag": "Layer 07 · AI-native services", "sells": "Finished work product — injury demand packages — not software.", "buyers": "Personal-injury law firms.", "model": "The purest 'sell the outcome' tile on the map: services revenue with AI expanding the margin underneath. This is the shape PE should study hardest.", "down": "Lab APIs; domain data pipelines.", "moat": "Outcome data and volume in a niche too small for labs to chase directly.", "kill": "Firms buying tools and insourcing — the eternal services-vs-software race."},
-    "ChatGPT": {"tag": "Layer 07 · product, not company", "sells": "This tile is a product of OpenAI (Layer 04) — another entity-type worth noticing: the same organization holds tiles in two layers.", "buyers": "1B+ MAU — the largest consumer distribution in AI.", "model": "Consumer subscription + the top of OpenAI's data flywheel.", "down": "OpenAI's models; Azure's compute.", "moat": "Default-app status — brand as distribution.", "kill": "Being a default is rented, not owned; assistants have near-zero switching costs."},
-    "Claude": {"tag": "Layer 07 · product, not company", "sells": "Anthropic's consumer/prosumer surface — same entity-spans-layers lesson as ChatGPT.", "buyers": "Fastest-growing assistant per this map.", "model": "Subscription atop the Layer 04 franchise.", "down": "Anthropic's models; AWS/Google compute.", "moat": "The coding and agentic franchise pulling consumers upstream.", "kill": "Same as every assistant: distribution is rented."}
+    "Nvidia": {
+      "tag": "Layer 01 · GPUs &amp; incumbents",
+      "sells": "GPUs, full systems (NVL racks), networking, and the CUDA software stack.",
+      "buyers": "Hyperscalers, neoclouds, and labs — everyone above it in this map.",
+      "model": "Hardware sales at software margins (~70%+ gross). Gets paid up front, before anyone above earns a dollar.",
+      "down": "TSMC wafers, HBM memory (SK Hynix / Micron), advanced packaging — the un-drawn layer below this map.",
+      "moat": "CUDA's two-decade software gravity plus locked-up supply-chain allocation. The moat is the ecosystem, not the chip.",
+      "kill": "Hyperscaler in-house silicon (TPU, Trainium) taking share, or an inference-dominated world where CUDA matters less per token."
+    },
+    "Groq": {
+      "tag": "Layer 01 · inference-silicon challenger",
+      "sells": "Ultra-low-latency inference on its own LPU ASICs, via GroqCloud.",
+      "buyers": "Developers and enterprises who care about tokens-per-second above all.",
+      "model": "Tokens-as-a-service on owned silicon — vertically integrated from chip to API.",
+      "down": "Fab capacity; capital for datacenters.",
+      "moat": "Deterministic architecture built for inference, not adapted from graphics. Plus the Nvidia license deal (~$20B) — validation and capital in one.",
+      "kill": "Nvidia's inference roadmap closing the latency gap generation over generation."
+    },
+    "CoreWeave": {
+      "tag": "Layer 02 · neocloud",
+      "sells": "Dedicated GPU cluster capacity on long-term contracts.",
+      "buyers": "Labs and inference companies who can't get (or don't want) hyperscaler allocation.",
+      "model": "Debt-financed GPU fleets rented against multi-year committed contracts. A leveraged bet on sustained GPU scarcity.",
+      "down": "Nvidia (allocation is the moat), power PPAs, datacenter shells.",
+      "moat": "Speed and allocation — it stands up capacity faster than hyperscalers move.",
+      "kill": "GPU depreciation outrunning contract revenue the moment hyperscaler supply loosens. Watch contract duration vs. fleet age."
+    },
+    "Constellation": {
+      "tag": "Layer 02 · power — the real bottleneck",
+      "sells": "Firm, carbon-free nuclear power via long-term PPAs to datacenter operators.",
+      "buyers": "Hyperscalers and neoclouds desperate for interconnected megawatts.",
+      "model": "Sell electrons on 10–20 year contracts to the most price-insensitive buyers in history.",
+      "down": "Uranium, regulatory licenses.",
+      "moat": "An existing fleet of licensed reactors — a decade and billions to replicate. The scarcest asset in the whole stack right now.",
+      "kill": "Demand undershooting the capex forecasts everyone upstream is making, or regulatory shifts on PPA structures."
+    },
+    "Microsoft Azure": {
+      "tag": "Layer 02 · hyperscaler",
+      "sells": "Cloud compute, and privileged hosting of OpenAI's entire workload.",
+      "buyers": "Enterprises (distribution moat) and labs (compute contracts).",
+      "model": "$190B of '26 capex converted into committed multi-year cloud contracts — capex arbitrage at civilization scale.",
+      "down": "Nvidia + its own Maia silicon; power contracts.",
+      "moat": "Enterprise distribution nobody can match, plus the OpenAI tie.",
+      "kill": "The perennial bear case: model efficiency gains growing faster than demand, stranding capex."
+    },
+    "Scale AI": {
+      "tag": "Layer 03 · data &amp; labeling",
+      "sells": "Training data, expert labeling, RLHF pipelines, and eval services to frontier labs.",
+      "buyers": "A handful of frontier labs — and that's the problem.",
+      "model": "Labor marketplace with a software margin layered on top.",
+      "down": "Global expert-labor networks.",
+      "moat": "Expert network scale and being wired into labs' training loops.",
+      "kill": "Customer concentration. The Meta deal showed what happens: one customer's strategy shift and the others flee. Labs internalize what matters most."
+    },
+    "Prime Intellect": {
+      "tag": "Layers 03 + 02 · RL environments &amp; cross-cloud compute",
+      "sells": "RL environments (teach models to act) and aggregated cross-cloud GPU training infra.",
+      "buyers": "Labs and researchers post-training models.",
+      "model": "Note it appears twice on this map — companies span layers; tiles are placed by primary business. That's a feature of reality, not an error in the map.",
+      "down": "GPU supply across many clouds.",
+      "moat": "The 'self-improving loop' thesis (Rule 4): whoever owns the environments owns the next scaling axis.",
+      "kill": "Labs building environments in-house — the same internalization risk as all of Layer 03."
+    },
+    "Databricks": {
+      "tag": "Layer 03 · data stack",
+      "sells": "The lakehouse: enterprise data platform plus ML/AI tooling on top.",
+      "buyers": "Enterprises — the widest customer base in this layer.",
+      "model": "Consumption-based platform revenue at $134B valuation; the anti-concentration story in Layer 03.",
+      "down": "Hyperscaler infrastructure.",
+      "moat": "Data gravity — once your data lives there, every AI workload lands there too.",
+      "kill": "Hyperscalers bundling 'good enough' equivalents into contracts enterprises already sign."
+    },
+    "OpenAI": {
+      "tag": "Layer 04 · frontier lab (IPO filed)",
+      "sells": "API tokens, ChatGPT subscriptions, and enterprise deals.",
+      "buyers": "1B+ consumers and most of the Fortune 500.",
+      "model": "Consumer subscription at unprecedented scale + API. ~$852B at filing — priced as an option on transformative AI, not as SaaS.",
+      "down": "Microsoft Azure compute; Nvidia.",
+      "moat": "Brand and consumer distribution — the strongest consumer franchise in AI.",
+      "kill": "Open weights commoditizing below-frontier capability while consumer switching costs stay near zero."
+    },
+    "Anthropic": {
+      "tag": "Layer 04 · frontier lab (IPO filed)",
+      "sells": "Claude API, enterprise deals, and its own Layer-06 products (Claude Code).",
+      "buyers": "Enterprise/API-skewed, with agentic coding as the standout franchise.",
+      "model": "~$965B at filing. Same option-pricing logic as OpenAI, different revenue mix.",
+      "down": "AWS and Google compute — note it rents from companies it competes with.",
+      "moat": "Frontier models, safety brand, and the coding-agent lead.",
+      "kill": "Same commoditization pressure as every lab; plus structural dependence on rivals' clouds."
+    },
+    "DeepSeek": {
+      "tag": "Layer 04 · open-weight frontier",
+      "sells": "Nothing, mostly — it gives weights away and sells cheap hosted inference.",
+      "buyers": "Everyone who fine-tunes; every app cutting its token bill.",
+      "model": "Open weights as strategy: commoditize your complement. If below-frontier intelligence is free, value moves to whoever owns customers and compute.",
+      "down": "Export-controlled chip supply — its binding constraint.",
+      "moat": "Training-efficiency engineering born of constraint.",
+      "kill": "Chip access. Its moat and its risk are the same fact."
+    },
+    "Fireworks": {
+      "tag": "Layer 05 · serverless inference",
+      "sells": "Fast serving of open and custom models, per token.",
+      "buyers": "AI apps that don't want to run their own GPUs.",
+      "model": "~$800M ARR run-rate buying GPUs from Layer 02 and selling tokens into a falling price curve — the squeezed middle, executed brilliantly. Chose independence: $1.5B raised at $17.5B, Nvidia-backed.",
+      "down": "Neoclouds and hyperscalers for GPU supply.",
+      "moat": "Kernel and serving engineering — latency and cost per token.",
+      "kill": "Rule 3 still looms — silicon and labs keep buying this layer. At $17.5B, independence now requires an IPO-scale outcome; the raise is a bet that neutrality compounds."
+    },
+    "Baseten": {
+      "tag": "Layer 05 · dedicated inference",
+      "sells": "Dedicated model-serving infrastructure for AI apps (powers Cursor and Notion).",
+      "buyers": "Layer 06/07 companies whose product is someone else's model, served fast.",
+      "model": "Infra-as-COGS: its revenue is literally its customers' cost of goods. Revenue ~20× YoY.",
+      "down": "GPU rent from Layer 02.",
+      "moat": "Being load-bearing inside the fastest-growing apps' latency budgets.",
+      "kill": "Labs bundling first-party serving with their models, cutting out the middle."
+    },
+    "OpenRouter": {
+      "tag": "Layer 05 · gateway / router",
+      "sells": "One API that routes to every model — ~25T tokens a week.",
+      "buyers": "Developers who want model optionality without integration cost.",
+      "model": "Take-rate on token flow. Tiny margin, enormous volume, perfect neutrality.",
+      "down": "Every lab and inference provider simultaneously.",
+      "moat": "Switzerland status — the only player with no incentive to favor a model.",
+      "kill": "Apps going direct to labs once they scale past needing optionality."
+    },
+    "Cursor / Anysphere": {
+      "tag": "Layer 06 · coding agent",
+      "sells": "AI coding seats — the fastest-growing software product ever measured.",
+      "buyers": "Developers, then whole engineering orgs.",
+      "model": "Subscription with token passthrough as COGS: it pays its own competitors (Anthropic, OpenAI) per keystroke.",
+      "down": "Frontier labs for models; Baseten for serving its own smaller ones.",
+      "moat": "Workflow habit and iteration speed — the weakest moat class on the map, which is the point.",
+      "kill": "Its own suppliers (Claude Code, Codex). The SpaceX deal — now a definitive ~$60B all-stock agreement expected to close Q3 '26 — reads as the escape from that squeeze."
+    },
+    "LangChain / LangGraph": {
+      "tag": "Layer 06 · frameworks",
+      "sells": "Open-source orchestration, monetized via LangSmith observability.",
+      "buyers": "Developers building agents; enterprises paying for the tracing.",
+      "model": "OSS funnel to SaaS — the classic infra playbook.",
+      "down": "Model APIs it wraps.",
+      "moat": "Mindshare and docs, which is to say: not much. Frameworks churn fast.",
+      "kill": "Protocols (MCP, A2A) standardizing away the glue code it exists to provide."
+    },
+    "MCP": {
+      "tag": "Layer 06 · protocol — not a company",
+      "sells": "Nothing. MCP is an open protocol (Anthropic-originated) for connecting models to tools.",
+      "buyers": "Adopted, not bought.",
+      "model": "It sits on this map like a company tile but it's a different kind of entity — worth noticing, because protocols shape economics without capturing them.",
+      "down": "—",
+      "moat": "—",
+      "kill": "Economically, MCP commoditizes integration on purpose: it moves the moat from 'who has the connectors' to 'who owns the workflow.' Protocols are how a layer gets squeezed deliberately."
+    },
+    "Harvey": {
+      "tag": "Layer 07 · vertical AI (legal)",
+      "sells": "AI associates for big law — research, drafting, diligence.",
+      "buyers": "Am Law firms, per seat plus usage.",
+      "model": "Vertical SaaS where the token bill is COGS and the law firm relationship is everything.",
+      "down": "Frontier lab APIs.",
+      "moat": "Firm-workflow integration, trust in a regulated domain, domain-tuned models.",
+      "kill": "General assistants getting good enough at law, or firms building in-house on open weights."
+    },
+    "Sierra": {
+      "tag": "Layer 07 · vertical AI (customer service)",
+      "sells": "AI agents that resolve customer-service issues end to end.",
+      "buyers": "Consumer brands replacing contact-center spend.",
+      "model": "The outcome-pricing pioneer: paid per resolution, not per seat. Prices against the wage line, not the software budget.",
+      "down": "Frontier lab APIs.",
+      "moat": "Resolution-rate data flywheel — every ticket makes the next one cheaper.",
+      "kill": "CRM incumbents (Salesforce et al.) bundling agents into contracts brands already hold."
+    },
+    "EvenUp": {
+      "tag": "Layer 07 · AI-native services",
+      "sells": "Finished work product — injury demand packages — not software.",
+      "buyers": "Personal-injury law firms.",
+      "model": "The purest 'sell the outcome' tile on the map: services revenue with AI expanding the margin underneath. This is the shape PE should study hardest.",
+      "down": "Lab APIs; domain data pipelines.",
+      "moat": "Outcome data and volume in a niche too small for labs to chase directly.",
+      "kill": "Firms buying tools and insourcing — the eternal services-vs-software race."
+    },
+    "ChatGPT": {
+      "tag": "Layer 07 · product, not company",
+      "sells": "This tile is a product of OpenAI (Layer 04) — another entity-type worth noticing: the same organization holds tiles in two layers.",
+      "buyers": "1B+ MAU — the largest consumer distribution in AI.",
+      "model": "Consumer subscription + the top of OpenAI's data flywheel.",
+      "down": "OpenAI's models; Azure's compute.",
+      "moat": "Default-app status — brand as distribution.",
+      "kill": "Being a default is rented, not owned; assistants have near-zero switching costs."
+    },
+    "Claude": {
+      "tag": "Layer 07 · product, not company",
+      "sells": "Anthropic's consumer/prosumer surface — same entity-spans-layers lesson as ChatGPT.",
+      "buyers": "Fastest-growing assistant per this map.",
+      "model": "Subscription atop the Layer 04 franchise.",
+      "down": "Anthropic's models; AWS/Google compute.",
+      "moat": "The coding and agentic franchise pulling consumers upstream.",
+      "kill": "Same as every assistant: distribution is rented."
+    },
+    "Broadcom": {
+      "tag": "Layer 01 · custom silicon — the anti-Nvidia trade",
+      "sells": "Custom AI accelerators (XPUs) co-designed with hyperscalers — Google's TPU among them — plus the Ethernet switching fabric AI clusters run on.",
+      "buyers": "Hyperscalers who want Nvidia-class compute without Nvidia-class margins or allocation risk.",
+      "model": "AI semi revenue of ~$10.8B a quarter, up 143% YoY — the custom-ASIC boom monetized. You don't beat CUDA head-on; you help the biggest buyers route around it.",
+      "down": "TSMC wafers, HBM, advanced packaging — same choke points as everyone.",
+      "moat": "Decades of ASIC co-design relationships and the networking franchise; switching silicon is as locked-in as the accelerators.",
+      "kill": "Hyperscaler capex digestion — a pause in the custom-chip buildout hits concentrated custom-silicon revenue harder than Nvidia's broad merchant base."
+    },
+    "n8n": {
+      "tag": "Layer 06 · workflow automation",
+      "sells": "Open-source-core workflow automation — the visual glue connecting models, tools, and business systems into agents that actually run.",
+      "buyers": "Ops teams and developers automating real processes; now SAP's enterprise base too, after its strategic stake at $5.2B.",
+      "model": "OSS funnel to paid orchestration — the LangChain playbook aimed at business workflows instead of developer glue code.",
+      "down": "Model APIs and every SaaS tool it connects.",
+      "moat": "A workflow library and self-host option enterprises can audit — sovereignty as a feature, which is exactly why SAP bought in.",
+      "kill": "Agents getting good enough to build their own integrations on the fly — the standing workflow graph becomes scaffolding nobody needs."
+    },
+    "LM Arena": {
+      "tag": "Layer 03 · evals — the leaderboard",
+      "sells": "The human-preference leaderboard every model launch is judged against, plus eval infrastructure for labs and enterprises.",
+      "buyers": "Labs (visibility and bragging rights), enterprises (model selection), and everyone who quotes the rankings.",
+      "model": "Berkeley research project → $1.7B company in months. Neutral measurement monetized — the Switzerland position, applied to evals instead of serving.",
+      "down": "Access to every frontier model; crowds of voters.",
+      "moat": "The brand as THE neutral scoreboard — network effects of voters and citations compound.",
+      "kill": "Benchmark gaming eroding trust (models tuned to win Arena rather than be good), or labs standing up rival eval consortia."
+    },
+    "Lovable": {
+      "tag": "Layer 06 · app-builder agents",
+      "sells": "Full apps from a prompt — the 'vibe-coding' wave productized for non-engineers.",
+      "buyers": "Founders and operators who want software without hiring for it; ~$500M ARR claimed within two years of founding.",
+      "model": "Subscription atop rented frontier models — the same token-passthrough COGS squeeze as every Layer 06 tile, at consumer-product growth rates. In talks at ~$13B (reported).",
+      "down": "Frontier lab APIs; hosting infra.",
+      "moat": "Speed and distribution among non-developers — the weakest moat class on the map, which the valuation is pricing as if it weren't.",
+      "kill": "Labs shipping the same capability natively (Claude, ChatGPT, and Gemini all build apps now) — the standing question for this whole layer, at maximum stakes."
+    },
+    "Cohere": {
+      "tag": "Layer 04 · enterprise / sovereign lab",
+      "sells": "Enterprise and government models deployed in the customer's own environment — private, on-prem, sovereignty-first.",
+      "buyers": "Regulated enterprises and governments that can't ship data to a US hyperscaler API.",
+      "model": "Deliberately not racing the frontier — selling deployment control and data privacy at enterprise contract prices instead of consumer scale.",
+      "down": "Cloud partners and its own training compute.",
+      "moat": "Trust and deployment flexibility where OpenAI/Anthropic terms can't reach; the enterprise version of the sovereign-AI argument.",
+      "kill": "Frontier labs' enterprise offerings getting private enough — if Claude or GPT can legally sit in your VPC, the privacy premium collapses."
+    },
+    "Midjourney": {
+      "tag": "Layer 07 · creative tools — the bootstrapped exception",
+      "sells": "Image generation by subscription — one of the strongest consumer creative brands in AI.",
+      "buyers": "Designers, marketers, and hobbyists — tens of millions of them.",
+      "model": "The map's rarest specimen: no venture capital at all. Profitable on subscriptions from early on, which means nobody's option-pricing logic applies — it answers to no cap table.",
+      "down": "GPU rent; research talent it funds from cash flow.",
+      "moat": "Aesthetic identity and community — people pay for the Midjourney look, not just 'an image model.'",
+      "kill": "Frontier multimodal models bundling good-enough image generation into subscriptions people already pay for."
+    }
   },
   "traces": {
-    "cursor": {"title": "One Cursor request — follow your $20 from keystroke to power plant", "steps": [
-      ["Cursor / Anysphere", "You pay ~$20/mo; every keystroke fires model calls. Its margin is the subscription minus the token bill."],
-      ["Anthropic", "Earns per token on frontier completions — the supplier that is also the competitor."],
-      ["Baseten", "Serves Cursor's own smaller models; keeps a serving margin over GPU rent."],
-      ["CoreWeave", "Rents the GPU-hours against debt-financed clusters."],
-      ["Nvidia", "Sold the chips at ~70% gross — paid up front, before anyone above earned a dollar."],
-      ["Constellation", "Sells the electrons — the one input every step above shares."]
-    ], "moral": "Six businesses touch one autocomplete. The fattest margin sits at the bottom (Nvidia) and the customer relationship at the top; everyone in between fights over slices of that $20. That is Rule 1, drawn as a wire."},
-    "training": {"title": "A frontier training run — capital flows down before intelligence flows back up", "steps": [
-      ["Anthropic", "Commits billions before a dollar of revenue — the training bet."],
-      ["Scale AI", "Expert data and evals feed the run."],
-      ["Prime Intellect", "RL environments teach the model to act, not just predict — the new >$1B/yr line item."],
-      ["AWS", "Months of reserved cluster time; even trillion-dollar labs rent."],
-      ["Nvidia", "The cluster itself — margin captured before training even starts."]
-    ], "moral": "Money pours down the entire stack, then capability climbs back up months later as the next model. That lag — spend now, capability later — is exactly why labs price like options, not like software."},
-    "enterprise": {"title": "An enterprise dollar — where a law firm's spend actually lands", "steps": [
-      ["Harvey", "The firm pays per seat. Harvey keeps the biggest slice — if its workflow lock-in holds."],
-      ["OpenAI", "Takes the token bill: Harvey's cost of goods sold."],
-      ["Microsoft Azure", "Takes the compute bill behind that."],
-      ["Nvidia", "Took its margin up front, on the hardware."],
-      ["Constellation", "The electrons. Again. Every trace ends here."]
-    ], "moral": "An app's gross margin is the residue after every layer below takes its cut. Lock-in at the top means pricing power over the entire chain beneath you — that's why Layer 07 moats matter more than Layer 07 models."}
+    "cursor": {
+      "title": "One Cursor request — follow your $20 from keystroke to power plant",
+      "steps": [
+        [
+          "Cursor / Anysphere",
+          "You pay ~$20/mo; every keystroke fires model calls. Its margin is the subscription minus the token bill."
+        ],
+        [
+          "Anthropic",
+          "Earns per token on frontier completions — the supplier that is also the competitor."
+        ],
+        [
+          "Baseten",
+          "Serves Cursor's own smaller models; keeps a serving margin over GPU rent."
+        ],
+        [
+          "CoreWeave",
+          "Rents the GPU-hours against debt-financed clusters."
+        ],
+        [
+          "Nvidia",
+          "Sold the chips at ~70% gross — paid up front, before anyone above earned a dollar."
+        ],
+        [
+          "Constellation",
+          "Sells the electrons — the one input every step above shares."
+        ]
+      ],
+      "moral": "Six businesses touch one autocomplete. The fattest margin sits at the bottom (Nvidia) and the customer relationship at the top; everyone in between fights over slices of that $20. That is Rule 1, drawn as a wire."
+    },
+    "training": {
+      "title": "A frontier training run — capital flows down before intelligence flows back up",
+      "steps": [
+        [
+          "Anthropic",
+          "Commits billions before a dollar of revenue — the training bet."
+        ],
+        [
+          "Scale AI",
+          "Expert data and evals feed the run."
+        ],
+        [
+          "Prime Intellect",
+          "RL environments teach the model to act, not just predict — the new >$1B/yr line item."
+        ],
+        [
+          "AWS",
+          "Months of reserved cluster time; even trillion-dollar labs rent."
+        ],
+        [
+          "Nvidia",
+          "The cluster itself — margin captured before training even starts."
+        ]
+      ],
+      "moral": "Money pours down the entire stack, then capability climbs back up months later as the next model. That lag — spend now, capability later — is exactly why labs price like options, not like software."
+    },
+    "enterprise": {
+      "title": "An enterprise dollar — where a law firm's spend actually lands",
+      "steps": [
+        [
+          "Harvey",
+          "The firm pays per seat. Harvey keeps the biggest slice — if its workflow lock-in holds."
+        ],
+        [
+          "OpenAI",
+          "Takes the token bill: Harvey's cost of goods sold."
+        ],
+        [
+          "Microsoft Azure",
+          "Takes the compute bill behind that."
+        ],
+        [
+          "Nvidia",
+          "Took its margin up front, on the hardware."
+        ],
+        [
+          "Constellation",
+          "The electrons. Again. Every trace ends here."
+        ]
+      ],
+      "moral": "An app's gross margin is the residue after every layer below takes its cut. Lock-in at the top means pricing power over the entire chain beneath you — that's why Layer 07 moats matter more than Layer 07 models."
+    }
   },
   "lensNotes": {
     "cap": "<b>Value capture</b> — each group banded by pricing power, not size: <span class=\"legend-chip\" style=\"background:var(--gold-bright)\"></span><b>strong</b> = defensible pricing power &nbsp;·&nbsp; <span class=\"legend-chip\" style=\"background:var(--hl-bright)\"></span><b>contested</b> = up for grabs, moats unproven &nbsp;·&nbsp; <span class=\"legend-chip\" style=\"background:var(--flag-bright)\"></span><b>squeezed</b> = commodity dynamics, margin flows to neighbors. ○ Bands are theses, at group level, judged as of July 2026. Notice the pattern: strong at both ends, squeezed in the middle — Rule 1, painted on.",
@@ -310,61 +1280,261 @@
     "pe": "<b>PE / VC angle</b> — highlighting where private-equity-shaped capital actually plays, rather than venture-shaped capital. The stack's venture zones (labs, inference, agents) price as options; the highlighted groups price as cash flows: <b>AI-native services</b> (buy the wage line, expand margin with AI — the roll-up thesis), <b>vertical workflow owners</b> (growth equity, regulated-domain lock-in), and <b>power</b> (infra capital, long-duration contracts). ○ This lens is a thesis — argue with it."
   },
   "quiz": [
-    ["Baseten runs models for Cursor and Notion. Which layer is it, and who squeezes it from each side?", "Layer 05 (inference & serving). It pays Layer 02 for GPUs below, sells tokens into a falling price curve above, and Layers 01 and 04 keep acquiring its competitors (Rule 3)."],
-    ["Nvidia sits at the 'commodity' bottom of the stack yet earns ~70% gross margin. What's the moat?", "CUDA's software ecosystem plus locked-up supply-chain allocation (TSMC, packaging, HBM). The moat is ecosystem + supply position — not the chip itself."],
-    ["What is the single biggest business risk for Scale AI and the whole data/labeling group?", "Customer concentration. A handful of frontier labs are most of the revenue, and labs internalize what matters most — the Meta deal fallout is the case study."],
-    ["Cursor's gross margin looks like software but isn't. Why?", "Token passthrough is its COGS — it pays labs per keystroke. And its supplier (Anthropic, OpenAI) is simultaneously its biggest competitor. Weakest-moat layer on the map."],
-    ["Which input — not chips — does this map call the real bottleneck, and why?", "Power. Grid interconnect queues and PPAs now gate datacenter growth; that's why Constellation-style nuclear fleets are the scarcest asset in the stack."],
-    ["What do open-weight models (DeepSeek, Qwen, GLM) do to the economics of the stack?", "They commoditize below-frontier capability on purpose — compressing Layer 04 pricing and letting Layer 07 apps cut token bills by self-hosting. Commoditize your complement."],
-    ["Why does independent inference (Layer 05) keep getting acquired rather than IPOing?", "Neutrality and serving engineering are scarce; silicon and labs buy the layer for distribution and talent (Replicate→Cloudflare, SambaNova→Intel reported). Rule 3."],
-    ["Where does PE / roll-up capital most naturally play in this stack, and why there?", "Layer 07 AI-native services: buy the client's wage line, not their software budget — services cash flows with AI margin expansion underneath. The rest of the stack is venture-priced options."],
-    ["'Value concentrates at the ends of the stack' — fact or thesis?", "Thesis (○). It's an argument consistent with the margins shown, not a measurement. The map's four Rules are all theses — that's why v2 marks them."],
-    ["MCP sits on the map like a company tile. What is it actually, and what does it do to moats?", "An open protocol, not a company. It commoditizes integration deliberately — moving the moat from 'who has the connectors' to 'who owns the workflow.'"],
-    ["Training vs inference: which is most of AI compute spend now, and what did that shift reprice?", "Inference, at roughly two-thirds. The shift repriced the whole stack toward serving efficiency and inference silicon (Rule 2)."],
-    ["What kills a neocloud like CoreWeave fastest?", "GPU depreciation outrunning contract revenue the moment hyperscaler supply loosens. It's a leveraged commodity trade — always compare contract duration to fleet age."],
-    ["Why do labs trade at 15–60× revenue when their operating margins are deeply negative?", "You're not buying software economics — you're buying a call option on transformative AI plus consumer distribution. Spend now, capability later."],
-    ["Prime Intellect appears in two layers. Mistake or lesson?", "Lesson: companies span layers; tiles are placed by primary business. Real firms are nodes in a dependency graph, not rows in a stack — the map linearizes on purpose."],
-    ["A task uses 10K tokens at a blended $6 per million. What does it cost — and why does that number run the app layer?", "Six cents. Multiply by tasks per user per month and you have an AI product's COGS — the gross margin is whatever the subscription leaves after that. The whole Layer 06/07 squeeze is this arithmetic."],
-    ["Why is long context expensive — the two mechanical reasons?", "Attention cost grows with the square of sequence length, and the KV cache (stored attention state) grows with context and sits in GPU memory. Long context isn't a pricing choice; it's physics plus memory."],
-    ["The rule of thumb: when RAG, when fine-tune?", "Need it to KNOW something → RAG (feed knowledge at query time). Need it to BEHAVE a certain way → fine-tune (train the style/format in). Most business problems are the first kind — and fine-tuning to teach facts produces confident hallucination."],
-    ["Your self-hosted GPUs cost MORE per token than the API. How is that possible?", "Utilization. A GPU costs the same per hour at 20% busy as at 90%; the API provider batches thousands of customers to run near-full. Below the utilization threshold, renting wins — build-vs-buy is a utilization question, not a hardware question."],
-    ["Token prices fall ~40%+ a year. Who captures that — the lab or the app?", "Whoever holds the customer relationship. If the app holds its price while its COGS deflates, deflation is pure margin expansion for the app layer — one reason distribution beats models in this stack (Rule 1 again)."],
-    ["What is an eval, and why does it gate the whole agent category?", "A test suite for model behavior — scored tasks run on every change. Agents compound per-step reliability (95% a step is 36% over twenty steps), so without evals you can't ship, price, or improve them. 'What's your eval set?' is the sharpest single question to ask an AI founder."]
+    [
+      "Baseten runs models for Cursor and Notion. Which layer is it, and who squeezes it from each side?",
+      "Layer 05 (inference & serving). It pays Layer 02 for GPUs below, sells tokens into a falling price curve above, and Layers 01 and 04 keep acquiring its competitors (Rule 3)."
+    ],
+    [
+      "Nvidia sits at the 'commodity' bottom of the stack yet earns ~70% gross margin. What's the moat?",
+      "CUDA's software ecosystem plus locked-up supply-chain allocation (TSMC, packaging, HBM). The moat is ecosystem + supply position — not the chip itself."
+    ],
+    [
+      "What is the single biggest business risk for Scale AI and the whole data/labeling group?",
+      "Customer concentration. A handful of frontier labs are most of the revenue, and labs internalize what matters most — the Meta deal fallout is the case study."
+    ],
+    [
+      "Cursor's gross margin looks like software but isn't. Why?",
+      "Token passthrough is its COGS — it pays labs per keystroke. And its supplier (Anthropic, OpenAI) is simultaneously its biggest competitor. Weakest-moat layer on the map."
+    ],
+    [
+      "Which input — not chips — does this map call the real bottleneck, and why?",
+      "Power. Grid interconnect queues and PPAs now gate datacenter growth; that's why Constellation-style nuclear fleets are the scarcest asset in the stack."
+    ],
+    [
+      "What do open-weight models (DeepSeek, Qwen, GLM) do to the economics of the stack?",
+      "They commoditize below-frontier capability on purpose — compressing Layer 04 pricing and letting Layer 07 apps cut token bills by self-hosting. Commoditize your complement."
+    ],
+    [
+      "Why does independent inference (Layer 05) keep getting acquired rather than IPOing?",
+      "Neutrality and serving engineering are scarce; silicon and labs buy the layer for distribution and talent (Replicate→Cloudflare, SambaNova→Intel reported). Rule 3."
+    ],
+    [
+      "Where does PE / roll-up capital most naturally play in this stack, and why there?",
+      "Layer 07 AI-native services: buy the client's wage line, not their software budget — services cash flows with AI margin expansion underneath. The rest of the stack is venture-priced options."
+    ],
+    [
+      "'Value concentrates at the ends of the stack' — fact or thesis?",
+      "Thesis (○). It's an argument consistent with the margins shown, not a measurement. The map's four Rules are all theses — that's why v2 marks them."
+    ],
+    [
+      "MCP sits on the map like a company tile. What is it actually, and what does it do to moats?",
+      "An open protocol, not a company. It commoditizes integration deliberately — moving the moat from 'who has the connectors' to 'who owns the workflow.'"
+    ],
+    [
+      "Training vs inference: which is most of AI compute spend now, and what did that shift reprice?",
+      "Inference, at roughly two-thirds. The shift repriced the whole stack toward serving efficiency and inference silicon (Rule 2)."
+    ],
+    [
+      "What kills a neocloud like CoreWeave fastest?",
+      "GPU depreciation outrunning contract revenue the moment hyperscaler supply loosens. It's a leveraged commodity trade — always compare contract duration to fleet age."
+    ],
+    [
+      "Why do labs trade at 15–60× revenue when their operating margins are deeply negative?",
+      "You're not buying software economics — you're buying a call option on transformative AI plus consumer distribution. Spend now, capability later."
+    ],
+    [
+      "Prime Intellect appears in two layers. Mistake or lesson?",
+      "Lesson: companies span layers; tiles are placed by primary business. Real firms are nodes in a dependency graph, not rows in a stack — the map linearizes on purpose."
+    ],
+    [
+      "A task uses 10K tokens at a blended $6 per million. What does it cost — and why does that number run the app layer?",
+      "Six cents. Multiply by tasks per user per month and you have an AI product's COGS — the gross margin is whatever the subscription leaves after that. The whole Layer 06/07 squeeze is this arithmetic."
+    ],
+    [
+      "Why is long context expensive — the two mechanical reasons?",
+      "Attention cost grows with the square of sequence length, and the KV cache (stored attention state) grows with context and sits in GPU memory. Long context isn't a pricing choice; it's physics plus memory."
+    ],
+    [
+      "The rule of thumb: when RAG, when fine-tune?",
+      "Need it to KNOW something → RAG (feed knowledge at query time). Need it to BEHAVE a certain way → fine-tune (train the style/format in). Most business problems are the first kind — and fine-tuning to teach facts produces confident hallucination."
+    ],
+    [
+      "Your self-hosted GPUs cost MORE per token than the API. How is that possible?",
+      "Utilization. A GPU costs the same per hour at 20% busy as at 90%; the API provider batches thousands of customers to run near-full. Below the utilization threshold, renting wins — build-vs-buy is a utilization question, not a hardware question."
+    ],
+    [
+      "Token prices fall ~40%+ a year. Who captures that — the lab or the app?",
+      "Whoever holds the customer relationship. If the app holds its price while its COGS deflates, deflation is pure margin expansion for the app layer — one reason distribution beats models in this stack (Rule 1 again)."
+    ],
+    [
+      "What is an eval, and why does it gate the whole agent category?",
+      "A test suite for model behavior — scored tasks run on every change. Agents compound per-step reliability (95% a step is 36% over twenty steps), so without evals you can't ship, price, or improve them. 'What's your eval set?' is the sharpest single question to ask an AI founder."
+    ]
   ],
   "concepts": [
-    {"t": "Transformer &amp; attention", "s": "the architecture under every LLM", "b": "Instead of reading left-to-right, every token looks at every other token at once and weighs relevance — that's self-attention. “The animal didn't cross the street because it was tired”: attention is how the model knows “it” = animal. Massively parallel, so it feeds on GPUs — which is the entire scaling story.", "r": "Attention = every word weighing every other word, all at once.", "q": "Sharp question: “what breaks when you double the context?” (cost grows with the square)"},
-    {"t": "Tokens", "s": "the unit of everything", "b": "Models read and write in tokens — word chunks, ~¾ of a word each. Context limits, latency, and above all pricing are all denominated in tokens. When someone quotes model costs, they're quoting a commodity priced per million tokens.", "r": "You are billed, throttled, and bounded in tokens, not words.", "q": "Sharp question: “what's your blended cost per task, in tokens?”"},
-    {"t": "Embeddings", "s": "meaning as coordinates", "b": "Text mapped to a vector so that similar meaning lands nearby — “invoice dispute” sits close to “billing complaint” with zero shared words. This is the machinery behind semantic search and the retrieval half of RAG.", "r": "Nearby vectors = similar meaning. That's the whole trick.", "q": "Sharp question: “what embedding + chunking choices did you make, and how do you know recall is good?”"},
-    {"t": "Context window &amp; KV cache", "s": "working memory, and why it costs", "b": "The context window is what the model can hold at once. The KV cache stores the attention math for everything already read so it isn't recomputed per token — it grows with context and lives in scarce GPU memory. Long context is expensive for two mechanical reasons: quadratic attention and that cache.", "r": "Long context isn't a pricing choice — it's physics plus memory.", "q": "Sharp question: “what happens to your unit costs as customer context grows?”"},
-    {"t": "RAG", "s": "look it up, then answer", "b": "Retrieval-Augmented Generation: fetch the relevant documents at query time and hand them to the model with the question. Adds knowledge without any training, stays current, and can cite sources. The default answer to “chat with our data.”", "r": "RAG adds KNOWLEDGE. It's the first lever, not the fancy one.", "q": "Sharp question: “why would fine-tuning beat retrieval here?” (it usually doesn't)"},
-    {"t": "Fine-tuning &amp; LoRA", "s": "training the behavior in", "b": "Show the model hundreds of examples and nudge its weights — it learns your format, tone, and task shape. LoRA does this cheaply by training small adapter layers. Changes BEHAVIOR reliably; changes knowledge badly (it will state your old facts confidently).", "r": "Fine-tune for how it acts, never for what it knows.", "q": "Sharp question: “what did you fine-tune on, and what does your eval say it improved?”"},
-    {"t": "RL, RLHF &amp; GRPO", "s": "how predictors become assistants", "b": "Reinforcement learning trains by reward instead of labels. RLHF used human preferences to turn raw next-word predictors into aligned assistants; GRPO-style methods now train reasoning by rewarding correct multi-step answers. RL environments — simulated workplaces for models — are the new nine-figure spend line (see Prime Intellect on the map).", "r": "Pretraining teaches knowledge; RL teaches behavior worth paying for.", "q": "Sharp question: “where does your reward signal come from, and can it be gamed?”"},
-    {"t": "Inference: prefill vs decode", "s": "the recurring cost of the whole stack", "b": "Serving a request has two phases: prefill reads your whole prompt in one parallel pass; decode then generates one token at a time — that's where the latency and cost live, and it's bounded by memory bandwidth, not raw compute. Two-thirds of AI compute spend is now this, not training.", "r": "Decode — one token at a time — is where the money goes.", "q": "Sharp question: “what's your time-to-first-token vs tokens-per-second, and which do customers feel?”"},
-    {"t": "Quantization &amp; distillation", "s": "why token prices keep falling", "b": "Quantization stores weights in lower precision — smaller, faster, nearly as good. Distillation trains a small model to imitate a big one. Together with batching tricks (vLLM-style paged attention, speculative decoding) they're the machinery behind the relentless price deflation the Token Meter models.", "r": "Efficiency IS the business model at the serving layer.", "q": "Sharp question: “which of these levers have you pulled before asking for more GPUs?”"},
-    {"t": "Evals", "s": "the test suite for intelligence", "b": "A scored set of tasks run against every model, prompt, or pipeline change — the difference between a demo and a product. Evals are how you catch regressions, justify model swaps, and ship agents at all. Teams without them are flying on vibes.", "r": "No evals, no product — just a demo that hasn't failed yet.", "q": "Sharp question (the single sharpest in AI diligence): “show me your eval set.”"},
-    {"t": "Agents &amp; MCP", "s": "models in a loop with tools", "b": "An agent is a model that plans, calls tools, checks results, and iterates — a worker, not an oracle. MCP is the open protocol standardizing how models reach tools (USB for AI). The catch: reliability compounds per step, so 95%-per-step is 36% over twenty steps — which is why evals and checkpoints gate the category.", "r": "Agent = model + tools + loop. Reliability compounds — downward.", "q": "Sharp question: “what's your end-to-end success rate on a twenty-step task?”"},
-    {"t": "MLOps vs LLMOps", "s": "two different factories", "b": "Classic MLOps runs models you trained: feature stores, retraining pipelines, drift monitoring — the XGBoost world that still owns tabular business data. LLMOps runs models you rent: prompt versioning, RAG pipelines, evals, token-cost management. Same discipline, different tool chain — teams get burned bringing only one playbook.", "r": "Own the model → MLOps. Rent the model → LLMOps.", "q": "Sharp question: “is this a train-our-own problem or a rent-and-orchestrate problem, and why?”"},
-    {"t": "The four learning paradigms", "s": "how anything learns at all", "b": "Supervised: learn from labeled answers (churn, pricing — the enterprise workhorse). Unsupervised: find structure without labels (clustering, anomaly detection). Self-supervised: the data labels itself — predict the next word — which is what let LLMs eat the internet without human labelers. Reinforcement: learn from reward (agents, alignment).", "r": "Self-supervision is why language models scaled: free labels, infinite data.", "q": "Sharp question: “what does your model learn from — labels, structure, prediction, or reward?”"},
-    {"t": "Skills, workflows &amp; agent modes", "s": "packaged know-how, and how to run it", "b": "A <b>skill</b> is a portable bundle of instructions, examples, and tools an agent loads only when a task needs it — not baked into weights (fine-tuning) and not retyped every session (a raw prompt). A <b>workflow</b> is different: a script that spawns and coordinates several agents at once — multi-agent by definition, where a skill is usually one agent following a playbook. Both are patterns, not any one vendor's feature. Separately, the same agent runs in different <b>modes</b>: interactive chat (you drive), autonomous/background (it runs a task end-to-end), or multi-agent (several split the work). Picking the wrong mode is the common failure — chat mode for a long unattended job wastes your attention; full autonomy on an ambiguous task burns steps with no one to correct it.", "r": "Skill = reusable playbook, usually one agent. Workflow = a script coordinating many. Mode = how much you supervise.", "q": "Sharp question: “is this one agent following a skill, or a job that needs several — and how much should it run unsupervised?”"},
-    {"t": "Open-weight vs closed-weight", "s": "who's allowed to download the model", "b": "<b>Open-weight</b> means the trained weights are downloadable and runnable yourself (Llama, Gemma, Qwen, DeepSeek, Mistral) — not the same as <i>open-source</i>, which would also hand you the training code and data. Labs release weights anyway to commoditize their complement: if below-frontier intelligence is free, value shifts to whoever owns customers, compute, and workflow. The capability gap to closed frontier models is now small on easy tasks and coding, wider on the hardest reasoning and long-horizon agentic work ○. Running an open model locally also keeps proprietary data off someone else's servers — the sovereign-AI argument, at any scale.", "r": "Open-weight ≠ open-source. Labs give the weights away to commoditize the layer just below the frontier.", "q": "Sharp question: “does this task actually need the frontier, or is an open model good enough — cheaper, and more private?”"},
-    {"t": "Model, effort &amp; autonomy", "s": "three dials people conflate", "b": "Three <i>independent</i> choices every time you use an AI tool. <b>Model</b>: how capable the underlying brain is — a bigger one for harder problems. <b>Effort / reasoning</b>: how much the model deliberates on <i>this one</i> call — more thinking for a gnarly judgment, less for a quick edit. <b>Autonomy</b>: how much you let it run unsupervised — watch every step, approve edits, or hand off a whole task. They're orthogonal: a small model on high effort can beat a big one rushing, and full autonomy on a fuzzy task is riskier than a capable model you supervise closely. Matching all three to the job is the actual skill.", "r": "Capability, deliberation, and supervision are separate dials — tune each to the task, don't max all three by reflex.", "q": "Sharp question: “does this need a smarter model, more thinking, or just less babysitting — or which combination?”"}
+    {
+      "t": "Transformer &amp; attention",
+      "s": "the architecture under every LLM",
+      "b": "Instead of reading left-to-right, every token looks at every other token at once and weighs relevance — that's self-attention. “The animal didn't cross the street because it was tired”: attention is how the model knows “it” = animal. Massively parallel, so it feeds on GPUs — which is the entire scaling story.",
+      "r": "Attention = every word weighing every other word, all at once.",
+      "q": "Sharp question: “what breaks when you double the context?” (cost grows with the square)"
+    },
+    {
+      "t": "Tokens",
+      "s": "the unit of everything",
+      "b": "Models read and write in tokens — word chunks, ~¾ of a word each. Context limits, latency, and above all pricing are all denominated in tokens. When someone quotes model costs, they're quoting a commodity priced per million tokens.",
+      "r": "You are billed, throttled, and bounded in tokens, not words.",
+      "q": "Sharp question: “what's your blended cost per task, in tokens?”"
+    },
+    {
+      "t": "Embeddings",
+      "s": "meaning as coordinates",
+      "b": "Text mapped to a vector so that similar meaning lands nearby — “invoice dispute” sits close to “billing complaint” with zero shared words. This is the machinery behind semantic search and the retrieval half of RAG.",
+      "r": "Nearby vectors = similar meaning. That's the whole trick.",
+      "q": "Sharp question: “what embedding + chunking choices did you make, and how do you know recall is good?”"
+    },
+    {
+      "t": "Context window &amp; KV cache",
+      "s": "working memory, and why it costs",
+      "b": "The context window is what the model can hold at once. The KV cache stores the attention math for everything already read so it isn't recomputed per token — it grows with context and lives in scarce GPU memory. Long context is expensive for two mechanical reasons: quadratic attention and that cache.",
+      "r": "Long context isn't a pricing choice — it's physics plus memory.",
+      "q": "Sharp question: “what happens to your unit costs as customer context grows?”"
+    },
+    {
+      "t": "RAG",
+      "s": "look it up, then answer",
+      "b": "Retrieval-Augmented Generation: fetch the relevant documents at query time and hand them to the model with the question. Adds knowledge without any training, stays current, and can cite sources. The default answer to “chat with our data.”",
+      "r": "RAG adds KNOWLEDGE. It's the first lever, not the fancy one.",
+      "q": "Sharp question: “why would fine-tuning beat retrieval here?” (it usually doesn't)"
+    },
+    {
+      "t": "Fine-tuning &amp; LoRA",
+      "s": "training the behavior in",
+      "b": "Show the model hundreds of examples and nudge its weights — it learns your format, tone, and task shape. LoRA does this cheaply by training small adapter layers. Changes BEHAVIOR reliably; changes knowledge badly (it will state your old facts confidently).",
+      "r": "Fine-tune for how it acts, never for what it knows.",
+      "q": "Sharp question: “what did you fine-tune on, and what does your eval say it improved?”"
+    },
+    {
+      "t": "RL, RLHF &amp; GRPO",
+      "s": "how predictors become assistants",
+      "b": "Reinforcement learning trains by reward instead of labels. RLHF used human preferences to turn raw next-word predictors into aligned assistants; GRPO-style methods now train reasoning by rewarding correct multi-step answers. RL environments — simulated workplaces for models — are the new nine-figure spend line (see Prime Intellect on the map).",
+      "r": "Pretraining teaches knowledge; RL teaches behavior worth paying for.",
+      "q": "Sharp question: “where does your reward signal come from, and can it be gamed?”"
+    },
+    {
+      "t": "Inference: prefill vs decode",
+      "s": "the recurring cost of the whole stack",
+      "b": "Serving a request has two phases: prefill reads your whole prompt in one parallel pass; decode then generates one token at a time — that's where the latency and cost live, and it's bounded by memory bandwidth, not raw compute. Two-thirds of AI compute spend is now this, not training.",
+      "r": "Decode — one token at a time — is where the money goes.",
+      "q": "Sharp question: “what's your time-to-first-token vs tokens-per-second, and which do customers feel?”"
+    },
+    {
+      "t": "Quantization &amp; distillation",
+      "s": "why token prices keep falling",
+      "b": "Quantization stores weights in lower precision — smaller, faster, nearly as good. Distillation trains a small model to imitate a big one. Together with batching tricks (vLLM-style paged attention, speculative decoding) they're the machinery behind the relentless price deflation the Token Meter models.",
+      "r": "Efficiency IS the business model at the serving layer.",
+      "q": "Sharp question: “which of these levers have you pulled before asking for more GPUs?”"
+    },
+    {
+      "t": "Evals",
+      "s": "the test suite for intelligence",
+      "b": "A scored set of tasks run against every model, prompt, or pipeline change — the difference between a demo and a product. Evals are how you catch regressions, justify model swaps, and ship agents at all. Teams without them are flying on vibes.",
+      "r": "No evals, no product — just a demo that hasn't failed yet.",
+      "q": "Sharp question (the single sharpest in AI diligence): “show me your eval set.”"
+    },
+    {
+      "t": "Agents &amp; MCP",
+      "s": "models in a loop with tools",
+      "b": "An agent is a model that plans, calls tools, checks results, and iterates — a worker, not an oracle. MCP is the open protocol standardizing how models reach tools (USB for AI). The catch: reliability compounds per step, so 95%-per-step is 36% over twenty steps — which is why evals and checkpoints gate the category.",
+      "r": "Agent = model + tools + loop. Reliability compounds — downward.",
+      "q": "Sharp question: “what's your end-to-end success rate on a twenty-step task?”"
+    },
+    {
+      "t": "MLOps vs LLMOps",
+      "s": "two different factories",
+      "b": "Classic MLOps runs models you trained: feature stores, retraining pipelines, drift monitoring — the XGBoost world that still owns tabular business data. LLMOps runs models you rent: prompt versioning, RAG pipelines, evals, token-cost management. Same discipline, different tool chain — teams get burned bringing only one playbook.",
+      "r": "Own the model → MLOps. Rent the model → LLMOps.",
+      "q": "Sharp question: “is this a train-our-own problem or a rent-and-orchestrate problem, and why?”"
+    },
+    {
+      "t": "The four learning paradigms",
+      "s": "how anything learns at all",
+      "b": "Supervised: learn from labeled answers (churn, pricing — the enterprise workhorse). Unsupervised: find structure without labels (clustering, anomaly detection). Self-supervised: the data labels itself — predict the next word — which is what let LLMs eat the internet without human labelers. Reinforcement: learn from reward (agents, alignment).",
+      "r": "Self-supervision is why language models scaled: free labels, infinite data.",
+      "q": "Sharp question: “what does your model learn from — labels, structure, prediction, or reward?”"
+    },
+    {
+      "t": "Skills, workflows &amp; agent modes",
+      "s": "packaged know-how, and how to run it",
+      "b": "A <b>skill</b> is a portable bundle of instructions, examples, and tools an agent loads only when a task needs it — not baked into weights (fine-tuning) and not retyped every session (a raw prompt). A <b>workflow</b> is different: a script that spawns and coordinates several agents at once — multi-agent by definition, where a skill is usually one agent following a playbook. Both are patterns, not any one vendor's feature. Separately, the same agent runs in different <b>modes</b>: interactive chat (you drive), autonomous/background (it runs a task end-to-end), or multi-agent (several split the work). Picking the wrong mode is the common failure — chat mode for a long unattended job wastes your attention; full autonomy on an ambiguous task burns steps with no one to correct it.",
+      "r": "Skill = reusable playbook, usually one agent. Workflow = a script coordinating many. Mode = how much you supervise.",
+      "q": "Sharp question: “is this one agent following a skill, or a job that needs several — and how much should it run unsupervised?”"
+    },
+    {
+      "t": "Open-weight vs closed-weight",
+      "s": "who's allowed to download the model",
+      "b": "<b>Open-weight</b> means the trained weights are downloadable and runnable yourself (Llama, Gemma, Qwen, DeepSeek, Mistral) — not the same as <i>open-source</i>, which would also hand you the training code and data. Labs release weights anyway to commoditize their complement: if below-frontier intelligence is free, value shifts to whoever owns customers, compute, and workflow. The capability gap to closed frontier models is now small on easy tasks and coding, wider on the hardest reasoning and long-horizon agentic work ○. Running an open model locally also keeps proprietary data off someone else's servers — the sovereign-AI argument, at any scale.",
+      "r": "Open-weight ≠ open-source. Labs give the weights away to commoditize the layer just below the frontier.",
+      "q": "Sharp question: “does this task actually need the frontier, or is an open model good enough — cheaper, and more private?”"
+    },
+    {
+      "t": "Model, effort &amp; autonomy",
+      "s": "three dials people conflate",
+      "b": "Three <i>independent</i> choices every time you use an AI tool. <b>Model</b>: how capable the underlying brain is — a bigger one for harder problems. <b>Effort / reasoning</b>: how much the model deliberates on <i>this one</i> call — more thinking for a gnarly judgment, less for a quick edit. <b>Autonomy</b>: how much you let it run unsupervised — watch every step, approve edits, or hand off a whole task. They're orthogonal: a small model on high effort can beat a big one rushing, and full autonomy on a fuzzy task is riskier than a capable model you supervise closely. Matching all three to the job is the actual skill.",
+      "r": "Capability, deliberation, and supervision are separate dials — tune each to the task, don't max all three by reflex.",
+      "q": "Sharp question: “does this need a smarter model, more thinking, or just less babysitting — or which combination?”"
+    }
   ],
   "mnaFlow": [
-    {"d": "Jun '26", "t": "<b>Anthropic &amp; OpenAI</b> file to IPO (~$965B / ~$852B); <b>SpaceX–xAI</b> merge at ~$1.25T"},
-    {"d": "Jun '26", "t": "<b>SpaceX → Cursor</b> ~$60B all-stock filed; closing Q3 <span class=\"rep\">pending — prospectus describes an option to acquire, not a done deal</span>"},
-    {"d": "Jun '26", "t": "<b>OpenAI → Astral</b> (Python dev tools) into Codex"},
-    {"d": "May '26", "t": "<b>Cerebras</b> IPOs (CBRS); biggest tech IPO of the year"},
-    {"d": "'26", "t": "<b>Cloudflare → Replicate</b> closes; feeds Workers AI"},
-    {"d": "'25–26", "t": "<b>Nvidia</b> licenses <b>Groq</b> LPU (~$20B) + hires Ross; Groq stays independent"},
-    {"d": "'26", "t": "<b>Intel → SambaNova</b> term sheet <span class=\"rep\">reported</span>; <b>Qualcomm → Tenstorrent</b> in talks <span class=\"rep\">reported</span>"},
-    {"d": "Jun '26", "t": "<b>Baseten</b> raises $1.5B at $13B — revenue ~20× YoY"}
+    {
+      "d": "Jul '26",
+      "t": "<b>Fireworks</b> raises $1.5B at <b>$17.5B</b> (Nvidia-backed) — last year's $15B acquisition talks became an independence round instead"
+    },
+    {
+      "d": "Jul '26",
+      "t": "<b>SAP → n8n</b> strategic stake at $5.2B; <b>Lovable</b> in talks at ~$13B on $500M ARR <span class=\"rep\">reported</span>"
+    },
+    {
+      "d": "Jul '26",
+      "t": "<b>Qualcomm</b> nears ~$4B <b>Modular</b> deal <span class=\"rep\">reported</span>; its <b>Tenstorrent</b> talks now $8–10B <span class=\"rep\">reported</span>"
+    },
+    {
+      "d": "Jul '26",
+      "t": "<b>SambaNova</b> raises $1B at $11B — the reported ~$1.6B Intel takeover is dead"
+    },
+    {
+      "d": "Jun '26",
+      "t": "<b>Anthropic</b> files confidential S-1 (~$965B, targeting an Oct Nasdaq listing); <b>OpenAI</b> <span class=\"rep\">reportedly</span> weighing a 2027 slip; <b>SpaceX–xAI</b> merged at ~$1.25T"
+    },
+    {
+      "d": "Jun '26",
+      "t": "<b>SpaceX → Cursor</b> ~$60B definitive all-stock; expected close Q3 '26"
+    },
+    {
+      "d": "Jun '26",
+      "t": "<b>OpenAI → Astral</b> (Python dev tools) into Codex; <b>Baseten</b> raises $1.5B at $13B"
+    },
+    {
+      "d": "May '26",
+      "t": "<b>Cerebras</b> IPOs (CBRS); biggest tech IPO of the year"
+    },
+    {
+      "d": "'26",
+      "t": "<b>Cloudflare → Replicate</b> closes; feeds Workers AI"
+    },
+    {
+      "d": "'25–26",
+      "t": "<b>Nvidia</b> licenses <b>Groq</b> LPU (~$20B) + hires Ross; Groq stays independent"
+    }
   ],
   "readingRules": [
-    {"tag": "○ Rule 1", "t": "Value concentrates at the <b>ends</b> — silicon (01) and workflow-owning apps (07). The middle commoditizes."},
-    {"tag": "○ Rule 2", "t": "The spend center of gravity shifted from <b>training → inference</b>. That repriced the whole stack in '26."},
-    {"tag": "○ Rule 3", "t": "Independent inference (05) is being bought by silicon (01) and labs (04). Neutrality is the scarce asset."},
-    {"tag": "○ Rule 4", "t": "Layer 03 (RL/evals) is the new frontier — <b>“self-improving”</b> is the loop Prime Intellect is selling."}
+    {
+      "tag": "○ Rule 1",
+      "t": "Value concentrates at the <b>ends</b> — silicon (01) and workflow-owning apps (07). The middle commoditizes."
+    },
+    {
+      "tag": "○ Rule 2",
+      "t": "The spend center of gravity shifted from <b>training → inference</b>. That repriced the whole stack in '26."
+    },
+    {
+      "tag": "○ Rule 3",
+      "t": "Independent inference (05) is being bought by silicon (01) and labs (04). Neutrality is the scarce asset."
+    },
+    {
+      "tag": "○ Rule 4",
+      "t": "Layer 03 (RL/evals) is the new frontier — <b>“self-improving”</b> is the loop Prime Intellect is selling."
+    }
   ],
   "corners": "Two cross-cutting angles now live in their home layers: <b>AI-native services</b> sit in Layer 07 (a second flavor of the app layer — outcomes, not software), and <b>open-weight fine-tuning</b> runs on the bases named in Layer 04 plus the tooling in Layer 03. The other two genuinely <i>can't</i> be rows without distorting the stack: <b>Physical AI / robotics</b> is a <i>parallel</i> stack — its own silicon, models, and applications, sharing only the bottom layers before branching into a separate tree; and <b>Sovereign AI</b> is a <i>lens</i>, not a layer — a \"who owns the weights, compute, and data\" question you can ask of <i>every</i> row (the Karp/Nadella argument, the open-weight surge from GLM/Qwen/DeepSeek). Keeping those two here is the honest call — forcing a parallel tree or a filter into a vertical supply chain would make the map lie about its own shape.",
-  "footer": "<b>Sourcing &amp; caveats.</b> Synthesized from public reporting; refreshed July 2026, reviewed monthly. <b>v4:</b> the Operator's Bench — a personal AI-cost meter, an adapt-or-build chooser, and a 16-card concepts deck — alongside per-layer economics, ~20 company profiles, three money-flow traces, three lenses (value capture · public/private · PE angle), company search, and a quiz. Built iteratively with several model critiques (Claude, Codex, Fable, cowork). No new factual claims are invented here; profiles and economics reason from what the July map already asserts, and theses are marked ○. Valuations and deal terms are directional and move weekly; items marked <span class=\"rep\">reported</span> are unconfirmed or in talks and should be verified before you cite them anywhere load-bearing. This is a navigational map, not diligence — names are placed by primary layer even where companies span several (Prime Intellect appears twice on purpose)."
+  "footer": "<b>Sourcing &amp; caveats.</b> Synthesized from public reporting; refreshed July 2026, reviewed monthly. <b>v5:</b> the redesigned atlas interface — an interactive stack hero, layer navigator, and refreshed type — with the Operator's Bench (personal AI-cost meter, adapt-or-build chooser, 16-card concepts deck) alongside per-layer economics, ~28 company profiles, three money-flow traces, three lenses (value capture · public/private · PE angle), company search, and a quiz. Built iteratively with several model critiques (Claude, Codex, Fable, cowork). No new factual claims are invented here; profiles and economics reason from what the July map already asserts, and theses are marked ○. Valuations and deal terms are directional and move weekly; items marked <span class=\"rep\">reported</span> are unconfirmed or in talks and should be verified before you cite them anywhere load-bearing. This is a navigational map, not diligence — names are placed by primary layer even where companies span several (Prime Intellect appears twice on purpose)."
 }

@@ -9,7 +9,7 @@ An interactive map of the AI industry stack — from silicon to application laye
 ## What it does
 
 - **Seven-layer stack** (silicon → compute → training/RL → labs → inference → orchestration/agents → applications), each with an economics breakdown (margins, moats, chokepoints, who's eating whom)
-- **~20 clickable company profiles** — what they sell, who buys, business model, dependencies, moat, and what kills them
+- **~28 clickable company profiles** — what they sell, who buys, business model, dependencies, moat, and what kills them
 - **3 money-flow traces** — follow a literal dollar through the stack for a Cursor request, a frontier training run, and an enterprise contract
 - **3 analytical lenses** — value capture, public vs. private, and a PE/VC angle on where non-venture capital plays
 - **Company search** — filter every tile on the map by name
