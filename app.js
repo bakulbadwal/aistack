@@ -193,10 +193,10 @@
     else if (tile.pub === "filed") pubAttr = ' data-pub="filed"';
     var tgCls = "tg" + (tile.muted ? " muted" : "");
     return (
-      '<div class="' + cls + '"' + pubAttr + '>' +
+      '<button type="button" class="' + cls + '"' + pubAttr + '>' +
       '<div class="nm">' + esc(tile.nm) + "</div>" +
       '<div class="' + tgCls + '">' + tile.tg + "</div>" +
-      "</div>"
+      "</button>"
     );
   }
 
@@ -304,10 +304,31 @@
       return (num ? num.textContent.trim() : "") + " — " + (name ? name.textContent.trim() : "");
     }
 
+    /* Focus management shared by the drawer and the quiz modal */
+    var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+    function trapTab(container, e) {
+      if (e.key !== "Tab") return;
+      var f = Array.prototype.filter.call(container.querySelectorAll(FOCUSABLE), function (el) {
+        return el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement;
+      });
+      if (!f.length) return;
+      var first = f[0],
+        last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
     /* Drawer */
     var drawer = document.getElementById("drawer"),
       scrim = document.getElementById("scrim"),
-      dBody = document.getElementById("drawerBody");
+      dBody = document.getElementById("drawerBody"),
+      drawerCloseBtn = document.getElementById("drawerClose"),
+      drawerReturnTo = null;
 
     function row(k, v) {
       return '<div class="drow"><span class="dk">' + k + "</span><span class=\"dv\">" + v + "</span></div>";
@@ -333,10 +354,19 @@
       dBody.innerHTML = html;
       drawer.classList.add("open");
       scrim.classList.add("open");
+      drawer.removeAttribute("inert");
+      drawer.setAttribute("aria-hidden", "false");
+      drawerReturnTo = tile;
+      drawerCloseBtn.focus();
     }
     function closeDrawer() {
+      if (!drawer.classList.contains("open")) return;
       drawer.classList.remove("open");
       scrim.classList.remove("open");
+      drawer.setAttribute("inert", "");
+      drawer.setAttribute("aria-hidden", "true");
+      if (drawerReturnTo && document.contains(drawerReturnTo)) drawerReturnTo.focus();
+      drawerReturnTo = null;
     }
     document.querySelectorAll(".tile").forEach(function (tile) {
       tile.addEventListener("click", function () {
@@ -344,8 +374,11 @@
         if (nm) openDrawer(nm.textContent.trim(), tile);
       });
     });
-    document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+    drawerCloseBtn.addEventListener("click", closeDrawer);
     scrim.addEventListener("click", closeDrawer);
+    drawer.addEventListener("keydown", function (e) {
+      trapTab(drawer, e);
+    });
 
     /* Lenses */
     var lensNote = document.getElementById("lensNote");
@@ -354,8 +387,10 @@
       btn.addEventListener("click", function () {
         lensBtns.forEach(function (b) {
           b.classList.remove("on");
+          b.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("on");
+        btn.setAttribute("aria-pressed", "true");
         document.body.classList.remove("lens-cap", "lens-pub", "lens-pe");
         var lens = btn.getAttribute("data-lens");
         if (lens !== "none") {
@@ -390,6 +425,7 @@
       tracePanel.style.display = "none";
       trBtns.forEach(function (b) {
         b.classList.remove("on");
+        b.setAttribute("aria-pressed", "false");
       });
       activeTrace = null;
     }
@@ -404,6 +440,7 @@
         clearTrace();
         activeTrace = key;
         btn.classList.add("on");
+        btn.setAttribute("aria-pressed", "true");
         var tr = TRACES[key];
         document.body.classList.add("tracing");
         var html = "<b>" + tr.title + "</b><div style='margin-top:8px'>";
@@ -447,12 +484,23 @@
       qA.textContent = QUIZ[idx][1];
       qA.classList.remove("show");
     }
-    document.getElementById("quizBtn").addEventListener("click", function () {
+    var quizReturnTo = null;
+    function openQuiz() {
       quizModal.classList.add("open");
       showCard();
-    });
-    document.getElementById("quizClose").addEventListener("click", function () {
+      quizReturnTo = document.getElementById("quizBtn");
+      document.getElementById("qReveal").focus();
+    }
+    function closeQuiz() {
+      if (!quizModal.classList.contains("open")) return;
       quizModal.classList.remove("open");
+      if (quizReturnTo && document.contains(quizReturnTo)) quizReturnTo.focus();
+      quizReturnTo = null;
+    }
+    document.getElementById("quizBtn").addEventListener("click", openQuiz);
+    document.getElementById("quizClose").addEventListener("click", closeQuiz);
+    quizModal.addEventListener("keydown", function (e) {
+      trapTab(quizModal, e);
     });
     document.getElementById("qReveal").addEventListener("click", function () {
       qA.classList.add("show");
@@ -471,7 +519,7 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         closeDrawer();
-        quizModal.classList.remove("open");
+        closeQuiz();
         if (activeTrace) clearTrace();
       }
     });
@@ -484,15 +532,16 @@
     box.innerHTML = concepts
       .map(function (c, i) {
         return (
-          '<div class="fcard" data-i="' + i + '"><div class="ft">' + c.t + "</div><div class=\"fs\">" + c.s +
+          '<button type="button" class="fcard" data-i="' + i + '" aria-expanded="false"><div class="ft">' + c.t + "</div><div class=\"fs\">" + c.s +
           ' · click to flip</div><div class="fb">' + c.b + '<span class="fr">Remember: ' + c.r +
-          '</span><span class="fq">' + c.q + "</span></div></div>"
+          '</span><span class="fq">' + c.q + "</span></div></button>"
         );
       })
       .join("");
     box.querySelectorAll(".fcard").forEach(function (el) {
       el.addEventListener("click", function () {
-        el.classList.toggle("open");
+        var isOpen = el.classList.toggle("open");
+        el.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
     });
   }
@@ -516,6 +565,7 @@
       ["Small / open", 0.4],
     ];
     var tmClass = 0;
+    var tmTask = 1; /* default matches the tokTask slider's 6K starting value */
     // [label, default tokTask in K, hint]
     var TM_TASKS = [
       ["Quick question", 1.5, "~1–2K tokens · a Slack-message-sized ask"],
@@ -542,18 +592,19 @@
     }
     function tmRenderControls() {
       $("tmTasks").innerHTML = TM_TASKS.map(function (t, i) {
-        return '<button class="btn" data-tt="' + i + '" title="' + t[2] + '">' + t[0] + "</button>";
+        return '<button type="button" class="btn' + (i === tmTask ? " on" : "") + '" aria-pressed="' + (i === tmTask) + '" data-tt="' + i + '" title="' + t[2] + '">' + t[0] + "</button>";
       }).join("");
       $("tmTasks").querySelectorAll("button").forEach(function (b) {
         b.addEventListener("click", function () {
           var s = TM_SLIDERS.find(function (x) { return x.id === "tokTask"; });
-          s.cur = TM_TASKS[+b.getAttribute("data-tt")][1];
+          tmTask = +b.getAttribute("data-tt");
+          s.cur = TM_TASKS[tmTask][1];
           tmRenderControls();
           tmUpd();
         });
       });
       $("tmClass").innerHTML = TM_CLASSES.map(function (c, i) {
-        return '<button class="btn' + (i === tmClass ? " on" : "") + '" data-tc="' + i + '">' + c[0] + " · $" + c[1] + "/M</button>";
+        return '<button type="button" class="btn' + (i === tmClass ? " on" : "") + '" aria-pressed="' + (i === tmClass) + '" data-tc="' + i + '">' + c[0] + " · $" + c[1] + "/M</button>";
       }).join("");
       $("tmClass").querySelectorAll("button").forEach(function (b) {
         b.addEventListener("click", function () {
@@ -563,7 +614,7 @@
         });
       });
       $("tmLocal").innerHTML = TM_LOCAL.map(function (t, i) {
-        return '<button class="btn' + (i === tmLocal ? " on" : "") + '" data-tl="' + i + '">' + t[0] + "</button>";
+        return '<button type="button" class="btn' + (i === tmLocal ? " on" : "") + '" aria-pressed="' + (i === tmLocal) + '" data-tl="' + i + '">' + t[0] + "</button>";
       }).join("");
       $("tmLocal").querySelectorAll("button").forEach(function (b) {
         b.addEventListener("click", function () {
@@ -670,7 +721,7 @@
           '<div class="qrow"><div class="qlab">' + q.l + '</div><div class="bseg">' +
           q.o
             .map(function (o, i) {
-              return '<button class="btn' + (acSel[q.k] === i ? " on" : "") + '" data-k="' + q.k + '" data-i="' + i + '">' + o + "</button>";
+              return '<button type="button" class="btn' + (acSel[q.k] === i ? " on" : "") + '" aria-pressed="' + (acSel[q.k] === i) + '" data-k="' + q.k + '" data-i="' + i + '">' + o + "</button>";
             })
             .join("") +
           "</div></div>"

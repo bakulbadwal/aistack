@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skiplink" href="#atlas">Skip to the atlas</a>
 <div class="wrap">
 
   <header class="mast">
@@ -49,6 +50,35 @@
     </div>
   </header>
 
+  <section class="freeze" id="freeze" aria-labelledby="freezeHeading">
+    <p class="fz-eyebrow">Frozen · 27 July 2026</p>
+    <h2 class="serif" id="freezeHeading">The map stops <em>here</em>.</h2>
+    <p class="fz-lede">A field atlas is a snapshot by construction. This one carries a date because, the week it was frozen, the people actually building these systems could not agree on what was happening.</p>
+    <ul class="fz-quotes">
+      <li>
+        <span class="fz-chip">Thesis</span>
+        <span class="fz-q">&ldquo;We&rsquo;re now, like, <b>in the singularity</b>.&rdquo;
+          <span class="fz-attr">Sam Altman &middot; OpenAI &middot; <i>Relentless</i> podcast, reported 27 Jul 2026</span></span>
+      </li>
+      <li>
+        <span class="fz-chip">Thesis</span>
+        <span class="fz-q">We are in the <b>&ldquo;foothills of the singularity.&rdquo;</b>
+          <span class="fz-attr">Demis Hassabis &middot; Google DeepMind &middot; reported 27 Jul 2026</span></span>
+      </li>
+      <li>
+        <span class="fz-chip">Thesis</span>
+        <span class="fz-q"><b>&ldquo;Coding is largely solved.&rdquo;</b>
+          <span class="fz-attr">Boris Cherny &middot; Anthropic, creator of Claude Code &middot; Lenny&rsquo;s Podcast, 19 Feb 2026</span></span>
+      </li>
+      <li>
+        <span class="fz-chip counter">Counter</span>
+        <span class="fz-q"><b>&ldquo;We aren&rsquo;t there yet.&rdquo;</b>
+          <span class="fz-attr">Se&aacute;n &Oacute; h&Eacute;igeartaigh &middot; Centre for the Study of Existential Risk, Cambridge &middot; reported 27 Jul 2026</span></span>
+      </li>
+    </ul>
+    <p class="fz-close">None of them cited an objective test. Under this atlas&rsquo;s own key that makes every line above <b class="fz-ring">&#9675; thesis &mdash; an argument, not a measurement</b>. Which is exactly the point: <b>the map is dated because the territory is contested.</b> Built July 2026 as one of my first Claude Code projects, and frozen here on purpose. The live trackers linked below carry the current numbers; updates from here are occasional and manual.</p>
+  </section>
+
   <div class="onboard" id="onboardHint" role="status">
     <span><b>Pick a path:</b> scan the layers, filter the market through a lens, trace one real dollar, or test what stuck. Every company tile opens a plain-English profile.</span>
     <button id="onboardClose" type="button" aria-label="Dismiss getting-started guidance">Got it <span aria-hidden="true">×</span></button>
@@ -65,27 +95,27 @@
     <div class="control-block">
       <span class="clab">View through</span>
       <div class="cgroup">
-        <button class="btn lensbtn on" data-lens="none">Plain map</button>
-        <button class="btn lensbtn" data-lens="cap">Value capture</button>
-        <button class="btn lensbtn" data-lens="pub">Public / private</button>
-        <button class="btn lensbtn" data-lens="pe">PE / VC</button>
+        <button type="button" class="btn lensbtn on" aria-pressed="true" data-lens="none">Plain map</button>
+        <button type="button" class="btn lensbtn" aria-pressed="false" data-lens="cap">Value capture</button>
+        <button type="button" class="btn lensbtn" aria-pressed="false" data-lens="pub">Public / private</button>
+        <button type="button" class="btn lensbtn" aria-pressed="false" data-lens="pe">PE / VC</button>
       </div>
     </div>
     <div class="control-block trace-control">
       <span class="clab">Trace one dollar</span>
       <div class="cgroup">
-        <button class="btn trbtn" data-trace="cursor">Cursor request</button>
-        <button class="btn trbtn" data-trace="training">Training run</button>
-        <button class="btn trbtn" data-trace="enterprise">Enterprise dollar</button>
+        <button type="button" class="btn trbtn" aria-pressed="false" data-trace="cursor">Cursor request</button>
+        <button type="button" class="btn trbtn" aria-pressed="false" data-trace="training">Training run</button>
+        <button type="button" class="btn trbtn" aria-pressed="false" data-trace="enterprise">Enterprise dollar</button>
       </div>
     </div>
     <div class="control-end">
-      <button class="btn quiz" id="quizBtn">Quiz me</button>
+      <button type="button" class="btn quiz" id="quizBtn">Quiz me</button>
       <a class="text-link" href="#bench">Bench <span aria-hidden="true">↓</span></a>
     </div>
   </div>
-  <div id="lensNote"></div>
-  <div id="tracePanel"></div>
+  <div id="lensNote" aria-live="polite"></div>
+  <div id="tracePanel" aria-live="polite"></div>
 
   <main id="atlas">
     <div class="atlas-heading">
@@ -131,9 +161,9 @@
           <div class="bstats">
             <div class="bstat"><div class="v" id="tmCost">—</div><div class="l">cost / query (API)</div></div>
             <div class="bstat"><div class="v" id="tmMonth">—</div><div class="l">est. cost / mo (API)</div></div>
-            <div class="bstat"><div class="v" id="tmVerdict">—</div><div class="l">vs your subscription</div></div>
+            <div class="bstat"><div class="v" id="tmVerdict" aria-live="polite">—</div><div class="l">vs your subscription</div></div>
           </div>
-          <div style="margin-top:14px" id="tmBars"></div>
+          <div class="tm-bars" id="tmBars"></div>
           <div id="tmNotes"></div>
         </div>
       </div>
@@ -147,7 +177,7 @@
       </div>
       <div class="bbody">
         <div id="acQs"></div>
-        <div id="acOut"></div>
+        <div id="acOut" aria-live="polite"></div>
       </div>
     </div>
 
@@ -197,22 +227,22 @@
 
 <!-- Drawer -->
 <div id="scrim"></div>
-<aside id="drawer" aria-label="Company profile">
-  <button class="dx" id="drawerClose" title="Close (Esc)">×</button>
+<aside id="drawer" aria-label="Company profile" aria-hidden="true" inert>
+  <button type="button" class="dx" id="drawerClose" title="Close (Esc)" aria-label="Close company profile">×</button>
   <div id="drawerBody"></div>
 </aside>
 
 <!-- Quiz -->
-<div id="quizModal">
+<div id="quizModal" role="dialog" aria-modal="true" aria-labelledby="qNum">
   <div class="qcard">
-    <button class="dx" id="quizClose" title="Close (Esc)">×</button>
+    <button type="button" class="dx" id="quizClose" title="Close (Esc)" aria-label="Close quiz">×</button>
     <div class="qn" id="qNum"></div>
     <div class="qq" id="qQ"></div>
-    <div class="qa" id="qA"></div>
+    <div class="qa" id="qA" aria-live="polite"></div>
     <div class="qbtns">
-      <button class="btn" id="qReveal">Reveal answer</button>
-      <button class="btn" id="qNext">Next →</button>
-      <button class="btn" id="qShuffle">Shuffle</button>
+      <button type="button" class="btn" id="qReveal">Reveal answer</button>
+      <button type="button" class="btn" id="qNext">Next →</button>
+      <button type="button" class="btn" id="qShuffle">Shuffle</button>
     </div>
   </div>
 </div>

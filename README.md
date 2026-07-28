@@ -4,6 +4,8 @@ An interactive map of the AI industry stack — from silicon to application laye
 
 **Live:** https://aistacked.netlify.app/
 
+> Built July 2026 as one of my first Claude Code projects, and frozen here on purpose — a dated snapshot rather than a maintained feed.
+
 ![Field atlas screenshot](docs/screenshot.png)
 
 ## What it does
@@ -50,7 +52,7 @@ Deployed on Netlify directly from this repo (auto-deploys on push to `main`). An
 
 ## Provenance
 
-Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. Reviewed monthly. Built and maintained by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) — MBA Candidate, UVA Darden, Class of 2027 — with Claude Code.
+Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. **Frozen at July 2026 and no longer on a review cadence** — the live trackers linked in the atlas carry the current numbers; any future updates are occasional and manual. Built by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) — MBA Candidate, UVA Darden, Class of 2027 — with Claude Code.
 
 ## License
 
