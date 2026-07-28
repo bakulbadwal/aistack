@@ -1040,7 +1040,6 @@
     max-width:72ch;font-size:13px;color:var(--paper-dim);line-height:1.6;
   }
   .fz-close b{color:var(--paper);font-weight:600;}
-  .fz-close .fz-ring{color:var(--flag-bright);font-weight:400;}
 
   /* Wide: argument on the left, the four claims on the right — mirrors .atlas-heading */
   @media(min-width:900px){
