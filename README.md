@@ -52,7 +52,7 @@ Deployed on Netlify directly from this repo (auto-deploys on push to `main`). An
 
 ## Provenance
 
-Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. **Frozen at July 2026 and no longer on a review cadence** — the live trackers linked in the atlas carry the current numbers; any future updates are occasional and manual. Built by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) — MBA Candidate, UVA Darden, Class of 2027 — with Claude Code.
+Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. **Frozen at July 2026 and no longer on a review cadence** — the live trackers linked in the atlas carry the current numbers; any future updates are occasional and manual. *12 Oct 2026:* added micro1, Handshake AI, Invisible and Halluminate to the "Data, labeling & verifiers" group (valuation and run-rate figures are reported/company-stated). Built by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) — MBA Candidate, UVA Darden, Class of 2027 — with Claude Code.
 
 ## License
 

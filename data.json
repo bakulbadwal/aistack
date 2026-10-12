@@ -573,6 +573,26 @@
               "nm": "Turing",
               "tg": "code data",
               "muted": true
+            },
+            {
+              "nm": "micro1",
+              "tg": "~$4B rptd · expert data",
+              "muted": true
+            },
+            {
+              "nm": "Handshake AI",
+              "tg": "~$1B run-rate · campus experts",
+              "muted": true
+            },
+            {
+              "nm": "Invisible",
+              "tg": "RLHF ops · enterprise",
+              "muted": true
+            },
+            {
+              "nm": "Halluminate",
+              "tg": "YC · expert & env data",
+              "muted": true
             }
           ]
         },
