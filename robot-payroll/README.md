@@ -6,6 +6,10 @@
 
 ![Robot Payroll: the Depot in cutaway, with a payroll office upstairs, a remote operator watching robots on screens, and a picker and a picker robot working side by side on the floor](docs/hero.png)
 
+![Animated demo of step 2: the minutes-between-calls slider is dragged from 30 minutes down to 3.5, up to 100 hours and back; calls per hour, autonomy, robots per operator and the robot's cost per good pick update live, and the dot on the chart rides the cost curve above and below the picker's dashed line](docs/demo.gif)
+
+*Step 2 in motion: a call every 3.5 minutes costs 23¢ a good pick, against the picker's 9.95¢; a call every 100 hours, 7.07¢. The default, every 30 minutes, is 8.23¢.*
+
 ![The ledger's tornado chart: the fleet's NPV with each of thirteen assumptions moved to a pessimistic and an optimistic value, widest swing first](docs/ledger.png)
 
 *The tornado in step 4: shifts a day and useful life swing the fleet's NPV more than the robot's price does.*
