@@ -30,7 +30,7 @@ Every step has predict-then-reveal questions and a "say it out loud" line that u
 
 ## Why this one
 
-Robot economics usually arrive as a vendor ROI calculator (one robot, no interventions, a payback number) or as a slide with "99% autonomous" on it. Neither shows the arithmetic that decides a deployment: cost per *good* task, the hours the robot is actually used, what autonomy below 100% costs in operator time, how calls queue when operators are shared, and who the saving goes to. This lab puts all of it on one set of books you can edit, built for the person who has to say yes: a COO, an investor, a founder. It doesn't teach how robots learn ([Wet Paint](https://bakulbadwal.github.io/arm-playground/wet-paint/) does) or GPU and compute economics ([Inference Kitchen](https://bakulbadwal.github.io/inference-kitchen/), [Compute Deal Desk](https://bakulbadwal.github.io/compute-deal-desk/)).
+Robot economics usually arrive as a vendor ROI calculator (one robot, no interventions, a payback number) or as a slide with "99% autonomous" on it. Neither shows the arithmetic that decides a deployment: cost per *good* task, the hours the robot is actually used, what autonomy below 100% costs in operator time, how calls queue when operators are shared, and who the saving goes to. This lab puts all of it on one set of books you can edit, built for the person who has to say yes: a COO, an investor, a founder. It doesn't teach how robots learn ([Demos to Deployment](https://bakulbadwal.github.io/arm-playground/demos-to-deployment/) does) or GPU and compute economics ([Inference Kitchen](https://bakulbadwal.github.io/inference-kitchen/), [Compute Deal Desk](https://bakulbadwal.github.io/compute-deal-desk/)).
 
 ## Run it
 
@@ -62,6 +62,6 @@ Play it live at the link above, or open `index.html` in a browser. There's no bu
 
 ## The series
 
-[Inference Kitchen](https://bakulbadwal.github.io/inference-kitchen/) (serving economics) · [Compute Deal Desk](https://bakulbadwal.github.io/compute-deal-desk/) (compute deals) · [Arm Playground](https://bakulbadwal.github.io/arm-playground/) (kinematics and control) · [Wet Paint](https://bakulbadwal.github.io/arm-playground/wet-paint/) (imitation learning) · **Robot Payroll** (the business of deploying robots)
+[Inference Kitchen](https://bakulbadwal.github.io/inference-kitchen/) (serving economics) · [Compute Deal Desk](https://bakulbadwal.github.io/compute-deal-desk/) (compute deals) · [Arm Playground](https://bakulbadwal.github.io/arm-playground/) (kinematics and control) · [Demos to Deployment](https://bakulbadwal.github.io/arm-playground/demos-to-deployment/) (imitation learning) · **Robot Payroll** (the business of deploying robots)
 
 MIT licensed. Built by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) with Claude Code.

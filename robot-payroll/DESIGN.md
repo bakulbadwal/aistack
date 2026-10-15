@@ -1,6 +1,6 @@
 # Design: Robot Payroll
 
-Robot Payroll uses the design system recorded in [Inference Kitchen's DESIGN.md](https://github.com/bakulbadwal/inference-kitchen/blob/master/DESIGN.md): a Busytown cross-section spread, flat gouache fields on warm paper, one warm-brown outline, and every object wearing a hand-lettered label. Buttons are painted signs, readouts are price tags on a nail, predictions are sticky notes, takeaways are chalked on a wood-framed board, and the glossary is a menu board. The type is Grandstander for signboards, Patrick Hand for labels and Andika for body text. The stylesheet and the step framework (nav, predictions, glossary tips, say-it-out-loud, segmented controls, review board, field test) come from Wet Paint.
+Robot Payroll uses the design system recorded in [Inference Kitchen's DESIGN.md](https://github.com/bakulbadwal/inference-kitchen/blob/master/DESIGN.md): a Busytown cross-section spread, flat gouache fields on warm paper, one warm-brown outline, and every object wearing a hand-lettered label. Buttons are painted signs, readouts are price tags on a nail, predictions are sticky notes, takeaways are chalked on a wood-framed board, and the glossary is a menu board. The type is Grandstander for signboards, Patrick Hand for labels and Andika for body text. The stylesheet and the step framework (nav, predictions, glossary tips, say-it-out-loud, segmented controls, review board, field test) come from Demos to Deployment.
 
 This file records only what the Depot changes.
 

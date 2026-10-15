@@ -2,7 +2,7 @@
    payroll office upstairs that pays humans and robots side by side, assembled from a small drawn cast (the picker,
    the picker robot, the payroll clerk, the remote operator, totes, the charger, the spares cage), plus the nav and
    cast icons. Flat gouache fills, one warm-brown outline, every object labelled with a hairline pointer.
-   Exposed as window.RP_ART (scenes) and window.RP_ICONS (icons). Primitives shared with Wet Paint. */
+   Exposed as window.RP_ART (scenes) and window.RP_ICONS (icons). Primitives shared with Demos to Deployment. */
 (function (root) {
   "use strict";
   var L = "#4A2E1E", PAPER = "#FBF7EC", SHEET = "#FFFDF6", YEL = "#F4C430", BRICK = "#C8452F", GRASS = "#5FA03C", SKY = "#9CCBEA",
@@ -11,7 +11,7 @@
       SKIN = "#F1C9A5", SKIN2 = "#D9A27A", SKIN3 = "#9C6B4A", CORK = "#D2A877", BLUE = "#246A9C", TOTE = "#5B8FC0", GOLD = "#E0A91E", SCREEN = "#D8F0E0";
   var HAND = "'Patrick Hand', 'Comic Sans MS', sans-serif", SIGN = "'Grandstander', 'Patrick Hand', sans-serif";
 
-  /* ---------- primitives (as in Wet Paint) ---------- */
+  /* ---------- primitives (as in Demos to Deployment) ---------- */
 
   /* ---------- primitives ---------- */
   function n(v) { return Math.round(v * 10) / 10; }

@@ -29,7 +29,7 @@ Success: after about 60 minutes, the reader can price a deployment per good task
 
 Vendor ROI calculators show one robot, no interventions and a payback number; analyst notes show market sizes. Neither lets you change the assumptions and watch cost per task, operator ratio, queueing and value capture move together. This lab is the editable, sourced, tested middle: an operator's and an investor's model, not a vendor's.
 
-It does not overlap its siblings: Inference Kitchen (GPU serving economics) and Compute Deal Desk (compute and power deals) are about compute; Wet Paint and the other robot-learning labs are about how robots learn. This one is about the business of deploying them.
+It does not overlap its siblings: Inference Kitchen (GPU serving economics) and Compute Deal Desk (compute and power deals) are about compute; Demos to Deployment and the other robot-learning labs are about how robots learn. This one is about the business of deploying them.
 
 ## Operating context
 
@@ -44,5 +44,5 @@ Used at a laptop in study or deal-prep sessions, and on a phone when shared. Ste
 
 ## Brand commitments
 
-- Name: **Robot Payroll**. A sibling of Inference Kitchen, Compute Deal Desk and Wet Paint: same design system, a warehouse-and-payroll-office palette and a ledger-green masthead.
+- Name: **Robot Payroll**. A sibling of Inference Kitchen, Compute Deal Desk and Demos to Deployment: same design system, a warehouse-and-payroll-office palette and a ledger-green masthead.
 - Must not look like "every AI tool" (dark ground, neon accent, glowing cards) or like a corporate SaaS dashboard, which is the obvious trap for a finance model.
