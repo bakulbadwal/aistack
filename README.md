@@ -54,6 +54,10 @@ Deployed on Netlify directly from this repo (auto-deploys on push to `main`). An
 
 Content current as of July 2026; company data, deal terms, and valuations are directional and move fast — treat as a teaching snapshot, not a live feed. **Frozen at July 2026 and no longer on a review cadence** — the live trackers linked in the atlas carry the current numbers; any future updates are occasional and manual. *12 Oct 2026:* added micro1, Handshake AI, Invisible and Halluminate to the "Data, labeling & verifiers" group (valuation and run-rate figures are reported/company-stated). Built by [Bakul Badwal](https://www.linkedin.com/in/bakulbadwal/) — MBA Candidate, UVA Darden, Class of 2027 — with Claude Code.
 
+## Also in this repo: Robot Payroll
+
+[`robot-payroll/`](robot-payroll/) ([live](https://aistacked.netlify.app/robot-payroll/)) is a separate hands-on lab that picks up where the atlas's application layer meets physical AI: when does a robot actually beat a human shift? Cost per good pick, autonomy as a rate (calls for help, operators per robot), a labelled learning-curve toy, payback / NPV / IRR and rent-vs-buy with a tornado, fleet queueing (Erlang C), who captures the saving, and a diligence checklist. Wages from BLS, power from EIA; every robot number is an illustrative assumption on a slider. It does not change the frozen atlas.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
