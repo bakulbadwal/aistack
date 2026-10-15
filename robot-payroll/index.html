@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Robot Payroll</title>
+<meta name="description" content="A hands-on lab for the business of deploying robots: when does a robot actually beat a human shift, and what has to be true? Cost per task, autonomy and remote operators, the learning curve, payback, NPV and IRR, RaaS vs buy, fleet queueing with Erlang C, and who captures the saving.">
+<meta property="og:title" content="Robot Payroll: when does a robot beat a human shift?">
+<meta property="og:description" content="A Busytown warehouse with a payroll office that pays humans and robots side by side. Every number comes from a tested model; every assumption is on the page and adjustable.">
+<meta property="og:image" content="https://aistacked.netlify.app/robot-payroll/docs/hero.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='14' width='52' height='36' rx='3' fill='%23FFF1A8' stroke='%234A2E1E' stroke-width='4'/%3E%3Cpath d='M6 16 L32 36 L58 16' fill='none' stroke='%234A2E1E' stroke-width='4'/%3E%3Ccircle cx='46' cy='42' r='8' fill='%23E0A91E' stroke='%234A2E1E' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Grandstander:wght@700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!--
+THESIS: A robot beats a human shift when its cost per GOOD task is lower, and that turns on a handful of numbers a pitch deck rarely shows together: utilisation, uptime, cycle time, success rate, interventions per hour and the minutes each takes, the operator ratio those imply, and how fast interventions fall with fleet hours. Drawn as a Busytown warehouse whose payroll office pays humans and robots side by side.
+OWN-WORLD: flat gouache on paper; warm-brown outlines; Grandstander signboards, Patrick Hand labels, Andika body; payslips, price tags, sticky-note predictions, chalkboard takeaways; a ledger-green masthead.
+HONESTY: the arithmetic (capital recovery, NPV, IRR, payback, Erlang C, the finite-population queue, binomial spares, exact Poisson intervals) is exact. Wage, benefits and electricity defaults are cited (BLS OEWS, BLS ECEC, EIA). Every robot number (price, cycle time, uptime, success, interventions, handling time, operator wage, RaaS fee, margins) is an illustrative assumption, labelled. The learning curve is a toy.
+-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="gouache" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="3" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="1.3" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+<div class="wrap">
+<header>
+  <div class="mast"><b><span class="mi" aria-hidden="true"></span>Robot Payroll</b><span>a hands-on lab</span></div>
+  <div><h1>When does a robot actually beat a human shift?</h1>
+  <p class="sub">The Depot's payroll office pays its pickers and its robots side by side. Find out what one good pick really costs each of them, what autonomy, remote operators and a learning curve do to that number, what a fleet is worth, and who keeps the saving. Every number is computed by a tested model; every assumption is on the page and yours to change. About 60 minutes of play.</p></div>
+</header>
+
+<nav id="nav" aria-label="Steps"></nav>
+<div class="changed" id="changed" hidden></div>
+
+<!-- ============ STEP 0 ============ -->
+<section id="s0" data-title="Payroll Office" data-n="0">
+  <div class="card">
+    <div class="scene" data-art="s0"></div>
+    <h2>0 · The payroll office: one question, two payslips</h2>
+    <p class="lede">The Depot is a warehouse in Busytown. Pickers lift items out of totes into orders, and the Depot's owner is being pitched a robot that does the same. The question a COO, an investor or a founder has to answer is not "can the robot pick?" but <b>when does it beat a human shift, and what has to be true?</b> The payroll clerk upstairs answers it the only fair way: what does one <span class="g" data-g="task">task</span> done right cost each of them? Every term with a wavy red underline is tappable.</p>
+    <div class="kmap">
+      <div><span class="k" data-i="picker" aria-hidden="true"></span><b>The picker</b> = a human shift<br><span class="t">paid per hour worked, wage plus benefits</span></div>
+      <div><span class="k" data-i="robot" aria-hidden="true"></span><b>The picker robot</b> = the robot<br><span class="t">paid for per year, used per hour</span></div>
+      <div><span class="k" data-i="clerk" aria-hidden="true"></span><b>The payroll clerk</b> = the cost model<br><span class="t">every line on the payslip is an assumption</span></div>
+      <div><span class="k" data-i="tote" aria-hidden="true"></span><b>A pick</b> = one task<br><span class="t">the unit both are judged on</span></div>
+      <div><span class="k" data-i="operator" aria-hidden="true"></span><b>The remote desk</b> = <span class="g" data-g="teleop">teleoperation</span><br><span class="t">a person who helps stuck robots (step 2)</span></div>
+      <div><span class="k" data-i="help" aria-hidden="true"></span><b>A call for help</b> = an <span class="g" data-g="intervention">intervention</span><br><span class="t">counted per running hour (step 2)</span></div>
+      <div><span class="k" data-i="flywheel" aria-hidden="true"></span><b>The lesson book</b> = training data<br><span class="t">and the flywheel it turns (step 3)</span></div>
+      <div><span class="k" data-i="ledger" aria-hidden="true"></span><b>The ledger</b> = the deal<br><span class="t">payback, NPV, IRR (step 4)</span></div>
+      <div><span class="k" data-i="spares" aria-hidden="true"></span><b>The spares cage</b> = fleet reserve<br><span class="t">and the queue at the remote desk (step 5)</span></div>
+      <div><span class="k" data-i="pie" aria-hidden="true"></span><b>The pie</b> = the saving<br><span class="t">and who gets a slice (step 6)</span></div>
+    </div>
+    <p class="covers">Covers <b>unit economics of automation</b>: cost per task · <b>labour cost</b>: BLS wage and benefits data</p>
+  </div>
+
+  <div class="card">
+    <h3>The human payslip</h3>
+    <p class="lede">Start with the number the robot has to beat. The default wage is the national mean for "laborers and freight, stock, and material movers, hand" in the Bureau of Labor Statistics' May 2025 survey, <span class="qv" data-q="wage">$20.32</span> an hour. An hour of work costs the employer more than the wage: the <span class="g" data-g="burden">benefits load</span> in BLS's December 2025 employer-cost survey was $13.79 on $32.36 of wages for private industry, <span class="qv" data-q="burden">42.6%</span>. Then divide by what the hour produces.</p>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl" data-k="wage"></div>
+        <div class="sl" data-k="burden"></div>
+        <div class="sl" data-k="humanRate"></div>
+        <div class="sl" data-k="humanSuccess"></div>
+      </div>
+      <div>
+        <div class="slips"><div id="s0slip"></div></div>
+        <div class="grid g3" style="margin-top:12px">
+          <div class="stat"><div class="v acc" id="s0h">–</div><div class="l">an hour of work, to the Depot</div></div>
+          <div class="stat big"><div class="v" id="s0cpp">–</div><div class="l">per good pick</div></div>
+          <div class="stat"><div class="v" id="s0yr">–</div><div class="l">a year, one shift (2,000 h)</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="predict" data-p="s0a">
+      <div class="tag">Guess first!</div>
+      <div class="q">A picker earns $20.32 an hour. What does an hour of their work cost the Depot?</div>
+      <div class="opts"><button data-a="0">$20.32</button><button data-a="1">About $23</button><button data-a="2" data-right>About $29</button><button data-a="3">About $40</button></div>
+      <div class="why"><span class="qv" data-q="hourly">$28.98</span>: benefits add <span class="qv" data-q="burden">42.6%</span> to every hour worked (paid leave, insurance, retirement, payroll taxes). That is the BLS average for all private-industry workers; warehouse employers' own loads differ, so the slider is yours. At 300 picks an hour and 99.5% right first time, that hour buys <span class="qv" data-q="hGood">298.5</span> good picks: <span class="qv" data-q="hCents">9.95¢</span> each, including a minute of rework for each miss.</div>
+    </div>
+    <div class="say" data-say="s0">
+      <div class="tag">Say it out loud</div>
+      <div class="line">A robot doesn't replace a wage; it replaces a cost per task. The picker's <span class="qv" data-q="hourly">$28.98</span> hour, plus rework, buys <span class="qv" data-q="hGood">298.5</span> good picks at <span class="qv" data-q="hCents">9.95¢</span> each, and that is the number to beat.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 1 ============ -->
+<section id="s1" data-title="Cost per Pick" data-n="1">
+  <div class="card">
+    <div class="scene" data-art="s1"></div>
+    <h2>1 · Cost per pick: the robot's payslip</h2>
+    <p class="lede">A robot isn't paid by the hour, but every year of it has to be paid for. Its payslip, per scheduled hour: a <span class="g" data-g="crf">capital charge</span> that repays the price and the <span class="g" data-g="integration">integration</span> over its life at the discount rate, upkeep, power, its share of a remote operator, and <span class="g" data-g="rework">rework</span> for every miss. Then divide by the good picks it actually makes, which is where <span class="g" data-g="uptime">uptime</span>, <span class="g" data-g="cycle">cycle time</span>, <span class="g" data-g="success">success rate</span> and calls for help come in. <span class="g" data-g="cpp">Cost per good pick</span> = the hour's cost ÷ the hour's good picks.</p>
+    <p class="covers">Covers <b>total cost of ownership</b> · <b>capital recovery</b> vs depreciation · <b>utilisation</b></p>
+  </div>
+  <div class="card">
+    <h3>Two payslips, one scale</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl" data-k="shifts"></div>
+        <div class="sl" data-k="capex"></div>
+        <div class="sl" data-k="integration"></div>
+        <div class="sl" data-k="life"></div>
+        <div class="sl" data-k="uptime"></div>
+        <div class="sl" data-k="cycle"></div>
+        <div class="sl" data-k="success"></div>
+        <div class="callout co-i">Robot numbers are <b>illustrative assumptions</b>, not any company's figures. Calls for help and the remote operator are step 2; they're on the slip already.</div>
+      </div>
+      <div>
+        <div class="slips"><div id="s1hslip"></div><div id="s1rslip"></div></div>
+        <div class="grid g3" style="margin-top:12px">
+          <div class="stat big"><div class="v" id="s1r">–</div><div class="l">robot, per good pick</div></div>
+          <div class="stat big"><div class="v acc" id="s1h">–</div><div class="l">human, per good pick</div></div>
+          <div class="stat"><div class="v" id="s1s">–</div><div class="l" id="s1sl">robot saves</div></div>
+        </div>
+        <canvas id="s1bar" class="chart sm" aria-label="Where each cent of a good pick goes, robot against human"></canvas>
+        <div class="chartcap">Where a good pick's cost goes. The robot's lines, left to right: capital, upkeep (maintenance and software), power, operators, rework.</div>
+      </div>
+    </div>
+    <h3>Utilisation: the same robot, more hours</h3>
+    <p class="lede">The picker costs the same per hour whether the Depot runs one shift or three. The robot's capital and upkeep are fixed per year, so every extra hour it works makes each pick cheaper.</p>
+    <canvas id="s1util" class="chart" aria-label="Robot cost per pick against hours worked a year, with the human's cost per pick"></canvas>
+    <div class="predict" data-p="s1a">
+      <div class="tag">Guess first!</div>
+      <div class="q">At two shifts the robot costs <span class="qv" data-q="rCents">8.23¢</span> a pick against the picker's <span class="qv" data-q="hCents">9.95¢</span>. The Depot only runs one shift. Now?</div>
+      <div class="opts"><button data-a="0">Still 8.23¢: it's per pick</button><button data-a="1" data-right>Dearer than the picker</button><button data-a="2">Cheaper: less wear</button></div>
+      <div class="why"><span class="qv" data-q="r1Cents">13.91¢</span>: the capital charge and upkeep are spread over 2,000 hours instead of 4,000, and the robot loses. Three shifts: <span class="qv" data-q="r3Cents">6.33¢</span>. Utilisation is the first thing to ask a customer about, before the robot's price.</div>
+    </div>
+    <div class="predict" data-p="s1b">
+      <div class="tag">Guess first!</div>
+      <div class="q">Which line on the robot's payslip is the smallest?</div>
+      <div class="opts"><button data-a="0" data-right>Power</button><button data-a="1">The remote operator's share</button><button data-a="2">Rework of missed picks</button></div>
+      <div class="why">Power: <span class="qv" data-q="powerHour">8¢</span> an hour at a 1 kW average draw and EIA's 2024 industrial price of 8.13¢/kWh. The surprise is the other end: at 97% first-time success, rework is <span class="qv" data-q="reworkHour">$4.65</span> an hour, more than the operator's share (<span class="qv" data-q="opsHour">$3.17</span>). Only capital, at <span class="qv" data-q="capHour">$13.19</span>, is bigger. Success rate is a cost line, not a quality footnote.</div>
+    </div>
+    <div class="say" data-say="s1">
+      <div class="tag">Say it out loud</div>
+      <div class="line">Cost per good pick is the hour's capital charge, upkeep, power, operator share and rework, divided by good picks. Utilisation spreads the fixed costs; uptime, cycle time and success set how many good picks there are to spread them over.</div>
+    </div>
+  </div>
+  <div class="card" id="books">
+    <h3>The books: every assumption</h3>
+    <p class="lede">Every number the lab uses, where it comes from, and a slider. Changes here carry through every step. <span class="src bls">BLS</span> <span class="src eia">EIA</span> are cited public data (see SOURCES.md); <span class="src illus">illustrative</span> numbers are assumptions to change; <span class="src toy">toy</span> marks the teaching model in step 3.</p>
+    <div id="booksbox" class="booksbox"></div>
+    <div class="btnrow"><button class="ghost" id="booksReset">Reset every assumption to the defaults</button></div>
+  </div>
+</section>
+
+<!-- ============ STEP 2 ============ -->
+<section id="s2" data-title="Remote Desk" data-n="2">
+  <div class="card">
+    <div class="scene" data-art="s2"></div>
+    <h2>2 · The remote desk: autonomy is not a yes or no</h2>
+    <p class="lede">No robot in a real warehouse is fully autonomous. Some of the time it gets stuck (an item it can't grip, a tote out of place) and calls for help: an <span class="g" data-g="intervention">intervention</span>. A remote operator fixes it by <span class="g" data-g="teleop">teleoperation</span>. Two numbers describe this: interventions per running hour λ (or its inverse, the <span class="g" data-g="mtbi">MTBI</span>), and the operator time each one takes, τ (minutes per call, written as a share of an hour). Together they set the <span class="g" data-g="ratio">operator ratio</span>: one operator can keep up with at most occupancy ÷ (λτ) robots.</p>
+    <p class="covers">Covers <b>autonomy as a rate</b> · <b>teleoperation economics</b> · the <b>last 5%</b> problem</p>
+  </div>
+  <div class="card">
+    <h3>Calls per hour, minutes per call</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl"><div class="sl-h"><span>Minutes between calls (MTBI) <span class="src illus">illustrative</span></span><b id="s2mv">–</b></div><input type="range" id="s2m" min="0" max="1000" step="1" aria-label="Minutes between calls"></div>
+        <div class="sl" data-k="handleMin"></div>
+        <div class="sl" data-k="occTarget"></div>
+        <div class="sl" data-k="opWage"></div>
+        <div class="lbl">Operator ratio</div>
+        <div class="seg" id="s2mode"></div>
+        <div class="sl" data-k="opRatio" id="s2fixed"></div>
+      </div>
+      <div>
+        <div class="grid g3">
+          <div class="stat"><div class="v" id="s2lam">–</div><div class="l">calls per running hour</div></div>
+          <div class="stat"><div class="v good" id="s2aut">–</div><div class="l"><span class="g" data-g="autonomy">autonomous</span>, per pick attempt</div></div>
+          <div class="stat"><div class="v" id="s2rat">–</div><div class="l">robots per operator</div></div>
+          <div class="stat"><div class="v" id="s2occ">–</div><div class="l">operator <span class="g" data-g="occ">busy</span></div></div>
+          <div class="stat"><div class="v" id="s2ops">–</div><div class="l">operator cost per pick</div></div>
+          <div class="stat big"><div class="v" id="s2cpp">–</div><div class="l">robot per good pick</div></div>
+        </div>
+        <canvas id="s2chart" class="chart" aria-label="Robot cost per pick against minutes between calls, with the operator share and the human's cost"></canvas>
+        <div class="chartcap">Log scale: from a call every minute to one every 100 hours. The dot is where you are.</div>
+      </div>
+    </div>
+    <h3>The last 5%</h3>
+    <p class="lede">Autonomy quoted as a percentage hides the rate. At 10 seconds a pick, the robot attempts 360 picks a running hour, so every point of autonomy below 100% is 3.6 calls an hour.</p>
+    <div class="tablewrap"><table class="ladder" id="s2tab"></table></div>
+    <div class="predict" data-p="s2a">
+      <div class="tag">Guess first!</div>
+      <div class="q">The default robot calls for help twice an hour and each call takes the operator 2 minutes. That's <span class="qv" data-q="autonomy">99.44%</span> autonomous per pick. How many robots can one operator look after, staying 75% busy?</div>
+      <div class="opts"><button data-a="0">About 100</button><button data-a="1">About 50</button><button data-a="2" data-right>About 11</button><button data-a="3">About 2</button></div>
+      <div class="why"><span class="qv" data-q="ratio">11.25</span>. Each robot needs 2 × 2 = 4 operator-minutes per running hour, and 45 busy minutes an hour ÷ 4 = 11.25. "Over 99% autonomous" and "one person per eleven robots" are the same robot.</div>
+    </div>
+    <div class="predict" data-p="s2b">
+      <div class="tag">Guess first!</div>
+      <div class="q">At 95% autonomy per pick the robot costs <span class="qv" data-q="a95cents">23.8¢</span> a pick, with <span class="qv" data-q="a95ratio">1.25</span> robots per operator. At 99.9%?</div>
+      <div class="opts"><button data-a="0">About 20¢</button><button data-a="1" data-right>About 7¢</button><button data-a="2">About 1¢</button></div>
+      <div class="why"><span class="qv" data-q="a999cents">7.13¢</span>. Almost the whole gain is in the last five points: 99% is still <span class="qv" data-q="a99cents">9.42¢</span>, barely under the picker. Past 99.9% the curve goes flat (99.99%: <span class="qv" data-q="a9999cents">7.07¢</span>): the operator line has shrunk to a sliver, one person is capped at watching <span class="qv" data-q="a999ratio">50.0</span> robots, so the rest of the payslip is all that's left. The last 5% of autonomy is where a robot company's economics are made.</div>
+    </div>
+    <div class="say" data-say="s2">
+      <div class="tag">Say it out loud</div>
+      <div class="line">Autonomy is a rate: calls per hour times minutes per call. That product sets how many robots one person can watch, and over the last few percent of autonomy the operator line collapses from a cost that sinks the robot to almost nothing.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 3 ============ -->
+<section id="s3" data-title="The Flywheel" data-n="3">
+  <div class="card">
+    <div class="scene" data-art="s3"></div>
+    <h2>3 · The flywheel: interventions are training data</h2>
+    <p class="lede">Every intervention is a labelled example of something the robot couldn't do, recorded exactly where it went wrong. Feed them back into training (the idea behind <span class="g" data-g="dagger">DAgger and human-in-the-loop learning</span>) and the next software release calls for help less. The more robots deployed, the more hours, the more lessons: a flywheel. How fast it spins is not something this lab can measure, so it is modelled as a <b>transparent toy</b>: interventions per hour fall by a fixed share each time the vendor's cumulative fleet hours double, a <span class="g" data-g="learning">learning curve</span> borrowed by analogy from Wright's 1936 study of airframe labour (about 20% per doubling). No robotics company's curve is used or implied.</p>
+    <p class="covers">Covers <b>learning curves</b> · <b>data network effects</b> · one line of <b>DAgger / HIL</b></p>
+  </div>
+  <div class="card">
+    <h3>Calls per hour, as the fleet's hours double</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl" data-k="lambda"></div>
+        <div class="sl" data-k="learnDrop"></div>
+        <div class="sl" data-k="hours0"></div>
+        <div class="sl" data-k="vendorHoursYr"></div>
+        <div class="sl" data-k="lambdaFloor"></div>
+        <div class="btnrow"><button class="ghost" type="button" id="s3young">A younger robot: 6 calls an hour</button><button class="ghost" type="button" id="s3back">Back to 2</button></div>
+        <div class="callout co-w"><b>A toy, labelled.</b> λ(H) = λ₀ · (H / H₀)^log₂(1 − drop), never below the floor. H₀ is the vendor's fleet hours so far, growing by the hours per year. Change any of it.</div>
+      </div>
+      <div>
+        <div class="grid g4">
+          <div class="stat"><div class="v" id="s3l1">–</div><div class="l">calls an hour, year 1</div></div>
+          <div class="stat"><div class="v" id="s3l3">–</div><div class="l">year 3</div></div>
+          <div class="stat"><div class="v" id="s3l5">–</div><div class="l">year 5</div></div>
+          <div class="stat"><div class="v good" id="s3x">–</div><div class="l">robot beats the picker from</div></div>
+        </div>
+        <canvas id="s3chart" class="chart" aria-label="Calls per hour and robot cost per pick over five years on the learning curve"></canvas>
+        <div class="chartcap">Left scale: cents per good pick. Right scale, in brick red: calls per running hour. The dashed green line marks the month the robot gets cheaper than the picker, if it does.</div>
+      </div>
+    </div>
+    <div class="predict" data-p="s3a">
+      <div class="tag">Guess first!</div>
+      <div class="q">A younger robot calls for help 6 times an hour and loses to the picker today. With 20% fewer calls per doubling, starting at 200,000 fleet hours and adding 400,000 a year, when does it start beating the picker?</div>
+      <div class="opts"><button data-a="0">Never</button><button data-a="1" data-right>In about a year</button><button data-a="2">After about five years</button></div>
+      <div class="why">Month <span class="qv" data-q="cross6">12</span> (set calls to 6 and read the tile). The early doublings come fast: 200,000 hours becomes 600,000 in the first year. The later ones are slow: by year 3 the default robot has had <span class="qv" data-q="dbl3">2.81</span> doublings and calls <span class="qv" data-q="lam3">1.07</span> times an hour, not zero. A curve per doubling rewards whoever has the most deployed hours.</div>
+    </div>
+    <div class="predict" data-p="s3b">
+      <div class="tag">Guess first!</div>
+      <div class="q">For the Depot's fleet of 20, what does the learning curve add to the deal's NPV (step 4, 5 years at 10%)?</div>
+      <div class="opts"><button data-a="0">Nothing: the robots are already bought</button><button data-a="1" data-right>About a third more</button><button data-a="2">It doubles it five times over</button></div>
+      <div class="why">NPV goes from <span class="qv" data-q="npv">$1.63M</span> to <span class="qv" data-q="npvLearn">$2.20M</span> when the software updates bring the calls down (toggle "learning" in step 4). Fewer calls means fewer operators, because the ratio follows the workload. That's why buyers ask whether updates are included, and investors ask for the curve: by cohort, by site, with the definition of an intervention fixed.</div>
+    </div>
+    <div class="say" data-say="s3">
+      <div class="tag">Say it out loud</div>
+      <div class="line">Every intervention is a training example. If the vendor learns from them, calls fall with doublings of fleet hours, so deployed hours are the moat, and the curve is an assumption to ask for, not a fact to assume.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 4 ============ -->
+<section id="s4" data-title="The Ledger" data-n="4">
+  <div class="card">
+    <div class="scene" data-art="s4"></div>
+    <h2>4 · The ledger: payback, NPV, IRR, and rent or buy</h2>
+    <p class="lede">Now the Depot considers a fleet. Year 0: it pays for the robots and their integration. Every year after: it saves the payroll for the picks the robots make, minus what the robots cost to run. The clerk reports three numbers: <span class="g" data-g="payback">payback</span> (when cash in covers cash out), <span class="g" data-g="npv">NPV</span> at the <span class="g" data-g="rate">discount rate</span>, and <span class="g" data-g="irr">IRR</span>. Then two questions a board asks: <span class="g" data-g="raas">rent or buy</span>, and which assumption matters most (the <span class="g" data-g="tornado">tornado</span>).</p>
+    <p class="covers">Covers <b>capital budgeting</b>: payback, NPV, IRR · <b>RaaS vs buy</b> · <b>sensitivity analysis</b> · <b>break-even wage</b></p>
+  </div>
+  <div class="card">
+    <h3>A fleet deployment</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl" data-k="fleet"></div>
+        <div class="sl" data-k="life"></div>
+        <div class="sl" data-k="rate"></div>
+        <div class="sl" data-k="raasFee"></div>
+        <label class="tg"><input type="checkbox" id="s4learn"><span class="sw"></span>with the learning curve (step 3)</label>
+        <div class="callout co-i">RaaS here: a monthly fee per robot that includes the hardware, maintenance and software; the Depot still pays for integration, power, operators and rework. Contracts vary; this one is illustrative.</div>
+      </div>
+      <div>
+        <div class="tablewrap"><table class="ladder" id="s4tab"></table></div>
+        <canvas id="s4cash" class="chart" aria-label="Cumulative cash for buying and renting the fleet, by year"></canvas>
+        <div class="chartcap">Undiscounted running total of cash: the year-0 outlay, then each year's saving. Where a line crosses zero is its simple payback.</div>
+        <div class="grid g2" style="margin-top:12px">
+          <div class="stat"><div class="v" id="s4bew">–</div><div class="l"><span class="g" data-g="bew">break-even wage</span>: robot = human per pick</div></div>
+          <div class="stat"><div class="v" id="s4bewn">–</div><div class="l">wage at which NPV = 0</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mathbox" id="s4math"></div>
+    <h3>Which assumption matters most?</h3>
+    <p class="lede">Each bar moves one assumption to a low and a high value (labelled), everything else at the books, and shows the fleet's NPV. Widest first.</p>
+    <canvas id="s4torn" class="chart tall" aria-label="Tornado chart of NPV sensitivity to each assumption"></canvas>
+    <div class="chartcap"><span class="sw" style="background:#F4B7A7"></span>the pessimistic end of each range · <span class="sw" style="background:#BFE3A6"></span>the optimistic end · the solid line is the books' NPV</div>
+    <div class="predict" data-p="s4a">
+      <div class="tag">Guess first!</div>
+      <div class="q">Of these, which swings the fleet's NPV the most across its range?</div>
+      <div class="opts"><button data-a="0">The picker's wage, ±20%</button><button data-a="1" data-right>Shifts a day, 1 to 3</button><button data-a="2">The robot's price, ±25%</button><button data-a="3">Calls per hour, 1 to 4</button></div>
+      <div class="why">Shifts (the tornado's top bar: <span class="qv" data-q="tornadoTop">Shifts a day</span>). One shift and the deal loses money; three and NPV more than triples. A deck that quotes payback "on a 24/7 operation" to a one-shift customer is quoting a different deal. Useful life is next: robots that last 3 years rather than 5 turn the NPV negative.</div>
+    </div>
+    <div class="predict" data-p="s4b">
+      <div class="tag">Guess first!</div>
+      <div class="q">The fleet pays back in <span class="qv" data-q="payback">32</span> months with an NPV of <span class="qv" data-q="npv">$1.63M</span> and an IRR of <span class="qv" data-q="irr">24.9%</span>. Below what wage does the robot stop beating the picker?</div>
+      <div class="opts"><button data-a="0">About $10 an hour</button><button data-a="1" data-right>About $16 an hour</button><button data-a="2">About $20 an hour</button></div>
+      <div class="why"><span class="qv" data-q="bew">$16.18</span>, only 20% under the national mean. And the wage at which NPV hits zero is the same, <span class="qv" data-q="bewNpv">$16.18</span>: the capital line on the payslip is the level payment that repays the robot at the discount rate, so "cheaper per pick" and "positive NPV" are one test. Renting at $5,000 a robot-month gives an NPV of <span class="qv" data-q="npvRaas">$1.44M</span>: less, but with a quarter of the cash up front and the vendor carrying the hardware risk.</div>
+    </div>
+    <div class="say" data-say="s4">
+      <div class="tag">Say it out loud</div>
+      <div class="line">Payback ignores the cost of money and every year after it; NPV and IRR don't. The deal turns on utilisation and useful life before the robot's price, and the break-even wage says which labour markets it works in.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 5 ============ -->
+<section id="s5" data-title="The Fleet" data-n="5">
+  <div class="card">
+    <div class="scene" data-art="s5"></div>
+    <h2>5 · The fleet: shared operators, queues and spares</h2>
+    <p class="lede">With twenty robots sharing a remote desk, two of them sometimes get stuck at once, and one waits. A waiting robot isn't picking. This is a queue: calls arrive at random, operators serve them, and the <span class="g" data-g="erlang">Erlang C</span> formula from the <span class="g" data-g="mmc">M/M/c queue</span> gives the chance a call waits and how long. The arrival rate depends on how many robots are running, which depends on how long they wait, so the model solves for both together. Then the other fleet question: how many <span class="g" data-g="spares">spares</span>.</p>
+    <p class="covers">Covers <b>queueing</b>: M/M/c, Erlang C, the finite-population check · <b>pooling</b> · <b>spares</b> (binomial)</p>
+  </div>
+  <div class="card">
+    <h3>The remote desk as a queue</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl"><div class="sl-h"><span>Robots sharing the desk</span><b id="s5Rv">–</b></div><input type="range" id="s5R" min="2" max="100" step="1" aria-label="Robots"></div>
+        <div class="sl"><div class="sl-h"><span>Operators on shift</span><b id="s5cv">–</b></div><input type="range" id="s5c" min="1" max="20" step="1" aria-label="Operators"></div>
+        <div class="sl" data-k="lambda"></div>
+        <div class="sl" data-k="handleMin"></div>
+        <div class="btnrow"><button class="ghost" id="s5best">Find the cheapest number of operators</button></div>
+      </div>
+      <div>
+        <div class="grid g3">
+          <div class="stat"><div class="v" id="s5A">–</div><div class="l">offered load (erlangs)</div></div>
+          <div class="stat"><div class="v" id="s5rho">–</div><div class="l">each operator busy</div></div>
+          <div class="stat"><div class="v" id="s5pw">–</div><div class="l">calls that wait (Erlang C)</div></div>
+          <div class="stat big"><div class="v" id="s5wq">–</div><div class="l">average wait per call</div></div>
+          <div class="stat"><div class="v" id="s5idle">–</div><div class="l">of a robot's time spent waiting</div></div>
+          <div class="stat big"><div class="v" id="s5cpp">–</div><div class="l">robot per good pick</div></div>
+        </div>
+        <canvas id="s5chart" class="chart" aria-label="Robot cost per pick against the number of operators"></canvas>
+        <div class="chartcap" id="s5cap"></div>
+      </div>
+    </div>
+    <h3>Pooling: the same ratio, bigger desks</h3>
+    <div class="tablewrap"><table class="ladder" id="s5pool"></table></div>
+    <h3>Spares</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl"><div class="sl-h"><span>Chance the full fleet is working</span><b id="s5tv">–</b></div><input type="range" id="s5t" min="0.5" max="0.995" step="0.005" aria-label="Target"></div>
+        <div class="sl" data-k="uptime"></div>
+      </div>
+      <div class="grid g3">
+        <div class="stat"><div class="v" id="s5p0">–</div><div class="l">chance all are up, no spares</div></div>
+        <div class="stat big"><div class="v" id="s5S">–</div><div class="l">spares needed</div></div>
+        <div class="stat"><div class="v" id="s5Sx">–</div><div class="l">extra robot capital</div></div>
+      </div>
+    </div>
+    <div class="predict" data-p="s5a">
+      <div class="tag">Guess first!</div>
+      <div class="q">Twenty robots share two operators, each operator busy about 60% of the time. How long does a stuck robot wait, on average, before someone picks up?</div>
+      <div class="opts"><button data-a="0">No wait: they're only 60% busy</button><button data-a="1" data-right>About a minute</button><button data-a="2">About ten minutes</button></div>
+      <div class="why"><span class="qv" data-q="q2wait">60</span> seconds on top of the 2-minute fix: <span class="qv" data-q="q2pw">42%</span> of calls find both operators busy, because calls arrive in clumps. One operator for twenty robots: <span class="qv" data-q="q1wait">12.2</span> minutes, and the robot loses to the picker. Three: <span class="qv" data-q="q3wait">9</span> seconds. The cheapest desk here has <span class="qv" data-q="bestC">2</span> operators: fewer and robots idle, more and operators idle.</div>
+    </div>
+    <div class="predict" data-p="s5b">
+      <div class="tag">Guess first!</div>
+      <div class="q">Keep the ratio at one operator per ten robots. Ten robots with one operator, or a hundred robots with ten: who waits longer?</div>
+      <div class="opts"><button data-a="0">The same: same ratio</button><button data-a="1" data-right>The small desk, by far</button><button data-a="2">The big desk: more robots calling</button></div>
+      <div class="why">Ten robots, one operator: <span class="qv" data-q="s10wait">147</span> seconds a call. A hundred robots, ten operators: <span class="qv" data-q="s100wait">3</span> seconds. That's <span class="g" data-g="pooling">pooling</span>: a busy moment at one robot is a quiet one at another. An operator ratio from a small pilot understates what a big fleet can run; a ratio quoted for a big fleet overstates what a small customer gets.</div>
+    </div>
+    <div class="say" data-say="s5">
+      <div class="tag">Say it out loud</div>
+      <div class="line">When robots share operators, calls queue, and waiting robots don't pick. Erlang C prices the wait; pooling operators across a bigger fleet makes the same ratio wait far less, so scale is an economy of the remote desk. Spares are a binomial: with 95% uptime, twenty robots are all up only about a third of the time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 6 ============ -->
+<section id="s6" data-title="Who Gets the Saving" data-n="6">
+  <div class="card">
+    <div class="scene" data-art="s6"></div>
+    <h2>6 · Who gets the saving: the investor's lens</h2>
+    <p class="lede">A robot replaces payroll. That payroll is a pie, and the customer is the last to be served: the robot maker takes its hardware and service price, the integrator its fee, the money tied up its interest, the operators their wages, and rework and power their share. This is a one-step <b>illustrative</b> split of one robot-year at the books' numbers, with margins you can change. It shows the mechanics, not any company's economics.</p>
+    <p class="covers">Covers <b>value capture</b> · <b>price ceilings</b> · <b>robotics diligence</b></p>
+  </div>
+  <div class="card">
+    <h3>One robot-year of replaced payroll, sliced</h3>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl" data-k="capex"></div>
+        <div class="sl" data-k="cogsPct"></div>
+        <div class="sl" data-k="svcMargin"></div>
+        <div class="sl" data-k="integration"></div>
+        <div class="sl" data-k="intMargin"></div>
+      </div>
+      <div>
+        <canvas id="s6pie" class="chart bar1" aria-label="The payroll a robot replaces in a year, split into who receives it"></canvas>
+        <div class="tablewrap"><table class="ladder" id="s6tab"></table></div>
+        <div class="grid g3" style="margin-top:12px">
+          <div class="stat"><div class="v" id="s6pay">–</div><div class="l">payroll replaced a robot-year</div></div>
+          <div class="stat big"><div class="v good" id="s6cust">–</div><div class="l" id="s6custl">the Depot keeps</div></div>
+          <div class="stat"><div class="v" id="s6ceil">–</div><div class="l"><span class="g" data-g="ceiling">price ceiling</span> for the robot</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="predict" data-p="s6a">
+      <div class="tag">Guess first!</div>
+      <div class="q">A robot replaces <span class="qv" data-q="payroll">$123,780</span> of picker payroll a year. How much of it does the Depot keep?</div>
+      <div class="opts"><button data-a="0">About 80%</button><button data-a="1">About half</button><button data-a="2" data-right>About a sixth</button></div>
+      <div class="why"><span class="qv" data-q="custShare">17%</span>. The robot maker's gross profit is <span class="qv" data-q="makerProfit">$21,000</span> a robot-year at these margins, about as much as the customer keeps. The robot's <span class="g" data-g="ceiling">price ceiling</span> is <span class="qv" data-q="ceiling">$212,360</span>: above it the Depot is better off with pickers. Every point of uptime, success or autonomy raises that ceiling, which is why a robot company's pricing power lives in its operating metrics, not its bill of materials.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>The diligence checklist</h3>
+    <p class="lede">A robotics startup's deck quotes an MTBI, an operator ratio and an autonomy rate. Put its claims here; the checklist tests them against each other and the books, and lists what to ask for. The 95% range on MTBI is the <span class="g" data-g="poisson">exact Poisson interval</span> for the number of interventions behind it.</p>
+    <div class="pg">
+      <div class="panel">
+        <div class="sl"><div class="sl-h"><span>Claimed MTBI</span><b id="d1v">–</b></div><input type="range" id="d1" min="0.1" max="40" step="0.1" aria-label="Claimed MTBI hours"></div>
+        <div class="sl"><div class="sl-h"><span>Robot-hours behind the claim</span><b id="d2v">–</b></div><input type="range" id="d2" min="10" max="20000" step="10" aria-label="Robot-hours of evidence"></div>
+        <div class="sl"><div class="sl-h"><span>Claimed robots per operator</span><b id="d3v">–</b></div><input type="range" id="d3" min="1" max="100" step="1" aria-label="Claimed robots per operator"></div>
+        <div class="sl"><div class="sl-h"><span>Claimed autonomy per pick</span><b id="d4v">–</b></div><input type="range" id="d4" min="90" max="99.99" step="0.01" aria-label="Claimed autonomy percent"></div>
+      </div>
+      <div>
+        <div class="checks" id="dlist"></div>
+        <div class="brief" id="dask"></div>
+        <div class="btnrow"><button class="ghost" id="dcopy">Copy the checklist</button><span class="status" id="dst"></span></div>
+      </div>
+    </div>
+    <div class="predict" data-p="s6b">
+      <div class="tag">Guess first!</div>
+      <div class="q">A deck says "MTBI of 8 hours", from 120 robot-hours of pilot data. What range is that consistent with?</div>
+      <div class="opts"><button data-a="0">7.5 to 8.5 hours</button><button data-a="1" data-right>About 5 to 14 hours</button><button data-a="2">Anything from 1 to 100 hours</button></div>
+      <div class="why">120 hours at 8 hours each is <span class="qv" data-q="ciK">15</span> interventions, and the exact 95% interval for 15 random events turns into an MTBI between <span class="qv" data-q="ciLo">4.9</span> and <span class="qv" data-q="ciHi">14.3</span> hours. Ask for the hours behind every rate, by site and by month, and for the definition of an intervention.</div>
+    </div>
+    <div class="say" data-say="s6">
+      <div class="tag">Say it out loud</div>
+      <div class="line">The saving is the payroll replaced minus everyone else's slice; the customer eats last, and the robot's price ceiling is set by the payroll. Diligence asks for the numbers that size the pie: calls per hour, minutes per call, uptime, success, operator ratio, and the hours behind each.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEW BOARD ============ -->
+<section id="cap" data-title="Review Board" data-n="★">
+  <div class="card">
+    <div class="scene" data-art="cap"></div>
+    <h2>★ Investor review board</h2>
+    <p class="lede">Three pitch decks from three fictional robot companies, each with one flawed line in its spreadsheet. For each: run the deck's own sheet through the model (it reproduces the claim), pick the fix, re-run it, and name what the deck got wrong. The tempting fixes are on the list; they move the number the wrong way, or not at all. Each deck is scored on the re-run <em>and</em> the diagnosis.</p>
+    <div id="capcases"></div>
+    <div class="row" style="margin-top:12px"><span class="stars" id="capstars">☆☆☆</span><span class="verdict" id="capverdict"></span></div>
+  </div>
+</section>
+
+<!-- ============ FIELD TEST ============ -->
+<section id="ft" data-title="Field Test" data-n="✓">
+  <div class="card">
+    <h2>✓ Field test</h2>
+    <p class="lede">Ten questions. Answer each by operating the widget in the step named, at the books' default assumptions (reset them in step 1 if you've changed any). Eight or more earns the check.</p>
+    <div id="ftqs"></div>
+    <div class="btnrow"><button class="act" id="ftgo">Grade me</button><span id="ftscore" style="font:18px var(--hand);align-self:center"></span></div>
+  </div>
+  <div class="card">
+    <h3>What's exact here, what's sourced, and what's a model</h3>
+    <ul class="honest">
+      <li><b>Exact arithmetic:</b> the capital recovery factor, NPV, IRR (bisection), payback, break-even wages (bisection), Erlang C (from Erlang B by the standard recursion), the M/M/c wait, the finite-population "machine-repair" queue used as a cross-check, binomial spares, and the exact (Garwood) Poisson interval. <code>node tests/check.js</code> checks each against hand-computed cases and prints every number this page quotes.</li>
+      <li><b>Sourced defaults:</b> the picker's wage ($20.32, BLS Occupational Employment and Wage Statistics, May 2025, SOC 53-7062, national mean); the benefits load (42.6%, BLS Employer Costs for Employee Compensation, December 2025, private industry, $13.79 of benefits on $32.36 of wages per hour worked); electricity (8.13¢/kWh, EIA's 2024 US average industrial price). Dated, with links, in SOURCES.md.</li>
+      <li><b>Illustrative assumptions, labelled on every slider:</b> every robot number (price, integration, life, maintenance, software, power draw, uptime, cycle time, success, interventions, minutes per intervention), the human's picks per hour and accuracy, rework minutes, the operator's wage and ratio limits, the discount rate, the RaaS fee, and the margins in step 6. Publicly listed robot prices are quoted in SOURCES.md only as anchors (a $24,950 mobile manipulator for research, a $74,500 quadruped in 2020); a warehouse picking cell is a different product. No company's private numbers are used, and the three decks are fictional.</li>
+      <li><b>Teaching models:</b> the learning curve is a toy (a Wright-style curve by analogy, not a measurement). The queue assumes random arrivals and service times and uses the infinite-population Erlang C with a fixed point for the call rate; the exact finite-population model is shown beside it and waits less for small fleets. Cash flows are yearly, pre-tax, with no residual value, no ramp-up and no inflation. Humans are assumed to be paid only for hours worked; real staffing has minimum shifts, overtime, hiring and turnover costs this model leaves out.</li>
+    </ul>
+    <p class="muted" style="font-size:15px;margin-top:10px">Sources (dated, with what each supports, in <a href="https://github.com/bakulbadwal/aistack/blob/main/robot-payroll/SOURCES.md" target="_blank" rel="noopener">SOURCES.md</a>): BLS <a href="https://www.bls.gov/oes/current/oes537062.htm" target="_blank" rel="noopener">OEWS, 53-7062</a> · BLS <a href="https://www.bls.gov/news.release/ecec.htm" target="_blank" rel="noopener">Employer Costs for Employee Compensation</a> · EIA <a href="https://www.eia.gov/electricity/annual/" target="_blank" rel="noopener">Electric Power Annual</a> · IFR <a href="https://ifr.org/ifr-press-releases/news/service-robots-see-global-growth-boom" target="_blank" rel="noopener">World Robotics 2025</a> · Wright (1936), "Factors Affecting the Cost of Airplanes" · Erlang (1917) · Ross, Gordon &amp; Bagnell (2011), DAgger.</p>
+    <div class="btnrow"><button class="ghost" id="reset">Reset all progress</button></div>
+  </div>
+</section>
+
+<p class="series">Part of a series of hands-on labs: <a href="https://bakulbadwal.github.io/inference-kitchen/">Inference Kitchen</a> (serving economics) · <a href="https://bakulbadwal.github.io/compute-deal-desk/">Compute Deal Desk</a> (compute deals) · <a href="https://bakulbadwal.github.io/arm-playground/">Arm Playground</a> (kinematics and control) · <a href="https://bakulbadwal.github.io/arm-playground/wet-paint/">Wet Paint</a> (imitation learning) · <b>Robot Payroll</b> (the business of deploying robots)</p>
+</div>
+<div id="tip" role="tooltip"></div>
+<footer>Robot Payroll · cited wages, illustrative robots, exact arithmetic · <a href="https://github.com/bakulbadwal/aistack/tree/main/robot-payroll" style="color:#D9F0E4">source</a></footer>
+
+<script src="js/core.js"></script>
+<script src="js/glossary.js"></script>
+<script src="js/art.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
